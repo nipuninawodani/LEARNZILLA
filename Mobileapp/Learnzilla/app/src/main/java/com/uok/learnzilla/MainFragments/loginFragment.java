@@ -38,7 +38,7 @@ public class loginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(loginFragment.this)
-                        .navigate(R.id.action_LoginFragment_to_RegisterFragment);
+                        .navigate(R.id.action_LoginFragment_to_RegisterDialog);
             }
         });
     }

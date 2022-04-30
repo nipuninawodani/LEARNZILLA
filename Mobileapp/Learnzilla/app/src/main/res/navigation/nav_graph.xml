@@ -18,8 +18,8 @@
         android:name="com.uok.learnzilla.MainFragments.loginFragment"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_LoginFragment_to_RegisterFragment"
-            app:destination="@id/RegisterFragment" />
+            android:id="@+id/action_LoginFragment_to_RegisterDialog"
+            app:destination="@id/RegisterDialog" />
     </fragment>
     <fragment
         android:id="@+id/RegisterFragment"
@@ -29,5 +29,14 @@
             android:id="@+id/action_RegisterFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/RegisterDialog"
+        android:name="com.uok.learnzilla.DialogFragments.RegisterDialogFragment"
+        tools:layout="@layout/fragment_register_dialog">
+
+        <action
+            android:id="@+id/action_RegisterDialog_to_RegisterFragment"
+            app:destination="@id/RegisterFragment" />
+    </dialog>
 
 </navigation>
