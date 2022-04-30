@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#ff033e</color>
+    <color name="colorPrimaryDark">#ff2400</color>
+    <color name="colorAccent">#fe6f5e</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,4 +11,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--colors for modern ui-->
+    <color name="whiteTextColor">#fff</color>
+    <color name="primaryTextColor">#ff2400</color>
+    <color name="loginBkColor">#f0f0f0</color>
+    <!--colors for card-->
+    <color name="whiteCardColor">#fff</color>
+    <color name="yellow">#ff8c00</color>
 </resources>
