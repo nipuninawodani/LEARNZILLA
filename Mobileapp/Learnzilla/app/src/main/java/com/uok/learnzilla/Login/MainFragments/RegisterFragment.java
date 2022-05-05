@@ -1,4 +1,4 @@
-package com.uok.learnzilla.MainFragments;
+package com.uok.learnzilla.Login.MainFragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

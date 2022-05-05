@@ -1,4 +1,4 @@
-package com.uok.learnzilla.DialogFragments;
+package com.uok.learnzilla.Login.DialogFragments;
 
 
 import android.app.AlertDialog;

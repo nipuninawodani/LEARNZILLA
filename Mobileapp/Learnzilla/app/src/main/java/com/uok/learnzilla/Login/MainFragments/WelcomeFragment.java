@@ -1,4 +1,4 @@
-package com.uok.learnzilla.MainFragments;
+package com.uok.learnzilla.Login.MainFragments;
 
 import android.os.Bundle;
 
@@ -11,34 +11,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import com.uok.learnzilla.R;
-import com.uok.learnzilla.databinding.FragmentLoginBinding;
+import com.uok.learnzilla.databinding.FragmentWelcomeBinding;
 
 
-public class loginFragment extends Fragment {
-    private FragmentLoginBinding binding;
+public class WelcomeFragment extends Fragment {
+    private FragmentWelcomeBinding binding;
 
-    public loginFragment() {
+
+    public WelcomeFragment() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        binding = FragmentLoginBinding.inflate(inflater, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = FragmentWelcomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.register.setOnClickListener(new View.OnClickListener() {
+        binding.LogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(loginFragment.this)
-                        .navigate(R.id.action_LoginFragment_to_RegisterDialog);
+                NavHostFragment.findNavController(WelcomeFragment.this)
+                        .navigate(R.id.action_welcomeFragment_to_LoginFragment);
             }
         });
     }
