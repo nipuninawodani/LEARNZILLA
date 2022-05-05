@@ -28,6 +28,10 @@
         <action
             android:id="@+id/action_RegisterFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
+        <argument
+            android:name="Register"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <dialog
         android:id="@+id/RegisterDialog"
@@ -35,7 +39,7 @@
         tools:layout="@layout/fragment_register_dialog">
 
         <action
-            android:id="@+id/action_RegisterDialog_to_RegisterFragment"
+            android:id="@+id/actionRegister"
             app:destination="@id/RegisterFragment" />
     </dialog>
 
