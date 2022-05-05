@@ -2,6 +2,7 @@ package com.uok.learnzilla.DialogFragments;
 
 
 import android.app.AlertDialog;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ public class RegisterDialogFragment extends DialogFragment {
                 return;
             int dialogWidth = 1000;
             int dialogHeight = 1000;
+
             getDialog().getWindow().setLayout(dialogWidth, dialogHeight);
             getDialog().getWindow().setBackgroundDrawableResource(R.drawable.dialog_round_bg);
     }
@@ -44,6 +46,7 @@ public class RegisterDialogFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         RegisterDialogFragmentDirections.ActionRegister action = RegisterDialogFragmentDirections.actionRegister();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
@@ -69,6 +72,7 @@ public class RegisterDialogFragment extends DialogFragment {
             AlertDialog alert = builder.create();
             alert.show();
         });
+
 
         binding.closeButton.setOnClickListener(View1 ->
                 dismiss());

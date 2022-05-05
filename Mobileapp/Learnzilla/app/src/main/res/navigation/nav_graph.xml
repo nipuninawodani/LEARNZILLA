@@ -43,6 +43,7 @@
 
         <action
             android:id="@+id/actionRegister"
+
             app:destination="@id/RegisterFragment" />
     </dialog>
 
