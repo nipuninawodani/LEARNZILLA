@@ -12,12 +12,14 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
     <TextView
+        android:id="@+id/registerTitle"
+        style="@style/loginHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/loginHeader"
-        android:text="@string/register"
-        android:layout_marginTop="@dimen/loginViewsMargin"/>
+        android:layout_marginTop="@dimen/loginViewsMargin"
+        android:text="@string/register" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputFirstName"
@@ -90,7 +92,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/cirLoginButton"
+        android:id="@+id/SignInButton"
         style="@style/loginButton"
         android:text="@string/signup"
         android:layout_gravity="right"

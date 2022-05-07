@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragments.WelcomeFragment"
+    tools:context=".Login.MainFragments.WelcomeFragment"
     android:background="@drawable/welcome_screen"
     android:focusableInTouchMode="true">
 
