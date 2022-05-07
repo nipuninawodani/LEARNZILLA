@@ -6,11 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
 import android.text.TextUtils;
-<<<<<<< Updated upstream
 
-=======
 import android.util.Log;
->>>>>>> Stashed changes
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,16 +20,13 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.uok.learnzilla.BackEndClasses.EmailPatternValidator;
+
+import com.uok.learnzilla.Home.HomeActivity;
 import com.uok.learnzilla.R;
 import com.uok.learnzilla.databinding.FragmentLoginBinding;
 
-<<<<<<< Updated upstream
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-=======
-import java.util.concurrent.Executor;
->>>>>>> Stashed changes
 
 
 public class loginFragment extends Fragment {
@@ -91,10 +86,9 @@ public class loginFragment extends Fragment {
             }
 
 
+
         });
     }
-
-
 
 
 
@@ -120,6 +114,7 @@ public class loginFragment extends Fragment {
                 editor.apply();
                 Looper.prepare();
                 Toast.makeText(getContext(), "Login Completed", Toast.LENGTH_SHORT).show();
+                goToHomeActivity();
             } catch (Exception e) {
                 e.printStackTrace();
                 Log.e("Login",String.format("unSuccessLogin:%s",loginSuccess));
