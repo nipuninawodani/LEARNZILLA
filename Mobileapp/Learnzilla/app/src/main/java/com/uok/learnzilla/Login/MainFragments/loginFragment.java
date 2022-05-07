@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
 import android.text.TextUtils;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.uok.learnzilla.BackEndClasses.EmailPatternValidator;
 import com.uok.learnzilla.Home.HomeActivity;
 import com.uok.learnzilla.R;
 import com.uok.learnzilla.databinding.FragmentLoginBinding;
+
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,6 +52,7 @@ public class loginFragment extends Fragment {
                 .navigate(R.id.action_LoginFragment_to_RegisterDialog));
 
         binding.cirLoginButton.setOnClickListener(view12 -> {
+
             binding.textInputEmail.setError(null);
             binding.textInputPassword.setError(null);
 
@@ -77,6 +80,7 @@ public class loginFragment extends Fragment {
             //all pass F try to login
                 LoginMethod();
 
+
         });
     }
 
@@ -98,7 +102,9 @@ public class loginFragment extends Fragment {
 
         new Thread(() -> {
             try {
+
                 //Add Login
+
                 //save login
                 SharedPreferences sharedPreferences = getContext().getSharedPreferences("login",MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -113,5 +119,4 @@ public class loginFragment extends Fragment {
             progressDialog.dismiss();
         }).start();
     }
-
 }

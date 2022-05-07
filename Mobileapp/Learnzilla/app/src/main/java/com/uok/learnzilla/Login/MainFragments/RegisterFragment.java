@@ -10,18 +10,22 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Looper;
 import android.text.TextUtils;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+
 import com.uok.learnzilla.BackEndClasses.ConfirmPasswordValidator;
 import com.uok.learnzilla.BackEndClasses.EmailPatternValidator;
+
 import com.uok.learnzilla.R;
 import com.uok.learnzilla.databinding.FragmentRegisterBinding;
 
 public class RegisterFragment extends Fragment {
     private FragmentRegisterBinding binding;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -45,6 +49,7 @@ public class RegisterFragment extends Fragment {
         binding.SignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 boolean Empty = false;
                 binding.textInputFirstName.setError(null);
                 binding.textInputFirstName.setError(null);
@@ -101,6 +106,7 @@ public class RegisterFragment extends Fragment {
                }
                if (RegisterArg == 2){
                    RegisterTeacher();
+
                }
             }
         });
@@ -131,6 +137,7 @@ public class RegisterFragment extends Fragment {
                     Toast.makeText(getContext(), "Registration Completed", Toast.LENGTH_SHORT).show();
                     NavHostFragment.findNavController(RegisterFragment.this)
                             .navigate(R.id.action_RegisterFragment_to_LoginFragment);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
