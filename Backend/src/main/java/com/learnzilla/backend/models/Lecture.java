@@ -3,7 +3,7 @@ package com.learnzilla.backend.models;
 import javax.persistence.*;
 
 @Entity
-public class Lecture {
+public class Lecture  {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
