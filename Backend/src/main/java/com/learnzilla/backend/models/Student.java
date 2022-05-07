@@ -1,4 +1,4 @@
-package com.learnzilla.backend.models.student;
+package com.learnzilla.backend.models;
 
 import javax.persistence.*;
 
