@@ -21,6 +21,9 @@
 
             android:id="@+id/action_LoginFragment_to_RegisterDialog"
             app:destination="@id/RegisterDialog" />
+        <action
+            android:id="@+id/action_LoginFragment_to_LoginFailed"
+            app:destination="@id/LoginFailed" />
 
     </fragment>
     <fragment
@@ -45,6 +48,12 @@
             android:id="@+id/actionRegister"
 
             app:destination="@id/RegisterFragment" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/LoginFailed"
+        android:name="com.uok.learnzilla.Login.DialogFragments.LoginFailedDialogFragment"
+        tools:layout="@layout/fragment_login_failed_dialog">
     </dialog>
 
 

@@ -96,7 +96,8 @@ public class RegisterFragment extends Fragment {
                 ConfirmPasswordValidator CPValidator = new ConfirmPasswordValidator();
                 String cPass = binding.editTextConfirmPassword.getText().toString();
                 String pass = binding.editTextPassword.getText().toString();
-                if(CPValidator.validateConfirmPassword(pass,cPass)){
+
+                if(!CPValidator.validateConfirmPassword(pass,cPass)){
                     binding.textInputConfirmPassword.setError("Error : Not matching with password");
                     return;
                 }

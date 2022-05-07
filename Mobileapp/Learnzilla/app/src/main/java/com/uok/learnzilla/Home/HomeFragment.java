@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
 
-        binding.LogOutButton.setOnClickListener(view1 -> {
+        binding.Logout.setOnClickListener(view1 -> {
             builder.setTitle("Logout");
             builder.setMessage("Do you need to logout your account")
                     .setCancelable(false)
@@ -41,17 +41,15 @@ public class HomeFragment extends Fragment {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean("Login",false);
                         editor.apply();
-                        goToLoginActivityt();
+                        goToLoginActivity();
                     })
                     .setNegativeButton("No",(dialogInterface, i) -> dialogInterface.cancel());
             AlertDialog alert = builder.create();
             alert.show();
-
-
         });
     }
 
-    private void goToLoginActivityt() {
+    private void goToLoginActivity() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
     }
