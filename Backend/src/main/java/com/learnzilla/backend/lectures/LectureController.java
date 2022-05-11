@@ -1,0 +1,31 @@
+package com.learnzilla.backend.lectures;
+
+import com.learnzilla.backend.models.Lecture;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+public class LectureController {
+
+    private LectureRepository lectureRepository;
+
+
+
+    @Autowired
+    public LectureController(LectureRepository lectureRepository) {
+        this.lectureRepository = lectureRepository;
+    }
+
+    @GetMapping("/lecture/{course_code}&{academic_year}")
+    public ResponseEntity<Lecture> getLecture(@PathVariable String course_code , @PathVariable String academic_year){
+        Lecture lecture = lectureRepository.findBycourse_codeAndacademic_year(course_code , academic_year);
+        return ResponseEntity.ok(lecture);
+    }
+
+    @PostMapping("/lecture")
+    public void addLecture(@RequestBody Lecture lectureData) {
+        lectureRepository.save(lectureData);
+    }
+
+}

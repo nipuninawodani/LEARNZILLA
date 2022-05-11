@@ -1,4 +1,4 @@
-package com.learnzilla.backend.enrollment;
+package com.learnzilla.backend.enrollments;
 
 import com.learnzilla.backend.models.Enrollment;
 import org.springframework.beans.factory.annotation.Autowired;
