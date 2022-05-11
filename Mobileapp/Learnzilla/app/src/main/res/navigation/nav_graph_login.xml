@@ -2,12 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/welcomeFragment">
+    android:id="@+id/nav_graph_login"
+    app:startDestination="@id/WelcomeFragment">
 
     <fragment
-        android:id="@+id/welcomeFragment"
-        android:name="com.uok.learnzilla.MainFragments.WelcomeFragment"
+        android:id="@+id/WelcomeFragment"
+        android:name="com.uok.learnzilla.Login.MainFragments.WelcomeFragment"
         tools:layout="@layout/fragment_welcome" >
         <action
             android:id="@+id/action_welcomeFragment_to_LoginFragment"
@@ -15,31 +15,45 @@
     </fragment>
     <fragment
         android:id="@+id/LoginFragment"
-        android:name="com.uok.learnzilla.MainFragments.loginFragment"
+        android:name="com.uok.learnzilla.Login.MainFragments.loginFragment"
         tools:layout="@layout/fragment_login" >
         <action
 
             android:id="@+id/action_LoginFragment_to_RegisterDialog"
             app:destination="@id/RegisterDialog" />
+        <action
+            android:id="@+id/action_LoginFragment_to_LoginFailed"
+            app:destination="@id/LoginFailed" />
 
     </fragment>
     <fragment
         android:id="@+id/RegisterFragment"
-        android:name="com.uok.learnzilla.MainFragments.RegisterFragment"
+        android:name="com.uok.learnzilla.Login.MainFragments.RegisterFragment"
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_RegisterFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
+        <argument
+            android:name="Register"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 
     <dialog
         android:id="@+id/RegisterDialog"
-        android:name="com.uok.learnzilla.DialogFragments.RegisterDialogFragment"
+        android:name="com.uok.learnzilla.Login.DialogFragments.RegisterDialogFragment"
         tools:layout="@layout/fragment_register_dialog">
 
         <action
-            android:id="@+id/action_RegisterDialog_to_RegisterFragment"
+            android:id="@+id/actionRegister"
+
             app:destination="@id/RegisterFragment" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/LoginFailed"
+        android:name="com.uok.learnzilla.Login.DialogFragments.LoginFailedDialogFragment"
+        tools:layout="@layout/fragment_login_failed_dialog">
     </dialog>
 
 
