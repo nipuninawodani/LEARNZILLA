@@ -17,9 +17,15 @@ public class EnrollmentController {
         this.enrollmentRepository = enrollmentRepository;
     }
 
-    @GetMapping("/enrollment/{course_code}&{academic_year}")
-    public ResponseEntity<Enrollment> getEnrollment(@PathVariable String course_code , @PathVariable String academic_year){
+    @GetMapping("/enrollment/course_code={course_code}&academic_year={academic_year}")
+    public ResponseEntity<Enrollment> getEnrollmentByCourse(@PathVariable String course_code , @PathVariable String academic_year){
         Enrollment enrollment = enrollmentRepository.findBycourse_codeAndacademic_year(course_code , academic_year);
+        return ResponseEntity.ok(enrollment);
+    }
+
+    @GetMapping("/enrollment/student_id={student_id}")
+    public ResponseEntity<Enrollment> getEnrollmentByStudent(@PathVariable String student_id){
+        Enrollment enrollment = enrollmentRepository.findByStudent_id(student_id);
         return ResponseEntity.ok(enrollment);
     }
 
