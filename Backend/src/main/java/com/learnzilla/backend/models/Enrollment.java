@@ -20,24 +20,45 @@ public class Enrollment implements Serializable {
 
     private String overall_grade;
 
+    public Enrollment(){
+
+    }
+    public Enrollment(String academic_year,String course_code,String student_id,String overall_grade){
+        this.academic_year=academic_year;
+        this.course_code=course_code;
+        this.student_id=student_id;
+        this.overall_grade=overall_grade;
+    }
 
     public String getAcademic_year() {
         return academic_year;
+    }
+
+    public void setAcademic_year(String academic_year) {
+        this.academic_year = academic_year;
     }
 
     public String getCourse_code() {
         return course_code;
     }
 
+    public void setCourse_code(String course_code) {
+        this.course_code = course_code;
+    }
+
     public String getOverall_grade() {
         return overall_grade;
+    }
+
+    public void setOverall_grade(String overall_grade) {
+        this.overall_grade = overall_grade;
     }
 
     public String getStudent_id() {
         return student_id;
     }
 
-    public void setOverall_grade(String overall_grade) {
-        this.overall_grade = overall_grade;
+    public void setStudent_id(String student_id) {
+        this.student_id = student_id;
     }
 }
