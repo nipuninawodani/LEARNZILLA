@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class CourseController {
 
@@ -24,8 +26,8 @@ public class CourseController {
     }
 
     @GetMapping("/course")
-    public ResponseEntity<Course> getAllCourses(){
-        Course course = courseRepository.getAll();
+    public ResponseEntity<List<Course>> getAllCourses(){
+        List<Course> course = courseRepository.findAll();
         return ResponseEntity.ok(course);
     }
 
