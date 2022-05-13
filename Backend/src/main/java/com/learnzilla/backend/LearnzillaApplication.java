@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class LearnzillaApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(LearnzillaApplication.class, args);
 	}
 

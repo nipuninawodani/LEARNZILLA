@@ -1,4 +1,4 @@
-package com.kelani.uni.lms;
+package com.learnzilla.backend.postmarks;
 
 public class Student {
     public String id;

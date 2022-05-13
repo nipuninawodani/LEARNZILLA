@@ -1,4 +1,4 @@
-package com.kelani.uni.lms;
+package com.learnzilla.backend.postmarks;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
