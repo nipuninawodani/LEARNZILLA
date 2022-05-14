@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.uok.learnzilla.HomeComponents.allCourses.adaptor.AllCourseListAdaptor;
 import com.uok.learnzilla.HomeComponents.myCourses.model.Courses;
 import com.uok.learnzilla.R;
 
@@ -29,7 +28,7 @@ public class MyCoursesListAdapter extends RecyclerView.Adapter<MyCoursesListAdap
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_view_course, parent, false);
+                .inflate(R.layout.card_view_mycourse, parent, false);
         return new MyCoursesListAdapter.ViewHolder(view);
     }
 
@@ -39,7 +38,7 @@ public class MyCoursesListAdapter extends RecyclerView.Adapter<MyCoursesListAdap
         holder.ID.setText(ItemViewModel.getCourseId());
         holder.Name.setText(ItemViewModel.getCourseName());
         holder.teacher.setText(ItemViewModel.getTeacherName());
-        holder.enroll.setOnClickListener(new View.OnClickListener() {
+        holder.Goto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(view.getContext(), "enroll", Toast.LENGTH_SHORT).show();
@@ -55,13 +54,13 @@ public class MyCoursesListAdapter extends RecyclerView.Adapter<MyCoursesListAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView ID;
         private TextView Name;
-        private ImageButton enroll;
+        private ImageButton Goto;
         private TextView teacher;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ID = (TextView) itemView.findViewById(R.id.textView_ID);
             Name = (TextView) itemView.findViewById(R.id.textview_Name);
-            enroll = (ImageButton) itemView.findViewById(R.id.enroll_button);
+            Goto = (ImageButton) itemView.findViewById(R.id.enroll_button);
             teacher = (TextView) itemView.findViewById(R.id.textview_teacher);
         }
 
@@ -73,8 +72,8 @@ public class MyCoursesListAdapter extends RecyclerView.Adapter<MyCoursesListAdap
             return Name;
         }
 
-        public ImageButton getEnroll() {
-            return enroll;
+        public ImageButton getGoto() {
+            return Goto;
         }
 
         public TextView getTeacher() {

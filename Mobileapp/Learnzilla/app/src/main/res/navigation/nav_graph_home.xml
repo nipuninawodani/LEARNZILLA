@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_MyCourses"
             app:destination="@id/MyCourses" />
+        <action
+            android:id="@+id/action_HomeFragment_to_Results"
+            app:destination="@id/Results" />
     </fragment>
     <fragment
         android:id="@+id/AllCourses"
@@ -25,5 +28,10 @@
         android:id="@+id/MyCourses"
         android:name="com.uok.learnzilla.HomeComponents.myCourses.fragment.MyCoursesListFragment"
         tools:layout="@layout/fragment_my_courses_list" >
+    </fragment>
+    <fragment
+        android:id="@+id/Results"
+        android:name="com.uok.learnzilla.HomeComponents.results.ResultsListFragment"
+        tools:layout="@layout/fragment_results_list" >
     </fragment>
 </navigation>

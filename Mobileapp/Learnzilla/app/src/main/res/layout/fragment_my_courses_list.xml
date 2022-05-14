@@ -14,7 +14,7 @@ tools:context=".HomeComponents.myCourses.fragment.MyCoursesListFragment">
     android:layout_marginTop="96dp"
     app:layout_constraintTop_toTopOf="parent"
     tools:layout_editor_absoluteX="-16dp"
-    tools:listitem="@layout/card_view_course"></androidx.recyclerview.widget.RecyclerView>
+    tools:listitem="@layout/card_view_mycourse"></androidx.recyclerview.widget.RecyclerView>
 
     <TextView
         android:id="@+id/textview_title"
