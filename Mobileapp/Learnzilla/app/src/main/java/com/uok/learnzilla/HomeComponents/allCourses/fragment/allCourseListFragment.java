@@ -40,11 +40,11 @@ public class allCourseListFragment extends Fragment {
         List<Courses> courses = new ArrayList<Courses>();
         Collections.addAll(
                 courses,
-                new Courses("SENG50236","Software", "Abdullah"),
-                new Courses("SENG50266","Hardware", "mahela"),
-                new Courses("SENG50246","Operating System", "shachin"),
-                new Courses("SENG50246","Gaming", "Nipuni"),
-                new Courses("SENG50246","Studies", "Waruni")
+                new Courses("QENG50236","Software", "Abdullah"),
+                new Courses("QENG50266","Hardware", "mahela"),
+                new Courses("QENG50246","Operating System", "shachin"),
+                new Courses("QENG50246","Gaming", "Nipuni"),
+                new Courses("QENG50246","Studies", "Waruni")
 
         );
 

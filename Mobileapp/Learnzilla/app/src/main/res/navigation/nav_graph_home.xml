@@ -12,11 +12,18 @@
         <action
             android:id="@+id/action_HomeFragment_to_AllCourses"
             app:destination="@id/AllCourses" />
+        <action
+            android:id="@+id/action_HomeFragment_to_MyCourses"
+            app:destination="@id/MyCourses" />
     </fragment>
     <fragment
         android:id="@+id/AllCourses"
         android:name="com.uok.learnzilla.HomeComponents.allCourses.fragment.allCourseListFragment"
         tools:layout="@layout/fragment_all_course_list" >
     </fragment>
-
+    <fragment
+        android:id="@+id/MyCourses"
+        android:name="com.uok.learnzilla.HomeComponents.myCourses.fragment.MyCoursesListFragment"
+        tools:layout="@layout/fragment_my_courses_list" >
+    </fragment>
 </navigation>
