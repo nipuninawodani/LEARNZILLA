@@ -17,12 +17,6 @@ public class LectureResourceController {
         this.lectureResourceRepository = lectureResourceRepository;
     }
 
-    @GetMapping("/lectureResource/course_code={course_code}&academic_year={academic_year}")
-    public ResponseEntity<LectureResource> getLectureResourceByCourse(@PathVariable String course_code , @PathVariable String academic_year){
-        LectureResource lectureResource = lectureResourceRepository.findBycourse_codeAndacademic_year(course_code,academic_year);
-        return ResponseEntity.ok(lectureResource);
-    }
-
     @GetMapping("/lectureResource/lecture_id={lecture_id}")
     public ResponseEntity<LectureResource> getLectureResourceById(@PathVariable String lecture_id){
         LectureResource lectureResource = lectureResourceRepository.findByLecture_id(lecture_id);
