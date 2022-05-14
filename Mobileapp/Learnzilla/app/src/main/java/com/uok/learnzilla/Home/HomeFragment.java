@@ -48,6 +48,7 @@ public class HomeFragment extends Fragment {
                     .setNegativeButton("No",(dialogInterface, i) -> dialogInterface.cancel());
             AlertDialog alert = builder.create();
             alert.show();
+
         });
 
         binding.AllCourse.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +71,7 @@ public class HomeFragment extends Fragment {
                 NavHostFragment.findNavController(HomeFragment.this)
                         .navigate(R.id.action_HomeFragment_to_Results);
             }
+
         });
     }
 

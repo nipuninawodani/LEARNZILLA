@@ -27,6 +27,7 @@
             android:id="@+id/action_LoginFragment_to_LoginSuccess"
             app:destination="@id/LoginSuccess" />
 
+
     </fragment>
     <fragment
         android:id="@+id/RegisterFragment"
@@ -62,5 +63,6 @@
         android:name="com.uok.learnzilla.Login.DialogFragments.LoginSuccessDialogFragment"
         tools:layout="@layout/fragment_login_success_dialog">
     </dialog>
+
 
 </navigation>
