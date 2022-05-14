@@ -15,12 +15,11 @@ import android.view.ViewGroup;
 import com.uok.learnzilla.Home.HomeActivity;
 import com.uok.learnzilla.R;
 import com.uok.learnzilla.databinding.FragmentLoginFailedDialogBinding;
-import com.uok.learnzilla.databinding.FragmentRegisterDialogBinding;
+import com.uok.learnzilla.databinding.FragmentLoginSuccessDialogBinding;
 
+public class LoginSuccessDialogFragment extends DialogFragment {
+    private FragmentLoginSuccessDialogBinding binding;
 
-public class LoginFailedDialogFragment extends DialogFragment {
-
-    private FragmentLoginFailedDialogBinding binding;
     @Override
     public void onStart() {
         super.onStart();
@@ -32,12 +31,11 @@ public class LoginFailedDialogFragment extends DialogFragment {
         getDialog().getWindow().setLayout(dialogWidth, dialogHeight);
         getDialog().getWindow().setBackgroundDrawableResource(R.drawable.dialog_round_bg);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-      binding = FragmentLoginFailedDialogBinding.inflate(inflater,container,false);
-      return binding.getRoot();
+        binding = FragmentLoginSuccessDialogBinding.inflate(inflater,container,false);
+        return binding.getRoot();
     }
 
     @Override
@@ -47,8 +45,13 @@ public class LoginFailedDialogFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 dismiss();
+                goToHomeActivity();
             }
         });
     }
 
+    private void goToHomeActivity() {
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
+        startActivity(intent);
+    }
 }

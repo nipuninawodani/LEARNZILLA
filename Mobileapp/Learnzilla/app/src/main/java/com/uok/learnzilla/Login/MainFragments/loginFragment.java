@@ -4,6 +4,7 @@ import static android.content.Context.MODE_PRIVATE;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 
@@ -31,7 +32,6 @@ import java.util.regex.Pattern;
 
 public class loginFragment extends Fragment {
     private FragmentLoginBinding binding;
-    private boolean loginSuccess;
     public loginFragment() {
         // Required empty public constructor
     }
@@ -40,7 +40,6 @@ public class loginFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        Log.e("Login",String.format("Start:%s",loginSuccess));
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -77,16 +76,8 @@ public class loginFragment extends Fragment {
                 return;
             }
 
-            //all pass F try to login
+            //all pass  try to login
             LoginMethod();
-            Log.e("Login",String.format("AfterLogin:%s",loginSuccess));
-            if(loginSuccess){
-                NavHostFragment.findNavController(loginFragment.this)
-                        .navigate(R.id.action_LoginFragment_to_LoginFailed);
-            }
-
-
-
         });
     }
 
@@ -102,25 +93,38 @@ public class loginFragment extends Fragment {
         progressDialog.setCancelable(false);
         new Thread(() -> {
             try {
-
                 //Add Login
 
                 //save login
-                Log.e("Login",String.format("successLogin:%s",loginSuccess));
-                loginSuccess = true;
                 SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("Login", true);
                 editor.apply();
                 Looper.prepare();
                 Toast.makeText(getContext(), "Login Completed", Toast.LENGTH_SHORT).show();
-                goToHomeActivity();
+                Handler mainHandler = new Handler(getContext().getMainLooper());
+                Runnable myRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        NavHostFragment.findNavController(loginFragment.this)
+                                .navigate(R.id.action_LoginFragment_to_LoginSuccess);
+                    } // This is your code
+                };
+                mainHandler.post(myRunnable);
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.e("Login",String.format("unSuccessLogin:%s",loginSuccess));
-               loginSuccess = false;
+                Handler mainHandler = new Handler(getContext().getMainLooper());
+                Runnable myRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        NavHostFragment.findNavController(loginFragment.this)
+                                .navigate(R.id.action_LoginFragment_to_LoginFailed);
+                    } // This is your code
+                };
+                mainHandler.post(myRunnable);
             }
             progressDialog.dismiss();
         }).start();
+
     }
 }

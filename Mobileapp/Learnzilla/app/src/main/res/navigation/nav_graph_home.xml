@@ -9,6 +9,14 @@
         android:id="@+id/HomeFragment"
         android:name="com.uok.learnzilla.Home.HomeFragment"
         tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_HomeFragment_to_AllCourses"
+            app:destination="@id/AllCourses" />
+    </fragment>
+    <fragment
+        android:id="@+id/AllCourses"
+        android:name="com.uok.learnzilla.HomeComponents.allCourses.fragment.allCourseListFragment"
+        tools:layout="@layout/fragment_all_course_list" >
     </fragment>
 
 </navigation>
