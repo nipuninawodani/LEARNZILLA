@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home.HomeFragment"
+    android:focusableInTouchMode="true">
+
+    <ImageButton
+        android:id="@+id/Results"
+        android:layout_width="150dp"
+        android:layout_height="160dp"
+        android:elevation="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/results"
+        android:background="@drawable/menu_button_design"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AllCourse" />
+
+    <ImageButton
+        android:id="@+id/Logout"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="528dp"
+        android:elevation="20dp"
+        android:src="@drawable/logout_tile"
+        android:background="@drawable/menu_button_design"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/MenuButton"
+        android:layout_width="73dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:elevation="20dp"
+        android:scaleType="fitCenter"
+        android:scaleY="2"
+        android:src="@drawable/menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.005"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+  <!--  <ImageButton
+        android:id="@+id/LogOutButton"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent"
+        android:elevation="20dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintStart_toEndOf="@+id/MenuButton"
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <ImageButton
+        android:id="@+id/AllCourse"
+        android:layout_width="150dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="40dp"
+        android:elevation="20dp"
+        android:layout_marginTop="152dp"
+        android:src="@drawable/allcourses"
+        android:background="@drawable/menu_button_design"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/MyCourses"
+        android:layout_width="150dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="152dp"
+        android:layout_marginEnd="40dp"
+        android:src="@drawable/my_courses"
+        android:background="@drawable/menu_button_design"
+        android:elevation="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toEndOf="@+id/AllCourse"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/Profile"
+        android:layout_width="150dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="40dp"
+        android:elevation="20dp"
+        android:src="@drawable/profile_button"
+        android:background="@drawable/menu_button_design"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintStart_toEndOf="@+id/Results"
+        app:layout_constraintTop_toBottomOf="@+id/MyCourses" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
