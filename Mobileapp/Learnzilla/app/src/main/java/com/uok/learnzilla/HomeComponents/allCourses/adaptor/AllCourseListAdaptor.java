@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.HomeComponents.allCourses.model.Courses;
 import com.uok.learnzilla.R;
 
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllCourseListAdaptor extends RecyclerView.Adapter<AllCourseListAdaptor.ViewHolder> {
-   private List<Courses>  mlistAllCourse;
+   private List<apiCourses>  mlistAllCourse;
 
-    public  AllCourseListAdaptor(List<Courses>  list){
+    public  AllCourseListAdaptor(List<apiCourses>  list){
        mlistAllCourse = list;
     }
 
@@ -33,10 +34,10 @@ public class AllCourseListAdaptor extends RecyclerView.Adapter<AllCourseListAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Courses ItemViewModel = mlistAllCourse.get(position);
-        holder.ID.setText(ItemViewModel.getCourseId());
-        holder.Name.setText(ItemViewModel.getCourseName());
-        holder.teacher.setText(ItemViewModel.getTeacherName());
+        apiCourses ItemViewModel = mlistAllCourse.get(position);
+        holder.ID.setText(ItemViewModel.getCourse_code());
+        holder.Name.setText(ItemViewModel.getDescription());
+        holder.teacher.setText(ItemViewModel.getTeacher_id());
         holder.enroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

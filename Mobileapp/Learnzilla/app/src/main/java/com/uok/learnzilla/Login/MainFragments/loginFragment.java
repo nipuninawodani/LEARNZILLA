@@ -40,7 +40,6 @@ public class loginFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        Log.e("Login",String.format("Start:%s",loginSuccess));
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
