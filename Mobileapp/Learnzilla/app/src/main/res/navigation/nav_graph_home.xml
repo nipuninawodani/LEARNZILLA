@@ -39,7 +39,7 @@
     </fragment>
     <dialog
         android:id="@+id/addLecture"
-        android:name="com.uok.learnzilla.courses.AddLectureDialogFragment"
+        android:name="com.uok.learnzilla.courses.teacher.AddLectureDialogFragment"
         tools:layout="@layout/fragment_add_lecture_dialog">
     </dialog>
 </navigation>

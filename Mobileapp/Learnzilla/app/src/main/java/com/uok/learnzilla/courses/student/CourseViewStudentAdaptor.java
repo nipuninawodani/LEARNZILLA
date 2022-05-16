@@ -1,4 +1,4 @@
-package com.uok.learnzilla.courses;
+package com.uok.learnzilla.courses.student;
 
 import android.view.LayoutInflater;
 import android.view.View;
