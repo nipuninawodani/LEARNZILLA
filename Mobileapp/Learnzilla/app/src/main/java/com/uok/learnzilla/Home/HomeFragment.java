@@ -73,6 +73,13 @@ public class HomeFragment extends Fragment {
             }
 
         });
+        binding.Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.action_HomeFragment_to_addLectcure);
+            }
+        });
     }
 
     private void goToLoginActivity() {

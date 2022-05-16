@@ -58,10 +58,10 @@ public class MyCoursesListAdapter extends RecyclerView.Adapter<MyCoursesListAdap
         private TextView teacher;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ID = (TextView) itemView.findViewById(R.id.textView_ID);
-            Name = (TextView) itemView.findViewById(R.id.textview_Name);
+            ID = (TextView) itemView.findViewById(R.id.textView_lecture);
+            Name = (TextView) itemView.findViewById(R.id.textview_lecture_Description);
             Goto = (ImageButton) itemView.findViewById(R.id.enroll_button);
-            teacher = (TextView) itemView.findViewById(R.id.textview_teacher);
+            teacher = (TextView) itemView.findViewById(R.id.textview_week);
         }
 
         public TextView getID() {

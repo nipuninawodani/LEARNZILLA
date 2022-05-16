@@ -11,10 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
-import com.uok.learnzilla.HomeComponents.allCourses.model.Courses;
 import com.uok.learnzilla.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AllCourseListAdaptor extends RecyclerView.Adapter<AllCourseListAdaptor.ViewHolder> {
@@ -58,10 +56,10 @@ public class AllCourseListAdaptor extends RecyclerView.Adapter<AllCourseListAdap
         private TextView teacher;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ID = (TextView) itemView.findViewById(R.id.textView_ID);
-            Name = (TextView) itemView.findViewById(R.id.textview_Name);
+            ID = (TextView) itemView.findViewById(R.id.textView_lecture);
+            Name = (TextView) itemView.findViewById(R.id.textview_lecture_Description);
             enroll = (ImageButton) itemView.findViewById(R.id.enroll_button);
-            teacher = (TextView) itemView.findViewById(R.id.textview_teacher);
+            teacher = (TextView) itemView.findViewById(R.id.textview_week);
         }
 
         public TextView getID() {

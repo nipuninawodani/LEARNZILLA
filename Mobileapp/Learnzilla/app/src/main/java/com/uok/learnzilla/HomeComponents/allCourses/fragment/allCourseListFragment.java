@@ -40,12 +40,13 @@ public class allCourseListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         addToRecyclerView();
 
     }
 
     private void addToRecyclerView() {
-        binding.recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+
         Call<List<apiCourses>> call = apiService.getAllCourses();
         call.enqueue(new Callback<List<apiCourses>>() {
             @Override
