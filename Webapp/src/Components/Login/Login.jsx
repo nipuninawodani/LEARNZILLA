@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import './css/main.css'
+import './css/login.css'
 import './css/util.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCoffee, faEnvelope, faLock, faLongArrowAltRight, faLongArrowRight} from "@fortawesome/free-solid-svg-icons";
+import {faEnvelope, faLock, faLongArrowRight} from "@fortawesome/free-solid-svg-icons";
 import img01 from './images/img-01.png'
 
 
@@ -45,17 +45,15 @@ function Login() {
                             </div>
 
                             <div className="text-center p-t-12">
-						<span className="txt1">
-							Forgot
-						</span>
-                                <a className="txt2" href="#">
+						<span className="txt1"> Forgot </span>
+                                <a className="txt2" href="./register">
                                     Username / Password?
                                 </a>
                             </div>
 
                             <div className="text-center p-t-136">
                                 <Link to='/Register'>
-                                    Create your Account
+                                    <span> Create your Account </span>
                                     <FontAwesomeIcon icon={faLongArrowRight} />
                                 </Link>
                             </div>
