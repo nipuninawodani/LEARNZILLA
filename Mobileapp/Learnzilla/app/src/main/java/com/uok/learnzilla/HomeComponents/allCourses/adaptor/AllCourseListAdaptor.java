@@ -19,6 +19,7 @@ public class AllCourseListAdaptor extends RecyclerView.Adapter<AllCourseListAdap
    private List<apiCourses>  mlistAllCourse;
 
     public  AllCourseListAdaptor(List<apiCourses>  list){
+
        mlistAllCourse = list;
     }
 
@@ -55,11 +56,12 @@ public class AllCourseListAdaptor extends RecyclerView.Adapter<AllCourseListAdap
         private ImageButton enroll;
         private TextView teacher;
         public ViewHolder(@NonNull View itemView) {
-            super(itemView);
+
             ID = (TextView) itemView.findViewById(R.id.textView_lecture);
             Name = (TextView) itemView.findViewById(R.id.textview_lecture_Description);
             enroll = (ImageButton) itemView.findViewById(R.id.enroll_button);
             teacher = (TextView) itemView.findViewById(R.id.textview_week);
+
         }
 
         public TextView getID() {

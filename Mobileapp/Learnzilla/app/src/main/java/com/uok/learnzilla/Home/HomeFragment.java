@@ -79,6 +79,7 @@ public class HomeFragment extends Fragment {
                 NavHostFragment.findNavController(HomeFragment.this)
                         .navigate(R.id.action_HomeFragment_to_addLectcure);
             }
+
         });
     }
 

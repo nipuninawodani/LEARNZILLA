@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
@@ -31,6 +34,7 @@ public class allCourseListFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentAllCourseListBinding.inflate(inflater, container, false);
@@ -60,6 +64,7 @@ public class allCourseListFragment extends Fragment {
                 Toast.makeText(getContext(), String.format("Error: %s", t), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }
     
