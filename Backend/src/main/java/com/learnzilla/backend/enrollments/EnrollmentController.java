@@ -28,7 +28,6 @@ public class EnrollmentController {
         Enrollment enrollment = enrollmentRepository.findByStudent_id(student_id);
         return ResponseEntity.ok(enrollment);
     }
-
     @PostMapping("/enrollment")
     public void addEnrollment(@RequestBody Enrollment enrollmentData) {
         enrollmentRepository.save(enrollmentData);

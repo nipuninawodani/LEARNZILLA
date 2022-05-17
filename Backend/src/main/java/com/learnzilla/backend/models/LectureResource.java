@@ -11,11 +11,8 @@ public class LectureResource implements Serializable {
 
     @Id
     private String lecture_id;
-
     @Id
     private String resource;
-
-
     public LectureResource(){
 
     }

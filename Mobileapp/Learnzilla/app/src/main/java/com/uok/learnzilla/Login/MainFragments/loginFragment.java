@@ -8,8 +8,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 
-import android.util.Log;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.uok.learnzilla.BackEndClasses.EmailPatternValidator;
+import com.uok.learnzilla.BackEndClasses.validaters.EmailPatternValidator;
 
-import com.uok.learnzilla.Home.HomeActivity;
 import com.uok.learnzilla.R;
 import com.uok.learnzilla.databinding.FragmentLoginBinding;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class loginFragment extends Fragment {
@@ -40,7 +34,6 @@ public class loginFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        Log.e("Login",String.format("Start:%s",loginSuccess));
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }

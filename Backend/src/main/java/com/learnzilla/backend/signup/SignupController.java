@@ -28,7 +28,6 @@ public class SignupController {
 
     @PostMapping("/signup/student")
     public void signupStudent(@RequestBody Student studentData){
-
         studentRepository.save(studentData);
     }
 }

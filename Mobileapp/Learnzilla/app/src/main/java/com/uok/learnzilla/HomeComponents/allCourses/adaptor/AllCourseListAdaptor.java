@@ -10,16 +10,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.uok.learnzilla.HomeComponents.allCourses.model.Courses;
+import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AllCourseListAdaptor extends RecyclerView.Adapter<AllCourseListAdaptor.ViewHolder> {
-   private List<Courses>  mlistAllCourse;
+   private List<apiCourses>  mlistAllCourse;
 
-    public  AllCourseListAdaptor(List<Courses>  list){
+    public  AllCourseListAdaptor(List<apiCourses>  list){
+
        mlistAllCourse = list;
     }
 
@@ -33,10 +33,10 @@ public class AllCourseListAdaptor extends RecyclerView.Adapter<AllCourseListAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Courses ItemViewModel = mlistAllCourse.get(position);
-        holder.ID.setText(ItemViewModel.getCourseId());
-        holder.Name.setText(ItemViewModel.getCourseName());
-        holder.teacher.setText(ItemViewModel.getTeacherName());
+        apiCourses ItemViewModel = mlistAllCourse.get(position);
+        holder.ID.setText(ItemViewModel.getCourse_code());
+        holder.Name.setText(ItemViewModel.getDescription());
+        holder.teacher.setText(ItemViewModel.getTeacher_id());
         holder.enroll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,11 +56,12 @@ public class AllCourseListAdaptor extends RecyclerView.Adapter<AllCourseListAdap
         private ImageButton enroll;
         private TextView teacher;
         public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            ID = (TextView) itemView.findViewById(R.id.textView_ID);
-            Name = (TextView) itemView.findViewById(R.id.textview_Name);
+
+            ID = (TextView) itemView.findViewById(R.id.textView_lecture);
+            Name = (TextView) itemView.findViewById(R.id.textview_lecture_Description);
             enroll = (ImageButton) itemView.findViewById(R.id.enroll_button);
-            teacher = (TextView) itemView.findViewById(R.id.textview_teacher);
+            teacher = (TextView) itemView.findViewById(R.id.textview_week);
+
         }
 
         public TextView getID() {

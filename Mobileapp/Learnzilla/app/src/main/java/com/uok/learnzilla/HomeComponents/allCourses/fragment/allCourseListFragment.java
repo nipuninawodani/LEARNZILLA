@@ -5,26 +5,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Toast;
+
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+
+import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
+import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
+import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
 import com.uok.learnzilla.HomeComponents.allCourses.adaptor.AllCourseListAdaptor;
-import com.uok.learnzilla.HomeComponents.allCourses.model.Courses;
 import com.uok.learnzilla.databinding.FragmentAllCourseListBinding;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class allCourseListFragment extends Fragment {
     private FragmentAllCourseListBinding binding;
+    CourseApiServices apiService = retrofitConfiguration.getClient().create(CourseApiServices.class);
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentAllCourseListBinding.inflate(inflater, container, false);
@@ -34,23 +44,26 @@ public class allCourseListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.recyclerview.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        binding.recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        addToRecyclerView();
 
-        //testing Only
-        List<Courses> courses = new ArrayList<Courses>();
-        Collections.addAll(
-                courses,
-                new Courses("QENG50236","Software", "Abdullah"),
-                new Courses("QENG50266","Hardware", "mahela"),
-                new Courses("QENG50246","Operating System", "shachin"),
-                new Courses("QENG50246","Gaming", "Nipuni"),
-                new Courses("QENG50246","Studies", "Waruni")
+    }
 
-        );
+    private void addToRecyclerView() {
 
-        AllCourseListAdaptor allCourseListAdaptor = new AllCourseListAdaptor(courses);
-        binding.recyclerview.setAdapter(allCourseListAdaptor);
-
+        Call<List<apiCourses>> call = apiService.getAllCourses();
+        call.enqueue(new Callback<List<apiCourses>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<apiCourses>> call, @NonNull Response<List<apiCourses>> response) {
+                List<apiCourses> body = response.body();
+                AllCourseListAdaptor allCourseListAdaptor = new AllCourseListAdaptor(body);
+                binding.recyclerview.setAdapter(allCourseListAdaptor);
+            }
+            @Override
+            public void onFailure(@NonNull Call<List<apiCourses>> call, @NonNull Throwable t) {
+                Toast.makeText(getContext(), String.format("Error: %s", t), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }
