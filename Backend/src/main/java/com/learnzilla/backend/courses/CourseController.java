@@ -36,4 +36,12 @@ public class CourseController {
         courseRepository.save(courseData);
     }
 
+
+    @PostMapping("/course/edit")
+    public void updateCourse(@RequestBody Course courseData) {
+        Course course = courseRepository.findByCourseid(courseData.getCourseid());
+        course.setDescription(courseData.getDescription());
+        courseRepository.save(course);
+    }
+
 }

@@ -8,7 +8,6 @@ public class Lecture  {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "lecture_id")
-
     private Long lecture_id;
     private String academic_year;
     private String course_code;
