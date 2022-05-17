@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 
-import com.uok.learnzilla.BackEndClasses.ConfirmPasswordValidator;
-import com.uok.learnzilla.BackEndClasses.EmailPatternValidator;
+import com.uok.learnzilla.BackEndClasses.validaters.ConfirmPasswordValidator;
+import com.uok.learnzilla.BackEndClasses.validaters.EmailPatternValidator;
 
 import com.uok.learnzilla.R;
 import com.uok.learnzilla.databinding.FragmentRegisterBinding;
