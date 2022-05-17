@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class TeacherController {
 
@@ -17,9 +19,9 @@ public class TeacherController {
         this.teacherRepository = teacherRepository;
     }
 
-    @GetMapping("/teacher/{id}")
-    public Teacher getTeacher(@PathVariable Integer id){
-        return teacherRepository.findById(id).get();
+    @GetMapping("/teacher/email")
+    public List<Teacher> getTeacher(@PathVariable String email){
+        return teacherRepository.findAll();
     }
 
 }
