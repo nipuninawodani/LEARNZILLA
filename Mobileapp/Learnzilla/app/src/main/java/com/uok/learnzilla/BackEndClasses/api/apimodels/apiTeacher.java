@@ -19,6 +19,13 @@ public class apiTeacher {
         return email;
     }
 
+    public apiTeacher(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+
     public String getPassword() {
         return password;
     }
