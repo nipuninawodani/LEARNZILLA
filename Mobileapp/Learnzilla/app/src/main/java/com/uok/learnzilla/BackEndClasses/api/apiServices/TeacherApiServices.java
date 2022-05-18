@@ -12,7 +12,7 @@ import retrofit2.http.Path;
 public interface TeacherApiServices {
     @GET("/teacher/{id}")
     Call<apiTeacher> getTeacherById(@Path("id") String teacherID);
-
+  
     @GET("/teacher/{email}")
     Call<apiTeacher> getTeacherByEmail(@Path("email") String email);
 

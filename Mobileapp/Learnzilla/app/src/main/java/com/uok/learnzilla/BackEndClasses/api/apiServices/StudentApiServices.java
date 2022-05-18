@@ -17,5 +17,6 @@ public interface StudentApiServices {
     Call<apiStudent> getStudentByEmail(@Path("email") String email);
 
     @POST("/signup/student")
+
     Call<apiStudent> signupStudent(@Body apiStudent student);
 }
