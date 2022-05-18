@@ -19,6 +19,13 @@ public class EnrollmentController {
         this.enrollmentRepository = enrollmentRepository;
     }
 
+    @GetMapping("/enrollment/check/course_code={course_code}&academic_year={academic_year}&student_id={student_id}")
+    public ResponseEntity<Enrollment> checkEnroll(@PathVariable String course_code , @PathVariable String academic_year,@PathVariable String student_id){
+        Enrollment enrollment = enrollmentRepository.findEnroll(course_code,academic_year,student_id);
+        return ResponseEntity.ok(enrollment);
+    }
+
+
     @GetMapping("/enrollment/course_code={course_code}&academic_year={academic_year}")
     public ResponseEntity<List<Enrollment>> getEnrollmentByCourse(@PathVariable String course_code , @PathVariable String academic_year){
         List<Enrollment> enrollment = enrollmentRepository.findBycourse_codeAndacademic_year(course_code , academic_year);
@@ -30,6 +37,13 @@ public class EnrollmentController {
         List<Enrollment> enrollment = enrollmentRepository.findByStudent_id(student_id);
         return ResponseEntity.ok(enrollment);
     }
+
+    @GetMapping("/enrollment/{enrollmentid}")
+    public ResponseEntity<Enrollment> getEnrollmentByStudent(@PathVariable Long enrollmentid){
+        Enrollment enrollment = enrollmentRepository.findByEnrollmentid(enrollmentid);
+        return ResponseEntity.ok(enrollment);
+    }
+
     @PostMapping("/enrollment")
     public void addEnrollment(@RequestBody Enrollment enrollmentData) {
         enrollmentRepository.save(enrollmentData);
