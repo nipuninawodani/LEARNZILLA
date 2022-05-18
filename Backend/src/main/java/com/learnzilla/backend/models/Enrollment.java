@@ -23,7 +23,15 @@ public class Enrollment implements Serializable {
 
     }
     public Enrollment(Long enrollmentid, String academic_year,String course_code,String student_id,String overall_grade){
+        super();
         this.enrollmentid=enrollmentid;
+        this.academic_year=academic_year;
+        this.course_code=course_code;
+        this.student_id=student_id;
+        this.overall_grade=overall_grade;
+    }
+
+    public Enrollment(String academic_year,String course_code,String student_id,String overall_grade){
         this.academic_year=academic_year;
         this.course_code=course_code;
         this.student_id=student_id;

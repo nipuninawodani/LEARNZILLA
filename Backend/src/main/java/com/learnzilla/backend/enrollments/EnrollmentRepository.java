@@ -15,4 +15,8 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment, String> 
 
     @Query("SELECT e FROM Enrollment e WHERE e.student_id = ?1")
     List<Enrollment> findByStudent_id(String student_id);
+
+    Enrollment findByEnrollmentid(Long enrollmentid);
+
+    void deleteAllByEnrollmentid(Long enrollmentid);
 }

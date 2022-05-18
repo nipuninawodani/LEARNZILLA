@@ -34,8 +34,18 @@ public class Course implements Serializable {
     }
 
     public Course(Long courseid, String course_code, String academic_year, String level, String semester, String teacher_id, String title, String description, String language) {
-        super();
         this.courseid = courseid;
+        this.academic_year=academic_year;
+        this.course_code=course_code;
+        this.description=description;
+        this.level=level;
+        this.semester=semester;
+        this.teacher_id=teacher_id;
+        this.title=title;
+        this.language=language;
+    }
+
+    public Course(String course_code, String academic_year, String level, String semester, String teacher_id, String title, String description, String language) {
         this.academic_year=academic_year;
         this.course_code=course_code;
         this.description=description;

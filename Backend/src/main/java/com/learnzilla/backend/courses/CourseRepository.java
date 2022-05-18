@@ -13,4 +13,6 @@ public interface CourseRepository extends JpaRepository<Course, String> {
     Course findBycourse_codeAndacademic_year(String course_code , String academic_year);
 
     Course findByCourseid(Long courseid);
+
+    void deleteAllByCourseid(Long courseid);
 }
