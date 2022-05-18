@@ -12,20 +12,15 @@ public class Course implements Serializable {
     @Column(name = "courseid")
 
     private Long courseid;
-
     @Column(name = "academic_year")
     private String academic_year;
-
     @Column(name = "course_code")
     private String course_code;
-
     private String level;
     private String semester;
     private String teacher_id;
-
     private String title;
     private String description;
-
     private String language;
 
 

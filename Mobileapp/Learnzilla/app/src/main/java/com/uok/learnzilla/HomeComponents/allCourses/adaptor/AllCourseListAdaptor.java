@@ -61,7 +61,6 @@ public class AllCourseListAdaptor extends RecyclerView.Adapter<AllCourseListAdap
             Name = (TextView) itemView.findViewById(R.id.textview_lecture_Description);
             enroll = (ImageButton) itemView.findViewById(R.id.enroll_button);
             teacher = (TextView) itemView.findViewById(R.id.textview_week);
-
         }
 
         public TextView getID() {

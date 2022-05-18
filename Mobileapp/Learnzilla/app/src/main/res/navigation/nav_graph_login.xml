@@ -91,6 +91,9 @@
         <argument
             android:name="Type"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_RegisterSuccess_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
     </dialog>
 
 

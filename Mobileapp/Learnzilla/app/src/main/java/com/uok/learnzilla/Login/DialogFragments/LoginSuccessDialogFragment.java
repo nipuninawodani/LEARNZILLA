@@ -47,11 +47,18 @@ public class LoginSuccessDialogFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 dismiss();
-                if (Type != 2) {
+                if (Type == 2) {
+                    gotoLoginFragment();
+                }else if (Type == 1){
                     goToHomeActivity();
                 }
             }
         });
+    }
+
+    private void gotoLoginFragment() {
+        NavHostFragment.findNavController(LoginSuccessDialogFragment.this)
+                . navigate(R.id.action_RegisterSuccess_to_LoginFragment);
     }
 
     private void goToHomeActivity() {

@@ -8,7 +8,7 @@ public class Students {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Integer id;
 
     @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
@@ -55,11 +55,12 @@ public class Students {
         this.password = password;
     }
 
-    public String getId() {
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
