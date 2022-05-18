@@ -26,4 +26,9 @@ public class StudentController {
         return studentRepository.findByEmail(email);
     }
 
+    @GetMapping("/student/{id}")
+    public Student getStudent(@PathVariable Integer id) {
+        return studentRepository.findById(id).get();
+    }
+
 }
