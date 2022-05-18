@@ -1,6 +1,5 @@
 package com.uok.learnzilla.Login.MainFragments;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,19 +7,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.os.Looper;
 import android.text.TextUtils;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+
 
 
 import com.uok.learnzilla.BackEndClasses.api.apiServices.StudentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.TeacherApiServices;
+import com.uok.learnzilla.BackEndClasses.api.apimodels.apiStudent;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiTeacher;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
 import com.uok.learnzilla.BackEndClasses.validaters.ConfirmPasswordValidator;
@@ -65,10 +62,10 @@ public class RegisterFragment extends Fragment {
 
                 boolean Empty = false;
                 binding.textInputFirstName.setError(null);
-                binding.textInputFirstName.setError(null);
-                binding.textInputFirstName.setError(null);
-                binding.textInputFirstName.setError(null);
-                binding.textInputFirstName.setError(null);
+                binding.textInputLastName.setError(null);
+                binding.textInputEmail.setError(null);
+                binding.textInputPassword.setError(null);
+                binding.textInputConfirmPassword.setError(null);
                 //check Empty
                 //FirstNAme
                 if(TextUtils.isEmpty(binding.editTextFirstName.getText().toString())){
@@ -136,95 +133,132 @@ public class RegisterFragment extends Fragment {
 
     //add Register Teacher Program
     private void RegisterTeacher() {
-        Call<apiTeacher> call = ApiTeacher.getTeacherByEmail(binding.editTextEmail.getText().toString());
-        call.enqueue(new Callback<apiTeacher>() {
+        Call<apiTeacher> callEmail = ApiTeacher.getTeacherByEmail(binding.editTextEmail.getText().toString());
+        callEmail.enqueue(new Callback<apiTeacher>() {
             @Override
             public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {
-                apiTeacher body = response.body();
-               if(body == null){
-                   apiTeacher teacher =getSignInData();
-                   Call<apiTeacher> RegisterCall = ApiTeacher.signUpTeacher(teacher);
-                   RegisterCall.enqueue(new Callback<apiTeacher>() {
-                       @Override
-                       public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {
-                        RegisterFragmentDirections.ActionRegisterFragmentToRegisterSuccess action;
-                        action = RegisterFragmentDirections.actionRegisterFragmentToRegisterSuccess(2);
-                        NavHostFragment.findNavController(RegisterFragment.this)
-                                .navigate(action);
+                String Error = new String("Email Already Taken..!");
+                RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
+                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
 
-                           NavHostFragment.findNavController(RegisterFragment.this)
-                                   .navigate(R.id.action_RegisterFragment_to_LoginFragment);
-                       }
-                       @Override
-                       public void onFailure(Call<apiTeacher> call, Throwable t) {
-
-                           RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
-                           action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(t.getMessage());
-
-                           NavHostFragment.findNavController(RegisterFragment.this)
-                                   .navigate(action);
-                       }
-                   });
-
-               }else{
-                   String Error = new String("Email Already Taken..!");
-                   RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
-                   action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
-
-                   NavHostFragment.findNavController(RegisterFragment.this)
-                           .navigate(action);
-               }
+                NavHostFragment.findNavController(RegisterFragment.this)
+                        .navigate(action);
             }
 
             @Override
             public void onFailure(Call<apiTeacher> call, Throwable t) {
-                Log.e("Error",t.getMessage());
-                RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
-                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(t.getMessage());
-                NavHostFragment.findNavController(RegisterFragment.this)
-                        .navigate(action);
+                Call<apiStudent> callEmailStudent = ApiStudent.getStudentByEmail(binding.editTextEmail.getText().toString());
+                callEmailStudent.enqueue(new Callback<apiStudent>() {
+                    @Override
+                    public void onResponse(Call<apiStudent> call, Response<apiStudent> response) {
+                        String Error = new String("Email Already Taken..!");
+                        RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
+                        action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
+                        NavHostFragment.findNavController(RegisterFragment.this)
+                                .navigate(action);
+                    }
+
+                    @Override
+                    public void onFailure(Call<apiStudent> call, Throwable t) {
+                        apiTeacher teacher = getSignInDataTeacher();
+                        Call<Void> RegisterCall = ApiTeacher.signUpTeacher(teacher);
+                        RegisterCall.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                RegisterFragmentDirections.ActionRegisterFragmentToRegisterSuccess action;
+                                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterSuccess(2);
+                                NavHostFragment.findNavController(RegisterFragment.this)
+                                        .navigate(action);
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                String Error = new String("Register Failed...! "+t.getMessage());
+                                RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
+                                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
+                                NavHostFragment.findNavController(RegisterFragment.this)
+                                        .navigate(action);
+                            }
+                        });
+                    }
+                });
 
             }
         });
 
-
-//        Toast.makeText(getContext(), "Registration Completed", Toast.LENGTH_SHORT).show();
-//        NavHostFragment.findNavController(RegisterFragment.this)
-//                .navigate(R.id.action_RegisterFragment_to_LoginFragment);
-
     }
 
-    private apiTeacher getSignInData() {
-      String FirstName = binding.editTextFirstName.getText().toString();
-      String LastName = binding.editTextLastName.getText().toString();
-      String Email = binding.editTextEmail.getText().toString();
-      String Password = DigestUtils.md5Hex(binding.editTextPassword.getText().toString());
-      return  new apiTeacher(FirstName,LastName,Email,Password);
-    }
+
 
     //add Register Student Program
     private void RegisterStudent() {
-        ProgressDialog progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Loading...");
-        progressDialog.setTitle("Register Student");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
-        progressDialog.setCancelable(false);
+        Call<apiStudent> EmailCall = ApiStudent.getStudentByEmail(binding.editTextEmail.getText().toString());
+        EmailCall.enqueue(new Callback<apiStudent>() {
+            @Override
+            public void onResponse(Call<apiStudent> call, Response<apiStudent> response) {
+                String Error = new String("Email Already Taken..!");
+                RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
+                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
 
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    //Add Register
-                    Looper.prepare();
-                    Toast.makeText(getContext(), "Registration Completed", Toast.LENGTH_SHORT).show();
-                    NavHostFragment.findNavController(RegisterFragment.this)
-                            .navigate(R.id.action_RegisterFragment_to_LoginFragment);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                progressDialog.dismiss();
+                NavHostFragment.findNavController(RegisterFragment.this)
+                        .navigate(action);
             }
-        }).start();
 
+            @Override
+            public void onFailure(Call<apiStudent> call, Throwable t) {
+                Call<apiTeacher> callEmailTeacher = ApiTeacher.getTeacherByEmail(binding.editTextEmail.getText().toString());
+                callEmailTeacher.enqueue(new Callback<apiTeacher>() {
+                    @Override
+                    public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {
+                        String Error = new String("Email Already Taken..!");
+                        RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
+                        action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
+
+                        NavHostFragment.findNavController(RegisterFragment.this)
+                                .navigate(action);
+                    }
+
+                    @Override
+                    public void onFailure(Call<apiTeacher> call, Throwable t) {
+                        apiStudent student = getSignInDataStudent();
+                        Call<Void> RegisterCall = ApiStudent.signupStudent(student);
+                        RegisterCall.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                RegisterFragmentDirections.ActionRegisterFragmentToRegisterSuccess action;
+                                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterSuccess(2);
+                                NavHostFragment.findNavController(RegisterFragment.this)
+                                        .navigate(action);
+                            }
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                String Error = new String("Register Failed...! "+t.getMessage());
+                                RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
+                                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
+                                NavHostFragment.findNavController(RegisterFragment.this)
+                                        .navigate(action);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    private apiTeacher getSignInDataTeacher() {
+        String FirstName = binding.editTextFirstName.getText().toString();
+        String LastName = binding.editTextLastName.getText().toString();
+        String Email = binding.editTextEmail.getText().toString();
+        String Password = DigestUtils.md5Hex(binding.editTextPassword.getText().toString());
+        return  new apiTeacher(FirstName,LastName,Email,Password);
+    }
+
+    private apiStudent getSignInDataStudent() {
+        String FirstName = binding.editTextFirstName.getText().toString();
+        String LastName = binding.editTextLastName.getText().toString();
+        String Email = binding.editTextEmail.getText().toString();
+        String Password = DigestUtils.md5Hex(binding.editTextPassword.getText().toString());
+        return  new apiStudent(FirstName,LastName,Email,Password);
     }
 }
