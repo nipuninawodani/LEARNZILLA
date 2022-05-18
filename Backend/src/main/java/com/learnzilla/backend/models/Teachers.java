@@ -3,8 +3,12 @@ package com.learnzilla.backend.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Students")
-public class Student {
+@Table(name = "Teachers")
+public class Teachers {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
 
     @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
@@ -15,9 +19,8 @@ public class Student {
     @Column(nullable = false, unique = true, length = 45)
     private String email;
 
-    @Id
+    @Column(nullable = false, unique = true)
     private String password;
-
 
     public String getFirstName() {
         return firstName;
@@ -49,5 +52,13 @@ public class Student {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
