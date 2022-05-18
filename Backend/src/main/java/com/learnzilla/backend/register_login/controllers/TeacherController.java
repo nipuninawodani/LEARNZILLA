@@ -28,5 +28,6 @@ public class TeacherController {
 
     @GetMapping("/teacher/{id}")
     public Teachers getTeacher(@PathVariable Integer id){
+
         return teacherRepository.findById(id).get();}
 }

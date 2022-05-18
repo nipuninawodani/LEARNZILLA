@@ -1,6 +1,7 @@
 package com.uok.learnzilla.BackEndClasses.api.apimodels;
 
 public class apiTeacher {
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
@@ -22,10 +23,15 @@ public class apiTeacher {
         return password;
     }
 
-    public apiTeacher(String firstName, String lastName, String email, String password) {
+    public apiTeacher(String id, String firstName, String lastName, String email, String password) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+    }
+
+    public String getId() {
+        return id;
     }
 }
