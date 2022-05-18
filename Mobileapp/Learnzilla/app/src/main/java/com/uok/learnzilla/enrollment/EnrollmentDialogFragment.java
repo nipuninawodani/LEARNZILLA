@@ -12,6 +12,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +20,15 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+
 import com.uok.learnzilla.BackEndClasses.api.apiServices.EnrollmentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
+
 import com.uok.learnzilla.Login.DialogFragments.RegisterDialogFragment;
 import com.uok.learnzilla.R;
 import com.uok.learnzilla.databinding.FragmentEnrollmentDialogBinding;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +38,7 @@ import retrofit2.Response;
 public class EnrollmentDialogFragment extends DialogFragment {
     private FragmentEnrollmentDialogBinding binding;
     EnrollmentApiServices EnrollServices = retrofitConfiguration.getClient().create(EnrollmentApiServices.class);
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -110,6 +115,7 @@ public class EnrollmentDialogFragment extends DialogFragment {
                          });
                         }
                     });
+
                 }
             }
         });
@@ -122,4 +128,5 @@ public class EnrollmentDialogFragment extends DialogFragment {
        String overall_grade = null;
       return  new apiEnrollment(academic_year,course_code,student_id,overall_grade);
     }
+
 }
