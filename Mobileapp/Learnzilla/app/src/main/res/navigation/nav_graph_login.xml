@@ -33,13 +33,19 @@
         android:id="@+id/RegisterFragment"
         android:name="com.uok.learnzilla.Login.MainFragments.RegisterFragment"
         tools:layout="@layout/fragment_register" >
-        <action
-            android:id="@+id/action_RegisterFragment_to_LoginFragment"
-            app:destination="@id/LoginFragment" />
         <argument
             android:name="Register"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_RegisterFragment_to_RegisterFailed"
+            app:destination="@id/RegisterFailed" />
+        <action
+            android:id="@+id/action_RegisterFragment_to_RegisterSuccess"
+            app:destination="@id/RegisterSuccess" />
+        <action
+            android:id="@+id/action_RegisterFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
     </fragment>
 
     <dialog
@@ -56,12 +62,35 @@
         android:id="@+id/LoginFailed"
         android:name="com.uok.learnzilla.Login.DialogFragments.LoginFailedDialogFragment"
         tools:layout="@layout/fragment_login_failed_dialog">
+        <argument
+            android:name="Error"
+            app:argType="string" />
     </dialog>
 
     <dialog
         android:id="@+id/LoginSuccess"
         android:name="com.uok.learnzilla.Login.DialogFragments.LoginSuccessDialogFragment"
         tools:layout="@layout/fragment_login_success_dialog">
+        <argument
+            android:name="Type"
+            app:argType="integer" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/RegisterFailed"
+        android:name="com.uok.learnzilla.Login.DialogFragments.LoginFailedDialogFragment"
+        tools:layout="@layout/fragment_login_failed_dialog">
+        <argument
+            android:name="Error"
+            app:argType="string" />
+    </dialog>
+    <dialog
+        android:id="@+id/RegisterSuccess"
+        android:name="com.uok.learnzilla.Login.DialogFragments.LoginSuccessDialogFragment"
+        tools:layout="@layout/fragment_login_success_dialog">
+        <argument
+            android:name="Type"
+            app:argType="integer" />
     </dialog>
 
 

@@ -29,7 +29,6 @@ public class StudentController {
     }
 
     @GetMapping("/student/{id}")
-
     public ResponseEntity<Students> getStudent(@PathVariable Integer id) {
         Students students = studentRepository.findById(id).get();
         return ResponseEntity.ok(students);

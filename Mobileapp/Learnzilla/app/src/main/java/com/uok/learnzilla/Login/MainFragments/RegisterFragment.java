@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -146,21 +147,43 @@ public class RegisterFragment extends Fragment {
                    RegisterCall.enqueue(new Callback<apiTeacher>() {
                        @Override
                        public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {
-                           Toast.makeText(getContext(), "RegisterDone", Toast.LENGTH_SHORT).show();
+                        RegisterFragmentDirections.ActionRegisterFragmentToRegisterSuccess action;
+                        action = RegisterFragmentDirections.actionRegisterFragmentToRegisterSuccess(2);
+                        NavHostFragment.findNavController(RegisterFragment.this)
+                                .navigate(action);
+
+                           NavHostFragment.findNavController(RegisterFragment.this)
+                                   .navigate(R.id.action_RegisterFragment_to_LoginFragment);
                        }
                        @Override
                        public void onFailure(Call<apiTeacher> call, Throwable t) {
-                           Toast.makeText(getContext(), "Register Failed", Toast.LENGTH_SHORT).show();
+
+                           RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
+                           action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(t.getMessage());
+
+                           NavHostFragment.findNavController(RegisterFragment.this)
+                                   .navigate(action);
                        }
                    });
+
                }else{
-                   Log.i("register",body.getEmail());
+                   String Error = new String("Email Already Taken..!");
+                   RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
+                   action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
+
+                   NavHostFragment.findNavController(RegisterFragment.this)
+                           .navigate(action);
                }
             }
 
             @Override
             public void onFailure(Call<apiTeacher> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("Error",t.getMessage());
+                RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
+                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(t.getMessage());
+                NavHostFragment.findNavController(RegisterFragment.this)
+                        .navigate(action);
+
             }
         });
 
@@ -176,7 +199,7 @@ public class RegisterFragment extends Fragment {
       String LastName = binding.editTextLastName.getText().toString();
       String Email = binding.editTextEmail.getText().toString();
       String Password = DigestUtils.md5Hex(binding.editTextPassword.getText().toString());
-      return  new apiTeacher(null, FirstName,LastName,Email,Password);
+      return  new apiTeacher(FirstName,LastName,Email,Password);
     }
 
     //add Register Student Program
