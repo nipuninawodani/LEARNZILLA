@@ -1,11 +1,9 @@
-package com.learnzilla.backend.controllers;
+package com.learnzilla.backend.register_login.controllers;
 
 import com.learnzilla.backend.models.Teacher;
-import com.learnzilla.backend.repositories.TeacherRepository;
+import com.learnzilla.backend.register_login.repositories.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +17,12 @@ public class TeacherController {
         this.teacherRepository = teacherRepository;
     }
 
-    @GetMapping("/teacher/email")
+    @PostMapping("/signup/teacher")
+    public void signupTeacher(@RequestBody Teacher teacherData){
+        teacherRepository.save(teacherData);
+    }
+
+    @GetMapping("/teacher/{email}")
     public List<Teacher> getTeacher(@PathVariable String email){
         return teacherRepository.findAll();
     }

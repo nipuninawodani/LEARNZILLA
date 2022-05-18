@@ -1,4 +1,4 @@
-package com.learnzilla.backend.repositories;
+package com.learnzilla.backend.register_login.repositories;
 
 import com.learnzilla.backend.models.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
