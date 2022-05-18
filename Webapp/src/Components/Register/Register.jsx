@@ -42,24 +42,19 @@ function Register() {
                             <h1>Create Account!</h1>
                             <form onSubmit={handleSubmit}>
                                 <div className="input-group">
-                                    <h5>First Name</h5>
-                                    <input type="text" name="Fname" value={Fusername} onChange={e => { setFname(e.target.value) }} id="fname" />
+                                    <input type="text" name="Fname" placeholder="First Name" value={Fusername} onChange={e => { setFname(e.target.value) }} id="fname" />
                                 </div>
                                 <div className="input-group">
-                                    <h5>Last Name</h5>
-                                    <input type="text" name="Lname" value={Lusername} onChange={e => { setLname(e.target.value) }} id="lname" />
+                                    <input type="text" name="Lname" placeholder="Last Name"value={Lusername} onChange={e => { setLname(e.target.value) }} id="lname" />
                                 </div>
                                 <div className="input-group">
-                                    <h5>Email</h5>
-                                    <input type="Email" name="Email" value={email} onChange={e => { setEmail(e.target.value) }} id="email" />
+                                    <input type="Email" name="Email" placeholder="Email Address" value={email} onChange={e => { setEmail(e.target.value) }} id="email" />
                                 </div>
                                 <div className="input-group">
-                                    <h5>Password</h5>
-                                    <input type="password" name="Password" value={pwd} onChange={e => { setPwd(e.target.value) }} id="pwd" />
+                                    <input type="password" name="Password" placeholder="Password" value={pwd} onChange={e => { setPwd(e.target.value) }} id="pwd" />
                                 </div>
                                 <div className="input-group">
-                                    <h5>Confirm Password</h5>
-                                    <input type="password" name="Confirm_password" value={cpwd} onChange={e => { setCpwd(e.target.value) }} id="c_pwd" />
+                                    <input type="password" name="Confirm_password" placeholder="Confirm Password" value={cpwd} onChange={e => { setCpwd(e.target.value) }} id="c_pwd" />
                                 </div>
                                 <input type="submit" id="s_btn" value="Submit" />
                             </form>
