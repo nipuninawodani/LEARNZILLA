@@ -17,6 +17,9 @@ public interface EnrollmentApiServices {
     @GET("/enrollment/student_id={student_id}")
     Call<List<apiEnrollment>> getEnrollmentsByStudent(@Path("student_id") String student_id);
 
+    @GET("/enrollment/check/course_code={course_code}&academic_year={academic_year}&student_id={student_id}")
+    Call<apiEnrollment> checkEnroll(@Path("course_code") String course_code,@Path("academic_year") String academic_year,@Path("student_id") String student_id);
+
     @POST("/enrollment")
-    Call<apiEnrollment> addEnrollment(@Body apiEnrollment enrollment);
+    Call<Void> addEnrollment(@Body apiEnrollment enrollment);
 }
