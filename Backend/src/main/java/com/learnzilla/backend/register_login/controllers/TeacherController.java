@@ -27,4 +27,7 @@ public class TeacherController {
         return teacherRepository.findByEmail(email);
     }
 
+    @GetMapping("/teacher/{id}")
+    public Teacher getTeacher(@PathVariable Integer id){
+        return teacherRepository.findById(id).get();}
 }

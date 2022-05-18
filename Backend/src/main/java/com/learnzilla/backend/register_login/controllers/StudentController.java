@@ -23,8 +23,13 @@ public class StudentController {
     }
 
     @GetMapping("/student/{email}")
-    public Student getTeacher(@PathVariable String email){
+    public Student getStudent(@PathVariable String email){
         return studentRepository.findByEmail(email);
+    }
+
+    @GetMapping("/student/{id}")
+    public Student getStudent(@PathVariable Integer id) {
+        return studentRepository.findById(id).get();
     }
 
 }
