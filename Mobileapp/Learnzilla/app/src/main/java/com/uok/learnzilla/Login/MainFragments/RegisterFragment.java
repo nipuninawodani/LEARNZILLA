@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.os.Looper;
 import android.text.TextUtils;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -152,6 +153,8 @@ public class RegisterFragment extends Fragment {
                            Toast.makeText(getContext(), "Register Failed", Toast.LENGTH_SHORT).show();
                        }
                    });
+               }else{
+                   Log.i("register",body.getEmail());
                }
             }
 
