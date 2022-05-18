@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+
 import com.uok.learnzilla.BackEndClasses.api.apiServices.StudentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.TeacherApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiStudent;
@@ -153,7 +154,6 @@ public class RegisterFragment extends Fragment {
                         String Error = new String("Email Already Taken..!");
                         RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
                         action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
-
                         NavHostFragment.findNavController(RegisterFragment.this)
                                 .navigate(action);
                     }
