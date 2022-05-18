@@ -5,7 +5,6 @@ import com.learnzilla.backend.register_login.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 public class StudentController {
@@ -23,7 +22,7 @@ public class StudentController {
     }
 
     @GetMapping("/student/{email}")
-    public Student getTeacher(@PathVariable String email){
+    public Student getStudentByEmail(@PathVariable String email){
         return studentRepository.findByEmail(email);
     }
 
