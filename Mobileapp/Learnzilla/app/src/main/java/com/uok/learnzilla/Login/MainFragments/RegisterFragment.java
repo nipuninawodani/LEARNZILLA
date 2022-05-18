@@ -11,7 +11,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.os.Looper;
 import android.text.TextUtils;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +26,8 @@ import com.uok.learnzilla.BackEndClasses.validaters.EmailPatternValidator;
 
 import com.uok.learnzilla.R;
 import com.uok.learnzilla.databinding.FragmentRegisterBinding;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -138,7 +139,20 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {
                 apiTeacher body = response.body();
-                Log.i("register",body.getEmail());
+               if(body == null){
+                   apiTeacher teacher =getSignInData();
+                   Call<apiTeacher> RegisterCall = ApiTeacher.signUpTeacher(teacher);
+                   RegisterCall.enqueue(new Callback<apiTeacher>() {
+                       @Override
+                       public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {
+                           Toast.makeText(getContext(), "RegisterDone", Toast.LENGTH_SHORT).show();
+                       }
+                       @Override
+                       public void onFailure(Call<apiTeacher> call, Throwable t) {
+                           Toast.makeText(getContext(), "Register Failed", Toast.LENGTH_SHORT).show();
+                       }
+                   });
+               }
             }
 
             @Override
@@ -152,6 +166,14 @@ public class RegisterFragment extends Fragment {
 //        NavHostFragment.findNavController(RegisterFragment.this)
 //                .navigate(R.id.action_RegisterFragment_to_LoginFragment);
 
+    }
+
+    private apiTeacher getSignInData() {
+      String FirstName = binding.editTextFirstName.getText().toString();
+      String LastName = binding.editTextLastName.getText().toString();
+      String Email = binding.editTextEmail.getText().toString();
+      String Password = DigestUtils.md5Hex(binding.editTextPassword.getText().toString());
+      return  new apiTeacher(null, FirstName,LastName,Email,Password);
     }
 
     //add Register Student Program
