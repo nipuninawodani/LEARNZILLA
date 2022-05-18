@@ -183,6 +183,7 @@ public class RegisterFragment extends Fragment {
                 action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(t.getMessage());
                 NavHostFragment.findNavController(RegisterFragment.this)
                         .navigate(action);
+
             }
         });
 
