@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_margin="10dp"
+    app:cardElevation="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="273dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_lecture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/colorAccent"
+                android:layout_marginLeft="15dp"
+                android:text="Course ID"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textview_lecture_Description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/primaryTextColor"
+                android:layout_marginTop="4dp"
+                android:text="Course Name"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/textview_week"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/primaryTextColor"
+                android:layout_marginTop="4dp"
+                android:text="Teacher Name"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/enroll_button"
+            android:layout_width="67dp"
+            android:layout_height="83dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            app:srcCompat="@android:drawable/ic_menu_send"
+            app:tint="@color/primaryTextColor" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
