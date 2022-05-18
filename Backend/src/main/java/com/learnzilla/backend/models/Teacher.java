@@ -3,13 +3,19 @@ package com.learnzilla.backend.models;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "Teachers")
 public class Teacher {
 
-    @Id
-    @Column(name = "password")
+    @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
+
+    @Column(name = "last_name", nullable = false, length = 50)
     private String lastName;
+
+    @Column(nullable = false, unique = true, length = 45)
     private String email;
+
+    @Id
     private String password;
 
     public String getFirstName() {

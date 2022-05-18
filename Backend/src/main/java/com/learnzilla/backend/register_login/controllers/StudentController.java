@@ -22,9 +22,9 @@ public class StudentController {
         studentRepository.save(studentData);
     }
 
-    @GetMapping("/student/email")
-    public List<Student> getTeacher(@PathVariable String email){
-        return studentRepository.findAll();
+    @GetMapping("/student/{email}")
+    public Student getTeacher(@PathVariable String email){
+        return studentRepository.findByEmail(email);
     }
 
 }

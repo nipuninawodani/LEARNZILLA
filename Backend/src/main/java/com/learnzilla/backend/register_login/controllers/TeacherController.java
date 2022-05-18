@@ -23,8 +23,8 @@ public class TeacherController {
     }
 
     @GetMapping("/teacher/{email}")
-    public List<Teacher> getTeacher(@PathVariable String email){
-        return teacherRepository.findAll();
+    public Teacher getTeacher(@PathVariable String email){
+        return teacherRepository.findByEmail(email);
     }
 
 }
