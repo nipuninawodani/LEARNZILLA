@@ -31,4 +31,5 @@ public class StudentController {
     public Student getStudent(@PathVariable Integer id) {
         return studentRepository.findById(id).get();
     }
+
 }
