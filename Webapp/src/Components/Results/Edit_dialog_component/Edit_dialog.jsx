@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import './Edit_dialog.css'
 
 
-function Update_dialog() {
+function Edit_dialog() {
 
     return (
         <div className="container-edit">
@@ -20,4 +20,4 @@ function Update_dialog() {
     )
 }
 
-export default Update_dialog;
+export default Edit_dialog;
