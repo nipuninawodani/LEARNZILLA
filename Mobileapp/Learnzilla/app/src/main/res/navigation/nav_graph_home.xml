@@ -9,6 +9,49 @@
         android:id="@+id/HomeFragment"
         android:name="com.uok.learnzilla.Home.HomeFragment"
         tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_HomeFragment_to_AllCourses"
+            app:destination="@id/AllCourses" />
+        <action
+            android:id="@+id/action_HomeFragment_to_MyCourses"
+            app:destination="@id/MyCourses" />
+        <action
+            android:id="@+id/action_HomeFragment_to_Results"
+            app:destination="@id/Results" />
+        <action
+            android:id="@+id/action_HomeFragment_to_addLectcure"
+            app:destination="@id/addLecture" />
     </fragment>
+    <fragment
+        android:id="@+id/AllCourses"
+        android:name="com.uok.learnzilla.HomeComponents.allCourses.fragment.allCourseListFragment"
+        tools:layout="@layout/fragment_all_course_list" >
+        <action
+            android:id="@+id/action_AllCourses_to_EnrollDialog"
+            app:destination="@id/EnrollDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/MyCourses"
+        android:name="com.uok.learnzilla.HomeComponents.myCourses.fragment.MyCoursesListFragment"
+        tools:layout="@layout/fragment_my_courses_list" >
+    </fragment>
+    <fragment
+        android:id="@+id/Results"
+        android:name="com.uok.learnzilla.HomeComponents.results.ResultsListFragment"
+        tools:layout="@layout/fragment_results_list" >
+    </fragment>
+    <dialog
+        android:id="@+id/addLecture"
+        android:name="com.uok.learnzilla.courses.teacher.AddLectureDialogFragment"
+        tools:layout="@layout/fragment_add_lecture_dialog">
+    </dialog>
+    <dialog
+        android:id="@+id/EnrollDialog"
+        android:name="com.uok.learnzilla.enrollment.EnrollmentDialogFragment"
+        tools:layout="@layout/fragment_enrollment_dialog">
+        <argument
+            android:name="Enroll"
+            app:argType="com.uok.learnzilla.enrollment.EnrollViewModel" />
+    </dialog>
 
 </navigation>

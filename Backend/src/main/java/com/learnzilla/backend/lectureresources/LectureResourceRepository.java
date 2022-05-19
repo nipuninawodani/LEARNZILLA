@@ -6,12 +6,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface LectureResourceRepository extends JpaRepository<LectureResource, String> {
 
-    @Query("SELECT r FROM LectureResource r WHERE r.course_code = ?1 AND r.academic_year = ?2")
-    LectureResource findBycourse_codeAndacademic_year(String course_code , String academic_year);
-
     @Query("SELECT r FROM LectureResource r WHERE r.lecture_id = ?1")
-    LectureResource findByLecture_id(String lecture_id);
+    List<LectureResource> findByLecture_id(Long lecture_id);
+
+    LectureResource findByLectureresourseid(Long lectureresourseid);
+
+    void deleteAllByLectureresourseid(Long lectureresourseid);
 }

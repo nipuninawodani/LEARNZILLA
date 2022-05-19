@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.uok.learnzilla.Login.Activities.LoginActivity;
+import com.uok.learnzilla.R;
 import com.uok.learnzilla.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -46,6 +48,38 @@ public class HomeFragment extends Fragment {
                     .setNegativeButton("No",(dialogInterface, i) -> dialogInterface.cancel());
             AlertDialog alert = builder.create();
             alert.show();
+
+        });
+
+        binding.AllCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.action_HomeFragment_to_AllCourses);
+            }
+        });
+        binding.MyCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.action_HomeFragment_to_MyCourses);
+            }
+        });
+        binding.Results.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.action_HomeFragment_to_Results);
+            }
+
+        });
+        binding.Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.action_HomeFragment_to_addLectcure);
+            }
+
         });
     }
 
