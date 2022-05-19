@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/acadamicView"
+        android:id="@+id/CourseCodeView"
         android:layout_width="83dp"
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/courseCodeVView"
-        app:layout_constraintTop_toBottomOf="@+id/AcadamicYearEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/CourseCodeEdit" />
 
     <TextView
         android:id="@+id/courseCodeVView"
@@ -58,7 +58,7 @@
         android:text="Course Code :"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/acadamicView" />
+        app:layout_constraintTop_toBottomOf="@+id/CourseCodeView" />
 
     <TextView
         android:id="@+id/TitleView"
@@ -128,7 +128,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/AcadamicYearEdit"
+        android:id="@+id/CourseCodeEdit"
         android:layout_width="112dp"
         android:layout_height="36dp"
         android:layout_marginTop="48dp"
@@ -138,7 +138,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/acadamicView"
+        app:layout_constraintStart_toEndOf="@+id/CourseCodeView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
