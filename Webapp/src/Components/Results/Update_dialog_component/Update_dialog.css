@@ -24,7 +24,7 @@
   }
   
   .wrap-update {
-    width: 960px;
+    width:fit-content;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -36,5 +36,15 @@
     
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 30px 130px 33px 50px;
+    padding: 30px 30px 30px 30px;
+  }
+
+  #title-question p{
+    font-size: 17px;
+    margin-bottom: 10px;
+    font-weight:400;
+  }
+
+  #btn-group{
+    margin-left: 80px;
   }
