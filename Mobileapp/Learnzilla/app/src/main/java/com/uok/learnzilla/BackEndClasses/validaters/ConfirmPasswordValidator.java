@@ -1,4 +1,4 @@
-package com.uok.learnzilla.BackEndClasses;
+package com.uok.learnzilla.BackEndClasses.validaters;
 
 public class ConfirmPasswordValidator {
     public boolean validateConfirmPassword(String pass, String cPass) {

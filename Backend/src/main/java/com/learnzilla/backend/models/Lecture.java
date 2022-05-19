@@ -8,8 +8,7 @@ public class Lecture  {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "lecture_id")
-
-    private Long lecture_id;
+    private Long lectureid;
     private String academic_year;
     private String course_code;
     private String description;
@@ -20,12 +19,19 @@ public class Lecture  {
 
     }
 
-    public Lecture(Long lecture_id,String academic_year,String course_code,String description,String week){
+    public Lecture(Long lectureid, String academic_year, String course_code, String description, String week){
         this.academic_year=academic_year;
         this.course_code=course_code;
         this.description=description;
         this.week=week;
-        this.lecture_id=lecture_id;
+        this.lectureid = lectureid;
+    }
+
+    public Lecture(String academic_year,String course_code,String description,String week){
+        this.academic_year=academic_year;
+        this.course_code=course_code;
+        this.description=description;
+        this.week=week;
     }
 
     public String getCourse_code() {
@@ -52,12 +58,12 @@ public class Lecture  {
         this.description = description;
     }
 
-    public Long getLecture_id() {
-        return lecture_id;
+    public Long getLectureid() {
+        return lectureid;
     }
 
-    public void setLecture_id(Long lecture_id) {
-        this.lecture_id = lecture_id;
+    public void setLectureid(Long lecture_id) {
+        this.lectureid = lecture_id;
     }
 
     public String getWeek() {
