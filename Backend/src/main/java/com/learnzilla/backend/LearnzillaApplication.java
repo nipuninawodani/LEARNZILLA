@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 public class LearnzillaApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(LearnzillaApplication.class, args);
 	}
 

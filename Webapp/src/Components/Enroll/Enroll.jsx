@@ -1,44 +1,17 @@
 import React from "react";
 import {Link, useSearchParams} from "react-router-dom";
 import cs01 from './img/cs-1.jpg'
-import './css/Course.css'
+import './css/Enroll.css'
 import {faCaretRight, faEnvelope, faHeart} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-function Course() {
+function Enroll() {
 
     const [searchParams] = useSearchParams();
 
 
-    let CourseCode = searchParams.get("CourseCode")
+    let enrollCode = searchParams.get("enrollCode")
     let AcademicYear = searchParams.get("AcademicYear")
-    let weeks = [1,2,3,4,5]
-
-
-    const accordian = weeks.map((week) =>
-        <div className="accordion-item">
-            <h2 className="accordion-header" id={'heading'+ week}>
-                <button className="accordion-button collapsed" type="button"
-                        data-bs-toggle="collapse" data-bs-target={'#collapse' +week}
-                        aria-expanded="false" aria-controls={'collapse' +week}>
-                    Week #{week}
-                </button>
-            </h2>
-            <div id={'collapse' +week} className="accordion-collapse collapse"
-                 aria-labelledby={'heading'+ week} data-bs-parent="#accordionExample">
-                <div className="accordion-body">
-                    <strong>This is the {week} item's accordion body.</strong> It is
-                    hidden by default, until the collapse plugin adds the appropriate
-                    classes that we use to style each element. These classes control the
-                    overall appearance, as well as the showing and hiding via CSS
-                    transitions. You can modify any of this with custom CSS or
-                    overriding our default variables. It's also worth noting that just
-                    about any HTML can go within the <code>.accordion-body</code>,
-                    though the transition does limit overflow.
-                </div>
-            </div>
-        </div>
-    );
 
     return (
         <div className="container-enroll100">
@@ -46,22 +19,22 @@ function Course() {
                 <div class="col-md-1"></div>
 
                 <div class="col-md-10">
-                    <div id="course-details" className="course-details-section">
+                    <div id="enroll-details" className="enroll-details-section">
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-9">
-                                    <div className="course-details-item">
-                                        <div className="course-single-pic mb30">
+                                    <div className="enroll-details-item">
+                                        <div className="enroll-single-pic mb30">
                                             <img src={cs01} alt="" />
                                         </div>
-                                        <div className="course-single-text">
-                                            <div className="course-title mt10 headline relative-position">
+                                        <div className="enroll-single-text">
+                                            <div className="enroll-title mt10 headline relative-position">
                                                 <h3><a
-                                                    href="file:///C:/Users/Mahela/Downloads/Compressed/geniuscoursehtml-10/geniuscoursehtml-10/genius-course-html-upload-package/Genius_course_placeholder/course-details.html#">Fully
-                                                    Responsive <b>Web Design &amp; COurse.</b></a>
+                                                    href="file:///C:/Users/Mahela/Downloads/Compressed/geniusenrollhtml-10/geniusenrollhtml-10/genius-enroll-html-upload-package/Genius_enroll_placeholder/enroll-details.html#">Fully
+                                                    Responsive <b>Web Design &amp; Development.</b></a>
                                                 </h3>
                                             </div>
-                                            <div className="course-details-content">
+                                            <div className="enroll-details-content">
                                                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
                                                     euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
                                                     minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
@@ -81,37 +54,25 @@ function Course() {
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div className="accordion" id="CourseAccordion">
-                                        <div className="accordion-item">
-                                            <h2 className="accordion-header" id="headingOne">
-                                                <button className="accordion-button" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                                        aria-expanded="true" aria-controls="collapseOne">
-                                                    Announcements
-                                                </button>
-                                            </h2>
-                                            <div id="collapseOne" className="accordion-collapse collapse show"
-                                                 aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                <div className="accordion-body">
-                                                    Announcements
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {accordian}
-                                    </div>
-
                                 </div>
 
                                 <div className="col-md-3">
                                     <div className="side-bar">
+                                        <div className="enroll-side-bar-widget">
+                                            <div className="btn btn-danger text-center text-uppercase float-left bold-font box">
+                                                Enroll THis enroll <FontAwesomeIcon icon={faCaretRight} />
+                                            </div>
+                                        </div>
+                                        <div className="enrolled-student">
+                                            <div className="student-number bold-font">
+                                                250 Enrolled
+                                            </div>
+                                        </div>
                                         <div className="couse-feature ul-li-block">
                                             <ul>
                                                 <li>Lectures <span>20 Lectures</span></li>
                                                 <li>Language <span>English, France</span></li>
                                                 <li>Teacher <span>Mr. A Adikari</span></li>
-                                                <li>Status <span>On Going</span></li>
-                                                <li>Grade <span>N/A</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -126,4 +87,4 @@ function Course() {
     )
 }
 
-export default Course;
+export default Enroll;

@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 }
 
-.container-update {
+.container-edit {
     width: 100%;  
     min-height: 100vh;
     display: -webkit-box;
@@ -23,10 +23,8 @@
     background: linear-gradient(-135deg, #ec0000, #fdc9cb);
   }
   
-  .wrap-update {
-
+  .wrap-edit {
     width:fit-content;
-    width: 960px;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -49,5 +47,4 @@
 
   #btn-group{
     margin-left: 80px;
-    padding: 30px 130px 33px 50px;
   }

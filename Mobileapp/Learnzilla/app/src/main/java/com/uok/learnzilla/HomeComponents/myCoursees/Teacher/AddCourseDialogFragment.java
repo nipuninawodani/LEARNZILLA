@@ -30,7 +30,6 @@ import retrofit2.Response;
 public class AddCourseDialogFragment extends DialogFragment {
     private  FragmentAddCourseDialogBinding binding;
     CourseApiServices ApiCourse = retrofitConfiguration.getClient().create(CourseApiServices.class);
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
