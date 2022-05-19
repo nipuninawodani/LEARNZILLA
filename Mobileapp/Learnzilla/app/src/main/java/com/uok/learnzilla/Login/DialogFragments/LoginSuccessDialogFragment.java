@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,13 +42,23 @@ public class LoginSuccessDialogFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        int Type = LoginSuccessDialogFragmentArgs.fromBundle(getArguments()).getType();
         binding.closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dismiss();
-                goToHomeActivity();
+                if (Type == 2) {
+                    gotoLoginFragment();
+                }else if (Type == 1){
+                    goToHomeActivity();
+                }
             }
         });
+    }
+
+    private void gotoLoginFragment() {
+        NavHostFragment.findNavController(LoginSuccessDialogFragment.this)
+                . navigate(R.id.action_RegisterSuccess_to_LoginFragment);
     }
 
     private void goToHomeActivity() {

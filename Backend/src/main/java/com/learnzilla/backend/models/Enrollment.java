@@ -1,21 +1,20 @@
 package com.learnzilla.backend.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@IdClass(Enrollment.class)
 public class Enrollment implements Serializable {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "enrollmentid")
+    private Long enrollmentid;
+
     private String academic_year;
 
-    @Id
     private String course_code;
 
-    @Id
     private String student_id;
 
     private String overall_grade;
@@ -23,6 +22,15 @@ public class Enrollment implements Serializable {
     public Enrollment(){
 
     }
+    public Enrollment(Long enrollmentid, String academic_year,String course_code,String student_id,String overall_grade){
+        super();
+        this.enrollmentid=enrollmentid;
+        this.academic_year=academic_year;
+        this.course_code=course_code;
+        this.student_id=student_id;
+        this.overall_grade=overall_grade;
+    }
+
     public Enrollment(String academic_year,String course_code,String student_id,String overall_grade){
         this.academic_year=academic_year;
         this.course_code=course_code;
@@ -60,5 +68,13 @@ public class Enrollment implements Serializable {
 
     public void setStudent_id(String student_id) {
         this.student_id = student_id;
+    }
+
+    public Long getEnrollmentid() {
+        return enrollmentid;
+    }
+
+    public void setEnrollmentid(Long enrollmentid) {
+        this.enrollmentid = enrollmentid;
     }
 }

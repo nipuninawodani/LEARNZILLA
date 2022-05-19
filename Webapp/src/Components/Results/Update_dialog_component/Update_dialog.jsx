@@ -15,6 +15,7 @@ function Update_dialog() {
                     <span id="btn-update"><button type="button" class="btn btn-success">Update</button></span>
                     <span id="btn-cancel"><button type="button" class="btn btn-danger">Cancel</button></span>
                 </div>
+
             </div>
         </div>
     )

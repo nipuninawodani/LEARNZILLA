@@ -1,4 +1,4 @@
-package com.uok.learnzilla.BackEndClasses;
+package com.uok.learnzilla.BackEndClasses.validaters;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
