@@ -24,7 +24,9 @@ public class AnnouncementController {
     public void setAnnouncement(@RequestBody Announcement announcement){
       announcementRepository.save(announcement);
 
-      System.out.println(announcement.id+" " +announcement.message+" " + announcement.date);
+      System.out.println("This is the number "+ announcement.id+ " from your course " + announcement.course_code);
+      System.out.println("This announcement is send on " + announcement.date);
+      System.out.println(announcement.message);
 
     }
 

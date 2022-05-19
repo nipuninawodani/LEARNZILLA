@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 public class Announcement {
@@ -11,6 +12,7 @@ public class Announcement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
+    public String course_code;
     public String message;
-    public int date;
+    public Date date;
 }
