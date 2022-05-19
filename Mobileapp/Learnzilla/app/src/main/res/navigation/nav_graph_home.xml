@@ -13,14 +13,17 @@
             android:id="@+id/action_HomeFragment_to_AllCourses"
             app:destination="@id/AllCourses" />
         <action
-            android:id="@+id/action_HomeFragment_to_MyCourses"
-            app:destination="@id/MyCourses" />
-        <action
             android:id="@+id/action_HomeFragment_to_Results"
             app:destination="@id/Results" />
         <action
             android:id="@+id/action_HomeFragment_to_addLectcure"
             app:destination="@id/addLecture" />
+        <action
+            android:id="@+id/action_HomeFragment_to_MyCoursesStudent"
+            app:destination="@id/MyCoursesStudent" />
+        <action
+            android:id="@+id/action_HomeFragment_to_MyCoursesTeacher"
+            app:destination="@id/MyCoursesTeacher" />
     </fragment>
     <fragment
         android:id="@+id/AllCourses"
@@ -31,9 +34,9 @@
             app:destination="@id/EnrollDialog" />
     </fragment>
     <fragment
-        android:id="@+id/MyCourses"
-        android:name="com.uok.learnzilla.HomeComponents.myCourses.fragment.MyCoursesListFragment"
-        tools:layout="@layout/fragment_my_courses_list" >
+        android:id="@+id/MyCoursesStudent"
+        android:name="com.uok.learnzilla.HomeComponents.myCoursees.Student.FragmentMyCoursesStudent"
+        tools:layout="@layout/fragment_mycourses_student" >
     </fragment>
     <fragment
         android:id="@+id/Results"
@@ -53,5 +56,10 @@
             android:name="Enroll"
             app:argType="com.uok.learnzilla.enrollment.EnrollViewModel" />
     </dialog>
+    <fragment
+        android:id="@+id/MyCoursesTeacher"
+        android:name="com.uok.learnzilla.HomeComponents.myCoursees.Teacher.FragmentMyCoursesTeacher"
+        tools:layout="@layout/fragment_my_courses_teacher" >
+    </fragment>
 
 </navigation>
