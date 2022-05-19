@@ -5,6 +5,9 @@ import Register from "./Components/Register/Register";
 import Course from "./Components/Course/Course";
 import Results from "./Components/Results/Results";
 import Update_dialog from "./Components/Results/Update_dialog_component/Update_dialog";
+import Edit_dialog from "./Components/Results/Edit_dialog_component/Edit_dialog";
+import Delete_dialog from "./Components/Results/Delete_dialog_component/Delete_dialog";
+
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
               <Route path="/Course"  element={<Course/>}/>
               <Route path="/Results"  element={<Results/>}/>
               <Route path="/Update_dialog"  element={<Update_dialog/>}/>
+              <Route path="/Edit_dialog"  element={<Edit_dialog/>}/>
+              <Route path="/Delete_dialog"  element={<Delete_dialog/>}/>
+
 
             </Routes> 
   
