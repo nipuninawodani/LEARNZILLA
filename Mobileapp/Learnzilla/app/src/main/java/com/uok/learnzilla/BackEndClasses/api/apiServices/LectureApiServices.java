@@ -14,10 +14,10 @@ public interface LectureApiServices {
     @GET("/lecture/{lecture_id}")
     Call<apiLectures> getLectureById(@Path("lecture_id") String lecture_id);
 
-    @GET("/lecture/course_code={course_code}&academic_year={academic_year}")
+    @GET("/lecture/get/course_code={course_code}&academic_year={academic_year}")
     Call<List<apiLectures>> getLecturesByCourse(@Path("course_code")String course_code, @Path("academic_year") String academic_year);
 
     @POST("/lecture")
-    Call<apiLectures>  addLecture(@Body apiLectures lectures);
+    Call<Void>  addLecture(@Body apiLectures lectures);
 
 }
