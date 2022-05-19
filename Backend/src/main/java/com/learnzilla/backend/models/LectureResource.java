@@ -14,8 +14,6 @@ public class LectureResource implements Serializable {
     private Long lecture_id;
 
     private String resource;
-
-
     public LectureResource(){
 
     }

@@ -47,13 +47,8 @@ public class LoginFailedDialogFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 dismiss();
-                goToHomeActivity();
             }
         });
     }
 
-    private void goToHomeActivity() {
-        Intent intent = new Intent(getActivity(), HomeActivity.class);
-        startActivity(intent);
-    }
 }

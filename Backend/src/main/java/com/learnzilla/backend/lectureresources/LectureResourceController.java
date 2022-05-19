@@ -15,8 +15,6 @@ public class LectureResourceController {
 
     private LectureResourceRepository lectureResourceRepository;
 
-
-
     @Autowired
     public LectureResourceController(LectureResourceRepository lectureResourceRepository) {
         this.lectureResourceRepository = lectureResourceRepository;
