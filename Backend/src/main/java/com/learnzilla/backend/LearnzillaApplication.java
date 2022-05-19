@@ -10,19 +10,10 @@ import org.springframework.context.event.EventListener;
 @SpringBootApplication
 public class LearnzillaApplication {
 
-	@Autowired
-	private EmailSenderService senderService;
 
 	public static void main(String[] args) {
 
 		SpringApplication.run(LearnzillaApplication.class, args);
 	}
-	@EventListener(ApplicationReadyEvent.class)
 
-	public void sendMail(){
-		senderService.sendEmail("learnzilla.lms@gmail.com",
-				"this mail from learnzilla",
-				"This is the mail body");
-
-	}
 }
