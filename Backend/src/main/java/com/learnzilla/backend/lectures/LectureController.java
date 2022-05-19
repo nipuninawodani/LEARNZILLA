@@ -26,7 +26,7 @@ public class LectureController {
         return ResponseEntity.ok(lecture);
     }
 
-    @GetMapping("/lecture/course_code={course_code}&academic_year={academic_year}")
+    @GetMapping("/lecture/get/course_code={course_code}&academic_year={academic_year}")
     public ResponseEntity<List<Lecture>> getLectureByCourse(@PathVariable String course_code , @PathVariable String academic_year){
         List<Lecture> lecture = lectureRepository.findBycourse_codeAndacademic_year(course_code , academic_year);
         return ResponseEntity.ok(lecture);
