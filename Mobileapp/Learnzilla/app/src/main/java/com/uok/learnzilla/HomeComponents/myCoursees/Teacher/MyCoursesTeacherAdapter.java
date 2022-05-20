@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uok.learnzilla.BackEndClasses.api.apiServices.TeacherApiServices;
@@ -67,6 +69,14 @@ public class MyCoursesTeacherAdapter extends RecyclerView.Adapter<MyCoursesTeach
             holder.Level.setText("Level :"+ItemViewModel.getLevel());
             holder.courseTitle.setText(ItemViewModel.getTitle());
             holder.courseDescription.setText(ItemViewModel.getDescription());
+            holder.Go.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentMyCoursesTeacherDirections.ActionMyCoursesTeacherToCourseViewLecturesTeacher Action;
+                    Action = FragmentMyCoursesTeacherDirections.actionMyCoursesTeacherToCourseViewLecturesTeacher(ItemViewModel);
+                    NavHostFragment.findNavController(FragmentManager.findFragment(Frag)).navigate(Action);
+                }
+            });
         }
 
     }
