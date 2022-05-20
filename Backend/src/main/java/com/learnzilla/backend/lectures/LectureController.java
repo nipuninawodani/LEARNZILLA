@@ -4,14 +4,13 @@ import com.learnzilla.backend.models.Enrollment;
 import com.learnzilla.backend.models.Lecture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class LectureController {
 
     private LectureRepository lectureRepository;
-
-
 
     @Autowired
     public LectureController(LectureRepository lectureRepository) {
