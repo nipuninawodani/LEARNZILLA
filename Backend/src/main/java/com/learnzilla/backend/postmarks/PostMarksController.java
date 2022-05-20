@@ -1,51 +1,51 @@
 package com.learnzilla.backend.postmarks;
 
-import com.learnzilla.backend.models.Students;
-import com.learnzilla.backend.models.PostMarks;
+import com.learnzilla.backend.enrollments.EnrollmentRepository;
+import com.learnzilla.backend.models.Enrollment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 public class PostMarksController {
 
-    private  PostMarksRepository postMarksRepository;
+    private EnrollmentRepository enrollmentRepository;
 
     @Autowired
-    public PostMarksController(PostMarksRepository postMarksRepository){
-        this.postMarksRepository= postMarksRepository;
+    public PostMarksController(EnrollmentRepository enrollmentRepository){
+        this.enrollmentRepository= enrollmentRepository;
     }
 
-    @GetMapping("/postMarks/student_id={student_id}")
-    public ResponseEntity<List<PostMarks>> getPostMarksById(@PathVariable String student_id){
-        List<PostMarks> postMarks = postMarksRepository.findByStudent_id(student_id);
-        return ResponseEntity.ok(PostMarks);
+    @GetMapping("/enrollment/student_id={student_id}")
+    public ResponseEntity<List<Enrollment>> getEnrollmentById(@PathVariable String student_id){
+        List<Enrollment> enrollment = enrollmentRepository.findByStudent_id(student_id);
+        return ResponseEntity.ok(Enrollment);
     }
 
-    @PostMapping("/postMarks")
-    public void postMarks(@RequestBody PostMarks postMarksData){
-        postMarksRepository.save(postMarksData);
+    @PostMapping("/enrollment")
+    public void postMarks(@RequestBody Enrollment enrollmentData){
+        enrollmentRepository.save(enrollmentData);
     }
 
-    @PostMapping("/postMarks/edit")
-    public void updatePostMarks(@RequestBody PostMarks postMarksData) {
+    @PostMapping("/entollment/edit")
+    public void updatePostMarks(@RequestBody Enrollment enrollmentData) {
 
-        PostMarks  postMarks = postMarksRepository.findByPostMarksid(postMarksData.getPostMarksid());
-        if (postMarksData.getStudent_id()!=null){
-            postMarks.setStudent_id(postMarksData.getStudent_id());
+
+        Enrollment enrollment = enrollmentRepository.findByEnrollmentid(enrollmentData.getEnrollmentid());
+        if (enrollmentData.getStudent_id()!=null){
+            enrollment.setStudent_id(enrollmentData.getStudent_id());
         }
 
-        if (postMarksData.getMarks()!=null){
-            lectureResource.setMarks(postMarksData.getMarks());
+        if (enrollmentData.getOverall_grade()!=null){
+            enrollment.setOverall_grade(enrollmentData.getOverall_grade());
         }
-        postMarksRepository.save(postMarksData);
+        enrollmentRepository.save(enrollmentData);
     }
 
-    @PostMapping("/postMarks/delete")
-    public void deletePostMarks(@RequestBody PostMarks postMarksData) {
-        postMarksRepository.deleteAllByPostMarksid(postMarksData.getPostMarksid());
+    @PostMapping("/enrollment/delete")
+    public void deletePostMarks(@RequestBody Enrollment enrollmentData) {
+        enrollmentRepository.deleteAllByEnrollmentid(enrollmentData.getEnrollmentid());
     }
 
 }
