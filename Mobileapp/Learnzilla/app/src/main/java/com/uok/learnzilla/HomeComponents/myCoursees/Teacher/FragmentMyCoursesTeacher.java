@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -57,6 +59,14 @@ public class FragmentMyCoursesTeacher extends Fragment {
                 Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+        binding.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(FragmentMyCoursesTeacher.this)
+                        .navigate(R.id.action_MyCoursesTeacher_to_AddCourseDialog);
+            }
+        });
+
 
     }
 }

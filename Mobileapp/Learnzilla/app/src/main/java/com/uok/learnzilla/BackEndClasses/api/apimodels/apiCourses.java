@@ -1,6 +1,14 @@
 package com.uok.learnzilla.BackEndClasses.api.apimodels;
 
-public class apiCourses {
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import kotlinx.parcelize.Parcelize;
+
+@SuppressLint("ParcelCreator")
+@Parcelize
+public class apiCourses implements Parcelable {
 
 
     private Long courseid;
@@ -70,5 +78,15 @@ public class apiCourses {
 
     public String getLanguage() {
         return language;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
     }
 }

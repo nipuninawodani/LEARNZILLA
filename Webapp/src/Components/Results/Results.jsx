@@ -15,57 +15,46 @@ function Results() {
                     <table id="Result-table" >
                         <tr>
                             <th>Student ID</th>
-                            <th>Student Name</th>
                             <th>Grade</th>
                         </tr>
                         <tr>
-                            <td>Alfreds Futterkiste</td>
-                            <td>Maria Anders</td>
+                            <td>SE/2018/001</td>
                             <td>A+</td>
                         </tr>
                         <tr>
-                            <td>Berglunds snabbköp</td>
-                            <td>Christina Berglund</td>
+                            <td>SE/2018/002</td>
                             <td>C-</td>
                         </tr>
                         <tr>
-                            <td>Centro comercial Moctezuma</td>
-                            <td>Francisco Chang</td>
+                            <td>SE/2018/003</td>
                             <td>A</td>
                         </tr>
                         <tr>
-                            <td>Ernst Handel</td>
-                            <td>Roland Mendel</td>
+                            <td>SE/2018/004</td>
                             <td>A+</td>
                         </tr>
                         <tr>
-                            <td>Island Trading</td>
-                            <td>Helen Bennett</td>
+                            <td>SE/2018/005</td>
                             <td>B+</td>
                         </tr>
                         <tr>
-                            <td>Königlich Essen</td>
-                            <td>Philip Cramer</td>
+                            <td>SE/2018/006</td>
                             <td>A</td>
                         </tr>
                         <tr>
-                            <td>Laughing Bacchus Winecellars</td>
-                            <td>Yoshi Tannamuri</td>
+                            <td>SE/2018/007</td>
                             <td>C</td>
                         </tr>
                         <tr>
-                            <td>Magazzini Alimentari Riuniti</td>
-                            <td>Giovanni Rovelli</td>
+                            <td>SE/2018/008</td>
                             <td>C-</td>
                         </tr>
                         <tr>
-                            <td>North/South</td>
-                            <td>Simon Crowther</td>
+                            <td>SE/2018/009</td>
                             <td>D</td>
                         </tr>
                         <tr>
-                            <td>Paris spécialités</td>
-                            <td>Marie Bertrand</td>
+                            <td>SE/2018/010</td>
                             <td>AB</td>
                         </tr>
                     </table>

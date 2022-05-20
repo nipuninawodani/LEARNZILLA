@@ -134,7 +134,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/acadamicYearEdit"
+        android:id="@+id/TitleCourseEdit"
         android:layout_width="120dp"
         android:layout_height="36dp"
         android:layout_marginTop="100dp"
@@ -148,7 +148,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/acadamicYearEdit2"
+        android:id="@+id/acadamicYearEdit"
         android:layout_width="120dp"
         android:layout_height="36dp"
         android:layout_marginTop="200dp"
@@ -162,7 +162,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/acadamicYearEdit4"
+        android:id="@+id/LeveleEdit"
         android:layout_width="120dp"
         android:layout_height="36dp"
         android:layout_marginTop="250dp"
@@ -176,7 +176,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/acadamicYearEdit5"
+        android:id="@+id/SemesterEdit"
         android:layout_width="120dp"
         android:layout_height="36dp"
         android:layout_marginTop="300dp"
@@ -190,7 +190,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/acadamicYearEdit6"
+        android:id="@+id/LanguageEdit"
         android:layout_width="120dp"
         android:layout_height="36dp"
         android:layout_marginTop="350dp"
@@ -204,7 +204,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/acadamicYearEdit3"
+        android:id="@+id/DescriptionEdit"
         android:layout_width="120dp"
         android:layout_height="36dp"
         android:layout_marginTop="150dp"
