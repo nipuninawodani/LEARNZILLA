@@ -1,56 +1,63 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Link, useSearchParams} from "react-router-dom";
 import cs01 from './img/cs-1.jpg'
 import './css/Enroll.css'
 import {faCaretRight, faEnvelope, faHeart} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import CourseService from "../../services/CourseService";
 
 function Enroll() {
 
     const [searchParams] = useSearchParams();
 
 
-    let enrollCode = searchParams.get("enrollCode")
+    let CourseCode = searchParams.get("CourseCode")
     let AcademicYear = searchParams.get("AcademicYear")
+
+    const [level, setLevel] = useState('');
+    const [semester,setSemester] = useState('');
+    const [teacher_id,setTeacher_id] = useState('');
+    const [title,setTitle] = useState('');
+    const [description,setDescription] = useState('');
+    const [language,setLanguage] = useState('');
+
+    useEffect(() => {
+        CourseService.getCourseByCourseCodeAndAcademicYear(CourseCode,AcademicYear).then(response =>{
+            setLevel(response.data.level)
+            setSemester(response.data.semester)
+            setTeacher_id(response.data.teacher_id)
+            setLanguage(response.data.language)
+            setTitle(response.data.title)
+           setDescription(response.data.description)
+        })
+    }, []);
+
+    console.log(level)
+
+
 
     return (
         <div className="container-enroll100">
-            <div class="row">
-                <div class="col-md-1"></div>
+            <div className="row">
+                <div className="col-md-1"></div>
 
-                <div class="col-md-10">
+                <div className="col-md-10">
                     <div id="enroll-details" className="enroll-details-section">
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-9">
                                     <div className="enroll-details-item">
                                         <div className="enroll-single-pic mb30">
-                                            <img src={cs01} alt="" />
+                                            <img src="https://learnzillaftp.000webhostapp.com/cs-1.jpg" alt="" />
                                         </div>
                                         <div className="enroll-single-text">
                                             <div className="enroll-title mt10 headline relative-position">
-                                                <h3><a
-                                                    href="file:///C:/Users/Mahela/Downloads/Compressed/geniusenrollhtml-10/geniusenrollhtml-10/genius-enroll-html-upload-package/Genius_enroll_placeholder/enroll-details.html#">Fully
-                                                    Responsive <b>Web Design &amp; Development.</b></a>
+                                                <h3>
+                                                    <b>{title}</b>
                                                 </h3>
                                             </div>
                                             <div className="enroll-details-content">
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
-                                                    minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-                                                    aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in
-                                                    vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla
-                                                    facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
-                                                    luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
-                                                <p>
-                                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                                    euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad
-                                                    minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
-                                                    aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in
-                                                    vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla
-                                                    facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent
-                                                    luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                                                </p>
+                                                <p>{description}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -60,7 +67,7 @@ function Enroll() {
                                     <div className="side-bar">
                                         <div className="enroll-side-bar-widget">
                                             <div className="btn btn-danger text-center text-uppercase float-left bold-font box">
-                                                Enroll THis enroll <FontAwesomeIcon icon={faCaretRight} />
+                                                Enroll In This Course <FontAwesomeIcon icon={faCaretRight} />
                                             </div>
                                         </div>
                                         <div className="enrolled-student">
@@ -70,8 +77,10 @@ function Enroll() {
                                         </div>
                                         <div className="couse-feature ul-li-block">
                                             <ul>
+                                                <li>Level <span>{level}</span></li>
+                                                <li>Semester <span>{semester}</span></li>
                                                 <li>Lectures <span>20 Lectures</span></li>
-                                                <li>Language <span>English, France</span></li>
+                                                <li>Language <span>{language}</span></li>
                                                 <li>Teacher <span>Mr. A Adikari</span></li>
                                             </ul>
                                         </div>
@@ -81,7 +90,7 @@ function Enroll() {
                         </div>
                     </div>
                 </div>
-                <div class="col-md-1"></div>
+                <div className="col-md-1"></div>
             </div>
         </div>
     )
