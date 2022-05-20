@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 public class LectureResourceController {
 
@@ -53,8 +54,8 @@ public class LectureResourceController {
     }
 
     @PostMapping("/lectureResource/file")
-    public void uploadLectureResourceFile(@RequestParam("file") MultipartFile file) {
-        new FileUploader(file , "1");
+    public void uploadLectureResourceFile(@RequestParam("file") MultipartFile file, @RequestParam("lecture_id") String lecture_id, @RequestParam("week") String week) {
+        new FileUploader(file , "Week "+week);
     }
 
 

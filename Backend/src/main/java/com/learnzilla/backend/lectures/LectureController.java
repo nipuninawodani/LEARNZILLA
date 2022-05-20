@@ -32,8 +32,9 @@ public class LectureController {
     }
 
     @PostMapping("/lecture")
-    public void addLecture(@RequestBody Lecture lectureData) {
+    public String addLecture(@RequestBody Lecture lectureData) {
         lectureRepository.save(lectureData);
+        return String.valueOf(lectureData.getLectureid());
     }
 
     @PostMapping("/lecture/edit")

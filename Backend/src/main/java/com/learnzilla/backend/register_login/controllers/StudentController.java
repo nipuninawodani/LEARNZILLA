@@ -16,7 +16,7 @@ public class StudentController {
     private  PasswordEncoder passwordEncoder;
 
     @Autowired
-    public StudentController(StudentRepository studentRepository, PasswordEncoder passwordEncoder, Students student) {
+    public StudentController(StudentRepository studentRepository, PasswordEncoder passwordEncoder) {
         this.studentRepository = studentRepository;
         this.passwordEncoder = passwordEncoder;
     }

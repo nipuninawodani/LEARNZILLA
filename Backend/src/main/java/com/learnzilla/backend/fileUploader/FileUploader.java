@@ -9,15 +9,17 @@ import java.io.IOException;
 
 public class FileUploader {
 
-    public FileUploader (MultipartFile file , String prefix){
+    public FileUploader (MultipartFile file , String folder){
         String FTP_ADDRESS = "files.000webhost.com";
         String LOGIN = "learnzillaftp";
         int port = 21;
         String PSW = "learnzillaFTP@";
 
+        String BasePath ="/public_html/learnzilla/";
+
         FTPClient con = null;
 
-        String saveFileName = prefix + file.getOriginalFilename();
+        String saveFileName = file.getOriginalFilename();
 
         try {
             con = new FTPClient();
@@ -26,8 +28,15 @@ public class FileUploader {
                 con.enterLocalPassiveMode(); // important!
                 con.setFileType(FTP.BINARY_FILE_TYPE);
 
-                boolean result = con.storeFile("/public_html/learnzilla/"+saveFileName, file.getInputStream());
+                String Directory = BasePath+folder;
 
+                boolean mkdir = con.makeDirectory(Directory);
+
+                System.out.println(mkdir);
+
+                boolean result = con.storeFile(Directory+"/"+saveFileName, file.getInputStream());
+
+                System.out.println(result);
                 con.logout();
                 con.disconnect();
             }
