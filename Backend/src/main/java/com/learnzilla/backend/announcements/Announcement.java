@@ -1,5 +1,7 @@
 package com.learnzilla.backend.announcements;
 
+import org.springframework.data.annotation.CreatedDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,5 +17,6 @@ public class Announcement {
     public String course_code;
     public String title;
     public String message;
-    public Date date;
+//    @CreatedDate
+//    public Date date;
 }

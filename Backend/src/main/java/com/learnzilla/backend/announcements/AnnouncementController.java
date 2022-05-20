@@ -1,6 +1,8 @@
 package com.learnzilla.backend.announcements;
 
+import com.learnzilla.backend.email.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,6 +12,8 @@ import java.util.List;
 public class AnnouncementController {
 
     private AnnouncementRepository announcementRepository;
+    @Autowired
+    private EmailSenderService mailSender;
 
     @Autowired
     public AnnouncementController(AnnouncementRepository announcementRepository) {
@@ -18,6 +22,7 @@ public class AnnouncementController {
 
     @GetMapping("/announcement/{id}")
     public Announcement getAnnouncement(@PathVariable Integer id){
+
         return announcementRepository.findById(id).get();
     }
 
@@ -29,9 +34,7 @@ public class AnnouncementController {
     @PostMapping("/announcement")
     public void setAnnouncement(@RequestBody Announcement announcement){
       announcementRepository.save(announcement);
-
-
-        System.out.println(announcement.message);
+       mailSender.sendEmail("learnzilla.lms@gmail.com",announcement.title,announcement.message);
     }
 
 }
