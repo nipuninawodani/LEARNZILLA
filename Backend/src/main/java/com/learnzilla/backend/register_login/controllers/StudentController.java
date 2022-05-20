@@ -15,7 +15,7 @@ public class StudentController {
     private  PasswordEncoder passwordEncoder;
 
     @Autowired
-    public StudentController(StudentRepository studentRepository, PasswordEncoder passwordEncoder, Students student) {
+    public StudentController(StudentRepository studentRepository, PasswordEncoder passwordEncoder) {
         this.studentRepository = studentRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -26,7 +26,7 @@ public class StudentController {
         studentRepository.save(studentData);
     }
 
-    @GetMapping("/student/{email}")
+    @PostMapping("/student/{email}")
     public ResponseEntity<Students> getStudentByEmail(@PathVariable String email){
         Students students = studentRepository.findByEmail(email);
         return ResponseEntity.ok(students);
