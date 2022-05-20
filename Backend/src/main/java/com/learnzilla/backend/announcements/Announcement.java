@@ -13,6 +13,7 @@ public class Announcement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
     public String course_code;
+    public String title;
     public String message;
     public Date date;
 }

@@ -9,7 +9,6 @@ import java.util.List;
 @RestController
 public class AnnouncementController {
 
-
     private AnnouncementRepository announcementRepository;
 
     @Autowired
@@ -30,6 +29,7 @@ public class AnnouncementController {
     @PostMapping("/announcement")
     public void setAnnouncement(@RequestBody Announcement announcement){
       announcementRepository.save(announcement);
+
 
         System.out.println(announcement.message);
     }
