@@ -1,10 +1,31 @@
 package com.uok.learnzilla.BackEndClasses.api.apimodels;
 
 public class apiEnrollment {
+    private Long enrollmentid;
     private String academic_year;
     private String course_code;
     private String student_id;
     private String overall_grade;
+
+    public apiEnrollment(String academic_year, String course_code, String student_id, String overall_grade) {
+        this.academic_year = academic_year;
+        this.course_code = course_code;
+        this.student_id = student_id;
+        this.overall_grade = overall_grade;
+    }
+
+    public apiEnrollment(Long enrollmentid, String academic_year, String course_code, String student_id, String overall_grade) {
+        this.enrollmentid = enrollmentid;
+        this.academic_year = academic_year;
+        this.course_code = course_code;
+        this.student_id = student_id;
+        this.overall_grade = overall_grade;
+    }
+
+
+    public Long getEnrollmentid() {
+        return enrollmentid;
+    }
 
     public String getAcademic_year() {
         return academic_year;
@@ -20,12 +41,5 @@ public class apiEnrollment {
 
     public String getOverall_grade() {
         return overall_grade;
-    }
-
-    public apiEnrollment(String academic_year, String course_code, String student_id, String overall_grade) {
-        this.academic_year = academic_year;
-        this.course_code = course_code;
-        this.student_id = student_id;
-        this.overall_grade = overall_grade;
     }
 }

@@ -12,13 +12,16 @@ import retrofit2.http.Path;
 
 public interface CourseApiServices {
 
-    @GET("/course/{course_code}&{academic_year}")
+    @GET("/course/get/{course_code}&{academic_year}")
     Call<apiCourses> getCourseByCourseCode(@Path("course_code") String course_code,@Path("academic_year") String academic_year);
+
+    @GET("/course/{teacher_id}")
+    Call<List<apiCourses>> getCourseByTeacherId(@Path("teacher_id") String teacher_id);
 
     @GET("/course")
     Call<List<apiCourses>> getAllCourses();
 
     @POST("/course")
-    Call<apiCourses> addCourse(@Body apiCourses courses);
+    Call<Void> addCourse(@Body apiCourses courses);
 
 }

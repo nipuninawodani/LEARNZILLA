@@ -19,9 +19,15 @@ public class CourseController {
         this.courseRepository = courseRepository;
     }
 
-    @GetMapping("/course/{course_code}&{academic_year}")
+    @GetMapping("/course/get/{course_code}&{academic_year}")
     public ResponseEntity<Course> getCourseByCourseCode(@PathVariable String course_code , @PathVariable String academic_year){
         Course course = courseRepository.findBycourse_codeAndacademic_year(course_code , academic_year);
+        return ResponseEntity.ok(course);
+    }
+
+    @GetMapping("/course/{teacher_id}")
+    public ResponseEntity<List<Course>> getCoursesByTeacher(@PathVariable String teacher_id){
+        List<Course> course = courseRepository.findByTeacher_id(teacher_id);
         return ResponseEntity.ok(course);
     }
 
@@ -34,6 +40,42 @@ public class CourseController {
     @PostMapping("/course")
     public void addCourse(@RequestBody Course courseData) {
         courseRepository.save(courseData);
+    }
+
+
+    @PostMapping("/course/edit")
+    public void updateCourse(@RequestBody Course courseData) {
+        Course course = courseRepository.findByCourseid(courseData.getCourseid());
+
+        if (courseData.getLanguage()!=null){
+            course.setLanguage(courseData.getLanguage());
+        }
+
+        if (courseData.getLevel()!=null){
+            course.setLevel(courseData.getLevel());
+        }
+
+        if (courseData.getSemester()!=null){
+            course.setSemester(courseData.getSemester());
+        }
+
+        if (courseData.getTitle()!=null){
+            course.setTitle(courseData.getTitle());
+        }
+
+        if (course.getTeacher_id()!=null){
+            course.setTeacher_id(course.getTeacher_id());
+        }
+
+        if (courseData.getDescription()!=null){
+            course.setDescription(courseData.getDescription());
+        }
+        courseRepository.save(course);
+    }
+
+    @PostMapping("/course/delete")
+    public void deleteCourse(@RequestBody Course courseData) {
+        courseRepository.deleteAllByCourseid(courseData.getCourseid());
     }
 
 }
