@@ -9,6 +9,7 @@ import Edit_dialog from "./Components/Results/Edit_dialog_component/Edit_dialog"
 import Delete_dialog from "./Components/Results/Delete_dialog_component/Delete_dialog";
 import Announcement from "./Components/Announcement/Announcemnet";
 import Course_view from "./Components/Course_view/Course_view";
+import Announcement_creation from "./Components/Announcement_creation/Announcement_creation"
 
 
 
@@ -29,6 +30,7 @@ function App() {
               <Route path="/Delete_dialog"  element={<Delete_dialog/>}/>
               <Route exact path="/Announcement" element={<Announcement/>} />
               <Route exact path="/Course_view" element={<Course_view/>} />
+              <Route path="/Announcement_creation" element={<Announcement_creation/>} />
 
             </Routes> 
   
