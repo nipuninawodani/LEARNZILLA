@@ -13,6 +13,7 @@ import Announcement_creation from "./Components/Announcement_creation/Announceme
 import Enroll from "./Components/Enroll/Enroll";
 import AddCourse from "./Components/Course_Teacher/AddCourse";
 import EditCourse from "./Components/Course_Teacher/EditCourse";
+import Lecture_add from "./Components/Lecture/Lecture_Add";
 
 
 
@@ -38,6 +39,7 @@ function App() {
               <Route path="/Announcement_creation" element={<Announcement_creation/>} />
               <Route exact path="/Add_Course" element={<AddCourse/>} />
               <Route exact path="/Edit_Course" element={<EditCourse/>} />
+              <Route exact path="/Add_Lecture" element={<Lecture_add/>} />
 
             </Routes> 
   
