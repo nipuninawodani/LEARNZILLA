@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 }
 
-.container-announcement {
+.container-course_view {
     width: 100%;  
     min-height: 100vh;
     display: -webkit-box;
@@ -23,7 +23,7 @@
     background: linear-gradient(-135deg, #ec0000, #fdc9cb);
   }
   
-  .wrap-announcement {
+  .wrap-course_view {
     width: 960px;
     background: #fff;
     border-radius: 10px;
@@ -39,12 +39,5 @@
     padding: 30px;
   }
 
-#Announcements{
+  
 
-    margin: 50px;
-}
-
-#Announcement-title{
-    margin-left: 50px;
-
-}

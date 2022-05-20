@@ -22,6 +22,6 @@ public interface CourseApiServices {
     Call<List<apiCourses>> getAllCourses();
 
     @POST("/course")
-    Call<apiCourses> addCourse(@Body apiCourses courses);
+    Call<Void> addCourse(@Body apiCourses courses);
 
 }

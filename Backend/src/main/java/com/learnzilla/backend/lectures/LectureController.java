@@ -4,6 +4,7 @@ import com.learnzilla.backend.models.Enrollment;
 import com.learnzilla.backend.models.Lecture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +13,6 @@ import java.util.List;
 public class LectureController {
 
     private LectureRepository lectureRepository;
-
-
 
     @Autowired
     public LectureController(LectureRepository lectureRepository) {
@@ -26,7 +25,7 @@ public class LectureController {
         return ResponseEntity.ok(lecture);
     }
 
-    @GetMapping("/lecture/course_code={course_code}&academic_year={academic_year}")
+    @GetMapping("/lecture/get/course_code={course_code}&academic_year={academic_year}")
     public ResponseEntity<List<Lecture>> getLectureByCourse(@PathVariable String course_code , @PathVariable String academic_year){
         List<Lecture> lecture = lectureRepository.findBycourse_codeAndacademic_year(course_code , academic_year);
         return ResponseEntity.ok(lecture);
