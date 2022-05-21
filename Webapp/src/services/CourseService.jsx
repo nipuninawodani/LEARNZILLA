@@ -26,8 +26,11 @@ class CourseService{
     }
 
     getCourseByCourseCodeAndAcademicYear(coursecode,academicyear){
-        console.log(COURSE_BASE_REST_API_URL+"/get/"+coursecode+"&"+academicyear)
         return axios.get(COURSE_BASE_REST_API_URL+"/get/"+coursecode+"&"+academicyear)
+    }
+
+    getCourseByName(name){
+        return axios.get(COURSE_BASE_REST_API_URL+"/name="+name)
     }
 }
 

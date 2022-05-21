@@ -4,32 +4,54 @@ import './css/Enroll.css'
 import {faCaretRight, faEnvelope, faHeart} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CourseService from "../../services/CourseService";
+import TeacherService from "../../services/TeacherService";
+import EnrollmentService from "../../services/EnrollmentService";
+import { useNavigate } from "react-router-dom";
 
 function Enroll() {
 
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate;
 
 
     let CourseCode = searchParams.get("CourseCode")
     let AcademicYear = searchParams.get("AcademicYear")
+    //let StudentId = localStorage.getItem('UserId')
+    let StudentId = "1";
 
     const [level, setLevel] = useState('');
     const [semester,setSemester] = useState('');
-    const [teacher_id,setTeacher_id] = useState('');
     const [title,setTitle] = useState('');
     const [description,setDescription] = useState('');
     const [language,setLanguage] = useState('');
+    const [teachername, setTeachername] = useState('');
 
     useEffect(() => {
         CourseService.getCourseByCourseCodeAndAcademicYear(CourseCode,AcademicYear).then(response =>{
             setLevel(response.data.level)
             setSemester(response.data.semester)
-            setTeacher_id(response.data.teacher_id)
             setLanguage(response.data.language)
             setTitle(response.data.title)
-           setDescription(response.data.description)
+            setDescription(response.data.description)
+
+            TeacherService.getTeacherById(response.data.teacher_id).then(response =>{
+                setTeachername(response.data.firstName +" "+response.data.lastName)
+            })
+
         })
     }, []);
+
+    const handleenroll = (e) => {
+        e.preventDefault();
+
+        const enroll = {CourseCode,AcademicYear,StudentId}
+        EnrollmentService.createEnrollment(enroll).then((response) => {
+            navigate("/course")
+        }).catch(error =>{
+            console.log(error)
+        })
+
+    }
 
 
 
@@ -63,7 +85,7 @@ function Enroll() {
                                 <div className="col-md-3">
                                     <div className="side-bar">
                                         <div className="enroll-side-bar-widget">
-                                            <div className="btn btn-danger text-center text-uppercase float-left bold-font box">
+                                            <div className="btn btn-danger text-center text-uppercase float-left bold-font box" onClick={(e) => handleenroll(e)}>
                                                 Enroll In This Course <FontAwesomeIcon icon={faCaretRight} />
                                             </div>
                                         </div>
@@ -78,7 +100,7 @@ function Enroll() {
                                                 <li>Semester <span>{semester}</span></li>
                                                 <li>Lectures <span>20 Lectures</span></li>
                                                 <li>Language <span>{language}</span></li>
-                                                <li>Teacher <span>Mr. A Adikari</span></li>
+                                                <li>Teacher <span>{teachername}</span></li>
                                             </ul>
                                         </div>
                                     </div>

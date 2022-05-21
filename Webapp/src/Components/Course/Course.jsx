@@ -27,8 +27,6 @@ function Course() {
     const [lectures, setLectures] = useState([]);
     const [accordian, setAccordian] = useState([]);
 
-    let lecture = [];
-
     const [teachername, setTeachername] = useState('');
 
     useEffect(() => {

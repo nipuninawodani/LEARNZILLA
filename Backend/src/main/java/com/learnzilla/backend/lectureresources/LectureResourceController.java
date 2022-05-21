@@ -66,7 +66,7 @@ public class LectureResourceController {
 
         lectureResource.setFilename(file.getOriginalFilename());
 
-        lectureResource.setResource("https://learnzillaftp.000webhostapp.com/learnzilla/"+"Lecture "+lecture_id+file.getOriginalFilename());
+        lectureResource.setResource("https://learnzillaftp.000webhostapp.com/learnzilla/"+"Lecture "+lecture_id+"/"+file.getOriginalFilename());
 
         lectureResourceRepository.save(lectureResource);
     }

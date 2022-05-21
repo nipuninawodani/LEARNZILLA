@@ -4,7 +4,6 @@ import com.learnzilla.backend.fileUploader.FileUploader;
 import com.learnzilla.backend.models.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,6 +37,18 @@ public class CourseController {
     @GetMapping("/course")
     public ResponseEntity<List<Course>> getAllCourses(){
         List<Course> course = courseRepository.findAll();
+        return ResponseEntity.ok(course);
+    }
+
+    @GetMapping("/course/name={name}")
+    public ResponseEntity<List<Course>> getCoursesByTitle(@PathVariable String name){
+        List<Course> course = courseRepository.findByTitleLike("%"+name+"%");
+        return ResponseEntity.ok(course);
+    }
+
+    @GetMapping("/course/id={id}")
+    public ResponseEntity<Course> getCoursesById(@PathVariable String id){
+        Course course = courseRepository.findByCourseid(Long.valueOf(id));
         return ResponseEntity.ok(course);
     }
 
@@ -80,7 +91,6 @@ public class CourseController {
     }
 
     @PostMapping("/course/delete")
-    @Transactional
     public void deleteCourse(@RequestBody Course courseData) {
         courseRepository.deleteAllByCourseid(courseData.getCourseid());
     }
