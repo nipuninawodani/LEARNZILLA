@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.uok.learnzilla.BackEndClasses.api.apiServices.LectureApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
+import com.uok.learnzilla.HomeComponents.myCoursees.Teacher.AddCourseDialogFragment;
 import com.uok.learnzilla.R;
 import com.uok.learnzilla.databinding.FragmentAddLectureDialogBinding;
 
@@ -52,7 +54,7 @@ public class AddLectureDialogFragment extends DialogFragment {
             public void onClick(View view) {
                 if(
                             TextUtils.isEmpty(binding.TitleEdit.getText())
-                        ||  TextUtils.isEmpty(binding.WeekEdt.getText())
+                        ||  TextUtils.isEmpty(binding.DisEdit.getText())
                 ){
                     Toast.makeText(getContext(), "Add Empty Fields", Toast.LENGTH_SHORT).show();
                 }else {
@@ -62,6 +64,8 @@ public class AddLectureDialogFragment extends DialogFragment {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             Toast.makeText(getContext(), "Lecture Added", Toast.LENGTH_SHORT).show();
+                            NavHostFragment.findNavController(AddLectureDialogFragment.this)
+                                    .navigate(R.id.action_AddLectureDialog_to_MyCoursesTeacher);
                         }
 
                         @Override
@@ -77,7 +81,7 @@ public class AddLectureDialogFragment extends DialogFragment {
     }
 
     private apiLectures getDataForLecture(apiCourses course) {
-        String week = binding.WeekEdt.getText().toString();
+        String week = binding.DisEdit.getText().toString();
         String Title = binding.TitleEdit.getText().toString();
         return new apiLectures(course.getAcademic_year(),course.getCourse_code(),Title,week);
     }

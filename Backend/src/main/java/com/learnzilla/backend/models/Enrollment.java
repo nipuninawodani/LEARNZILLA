@@ -16,6 +16,7 @@ public class Enrollment implements Serializable {
 
     private String course_code;
 
+
     private Integer student_id;
 
     private String overall_grade;
@@ -23,6 +24,7 @@ public class Enrollment implements Serializable {
     public Enrollment(){
 
     }
+
     public Enrollment(Long enrollmentid, String academic_year,String course_code,int student_id,String overall_grade){
         super();
         this.enrollmentid=enrollmentid;
@@ -31,6 +33,7 @@ public class Enrollment implements Serializable {
         this.student_id=student_id;
         this.overall_grade=overall_grade;
     }
+
 
     public Enrollment(String academic_year,String course_code,int student_id,String overall_grade){
         this.academic_year=academic_year;
@@ -63,7 +66,9 @@ public class Enrollment implements Serializable {
         this.overall_grade = overall_grade;
     }
 
+
     public Integer getStudent_id() {
+
         return student_id;
     }
 

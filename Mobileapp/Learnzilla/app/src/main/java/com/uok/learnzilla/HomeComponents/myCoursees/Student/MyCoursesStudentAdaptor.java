@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
@@ -77,7 +79,10 @@ public class MyCoursesStudentAdaptor extends RecyclerView.Adapter<MyCoursesStude
                 holder.Go.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, "Nodata", Toast.LENGTH_SHORT).show();
+                        FragmentMyCoursesStudentDirections.ActionMyCoursesStudentToCourseViewStudent Action;
+                        Action = FragmentMyCoursesStudentDirections.actionMyCoursesStudentToCourseViewStudent(ItemViewModel);
+                        NavHostFragment.findNavController(FragmentManager.findFragment(view))
+                                .navigate(Action);
                     }
                 });
             }

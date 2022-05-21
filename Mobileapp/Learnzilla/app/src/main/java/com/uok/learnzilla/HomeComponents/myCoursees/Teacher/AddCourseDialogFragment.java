@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -60,6 +61,8 @@ public class AddCourseDialogFragment extends DialogFragment {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             Toast.makeText(getContext(), "Course Added", Toast.LENGTH_SHORT).show();
+                            NavHostFragment.findNavController(AddCourseDialogFragment.this)
+                                    .navigate(R.id.action_AddCourseDialog_to_MyCoursesTeacher);
                         }
 
                         @Override
