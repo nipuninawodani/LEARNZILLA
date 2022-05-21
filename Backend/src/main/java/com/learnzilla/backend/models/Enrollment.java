@@ -3,6 +3,7 @@ package com.learnzilla.backend.models;
 import javax.persistence.*;
 import java.io.Serializable;
 
+
 @Entity
 public class Enrollment implements Serializable {
 

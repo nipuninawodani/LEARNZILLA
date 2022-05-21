@@ -1,6 +1,5 @@
 package com.learnzilla.backend.lectures;
 
-import com.learnzilla.backend.models.Enrollment;
 import com.learnzilla.backend.models.Lecture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 public class LectureController {
 
@@ -33,8 +33,9 @@ public class LectureController {
     }
 
     @PostMapping("/lecture")
-    public void addLecture(@RequestBody Lecture lectureData) {
+    public String addLecture(@RequestBody Lecture lectureData) {
         lectureRepository.save(lectureData);
+        return String.valueOf(lectureData.getLectureid());
     }
 
     @PostMapping("/lecture/edit")
@@ -53,8 +54,8 @@ public class LectureController {
             lecture.setDescription(lectureData.getDescription());
         }
 
-        if (lectureData.getWeek()!=null){
-            lecture.setWeek(lectureData.getWeek());
+        if (lectureData.getTitle()!=null){
+            lecture.setTitle(lectureData.getTitle());
         }
 
         lectureRepository.save(lecture);
