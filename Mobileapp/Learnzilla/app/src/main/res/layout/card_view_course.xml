@@ -14,45 +14,94 @@
         android:orientation="horizontal"
         android:padding="5dp">
 
-        <LinearLayout
-            android:layout_width="273dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="300dp"
+            android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView_ID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:id="@+id/textView_CourseTitle"
+                android:layout_width="184dp"
+                android:layout_height="29dp"
+                android:text="Course Title"
+                android:gravity="center"
                 android:textColor="@color/colorAccent"
-                android:layout_marginLeft="15dp"
-                android:text="Course ID"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textview_Name"
+                android:id="@+id/textView_CourseTeacher"
+                android:layout_width="184dp"
+                android:layout_height="29dp"
+                android:layout_marginTop="60dp"
+                android:gravity="center"
+                android:text="Abdullah Ramees"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_CourseDescription"
+                android:layout_width="281dp"
+                android:layout_height="29dp"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                android:text="desCorruption"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_AcademicYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="15dp"
-                android:textColor="@color/primaryTextColor"
-                android:layout_marginTop="4dp"
-                android:text="Course Name"
-                android:textSize="15sp" />
+                android:text="2018"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:textColor="@color/yellow"
+                app:layout_constraintEnd_toStartOf="@+id/textView_CourseTitle"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textview_teacher"
-                android:layout_width="match_parent"
+                android:id="@+id/textView_Level"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="15dp"
-                android:textColor="@color/primaryTextColor"
-                android:layout_marginTop="4dp"
-                android:text="Teacher Name"
-                android:textSize="15sp" />
+                android:layout_marginTop="76dp"
+                android:text="Level 01"
+                android:textColor="@color/yellow"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toStartOf="@+id/textView_CourseTitle"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/textView_Semester"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sem:01"
+                android:gravity="right"
+                android:textColor="@color/yellow"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton
             android:id="@+id/enroll_button"

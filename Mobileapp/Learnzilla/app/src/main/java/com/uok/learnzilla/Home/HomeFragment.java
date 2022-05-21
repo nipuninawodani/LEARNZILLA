@@ -61,8 +61,15 @@ public class HomeFragment extends Fragment {
         binding.MyCourses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(HomeFragment.this)
-                        .navigate(R.id.action_HomeFragment_to_MyCourses);
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", MODE_PRIVATE);
+                int Type = sharedPreferences.getInt("type",0);
+                if(Type == 1){
+                    NavHostFragment.findNavController(HomeFragment.this)
+                            .navigate(R.id.action_HomeFragment_to_MyCoursesTeacher);
+                }if(Type == 2){
+                    NavHostFragment.findNavController(HomeFragment.this)
+                            .navigate(R.id.action_HomeFragment_to_MyCoursesStudent);
+                }
             }
         });
         binding.Results.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +77,14 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 NavHostFragment.findNavController(HomeFragment.this)
                         .navigate(R.id.action_HomeFragment_to_Results);
+            }
+
+        });
+        binding.Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.action_HomeFragment_to_addLectcure);
             }
 
         });

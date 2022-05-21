@@ -17,6 +17,9 @@ public class Announcement {
     public String course_code;
     public String title;
     public String message;
-//    @CreatedDate
-//    public Date date;
+    @CreatedDate
+    public Date date;
+
+package com.learnzilla.backend.announcements;public class Announcement {
+
 }
