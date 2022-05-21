@@ -2,7 +2,7 @@ package com.learnzilla.backend.announcements;
 
 import com.learnzilla.backend.email.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -22,8 +22,13 @@ public class AnnouncementController {
 
     @GetMapping("/learnzilla/announcement/{id}")
     public Announcement getAnnouncement(@PathVariable Integer id){
-
         return announcementRepository.findById(id).get();
+    }
+
+    @GetMapping("/learnzilla/announcement/Get/{course_code}")
+    public ResponseEntity<List<Announcement>> getAnnouncementByCourseCode(@PathVariable String course_code){
+        List<Announcement> announcements = announcementRepository.findAnnouncementByCourse_code(course_code);
+        return ResponseEntity.ok(announcements);
     }
 
     @GetMapping("/learnzilla/announcement")
