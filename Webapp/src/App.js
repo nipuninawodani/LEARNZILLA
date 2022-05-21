@@ -14,6 +14,7 @@ import Enroll from "./Components/Enroll/Enroll";
 import AddCourse from "./Components/Course_Teacher/AddCourse";
 import EditCourse from "./Components/Course_Teacher/EditCourse";
 import Lecture_add from "./Components/Lecture/Lecture_Add";
+import Lecture_Add from "./Components/Lecture/Lecture_Add";
 
 
 

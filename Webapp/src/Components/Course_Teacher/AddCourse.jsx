@@ -5,6 +5,7 @@ import './Course_Teacher.css'
 import {useState} from "react";
 import RegisterService from "../../services/RegisterService";
 import CourseService from "../../services/CourseService";
+import LectureService from "../../services/LectureService";
 
 
 function Course_add() {
@@ -17,20 +18,26 @@ function Course_add() {
     const [semester, setSemester] = useState('');
     const [language, setLanguage] = useState('');
     const [teacher_id, setTeacher_id] = useState('1');
+    const [file, setFile] = useState(null)
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const course = {title,description,course_code,academic_year,level,semester,language,teacher_id}
 
+        const data = new FormData()
+        data.append('file', file)
+
         CourseService.createCourse(course).then((response) => {
 
-            console.log(response.data)
+            CourseService.uploadPreviewImg(data,response.data)
 
         }).catch(error =>{
             console.log(error)
         })
+
     }
+
 
 
     return (
@@ -76,7 +83,7 @@ function Course_add() {
 
                     <div className="mb-3">
                         <label htmlFor="courseFile" className="form-label">Preview Image</label>
-                        <input className="form-control" type="file" id="courseFile" />
+                        <input className="form-control" type="file" id="courseFile" onChange={e => { setFile(e.target.files[0]) }}/>
                     </div>
 
                     <div className="mb-3">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {Link, useSearchParams} from "react-router-dom";
 import cs01 from './img/cs-1.jpg'
 import './css/Course.css'
@@ -7,6 +7,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useEffect, useState} from "react";
 import CourseService from "../../services/CourseService";
 import TeacherService from "../../services/TeacherService";
+import LectureService from "../../services/LectureService";
+import RegisterService from "../../services/RegisterService";
 
 function Course() {
 
@@ -15,14 +17,17 @@ function Course() {
 
     let CourseCode = searchParams.get("CourseCode")
     let AcademicYear = searchParams.get("AcademicYear")
-    let weeks = [1,2,3,4,5]
 
     const [level, setLevel] = useState('');
     const [semester,setSemester] = useState('');
-    const [teacher_id,setTeacher_id] = useState('');
     const [title,setTitle] = useState('');
     const [description,setDescription] = useState('');
     const [language,setLanguage] = useState('');
+    const [previewImg, setPreviewImg] = useState('');
+    const [lectures, setLectures] = useState([]);
+    const [accordian, setAccordian] = useState([]);
+
+    let lecture = [];
 
     const [teachername, setTeachername] = useState('');
 
@@ -30,44 +35,55 @@ function Course() {
         CourseService.getCourseByCourseCodeAndAcademicYear(CourseCode,AcademicYear).then(response =>{
             setLevel(response.data.level)
             setSemester(response.data.semester)
-            setTeacher_id(response.data.teacher_id)
             setLanguage(response.data.language)
             setTitle(response.data.title)
             setDescription(response.data.description)
+            setPreviewImg(response.data.previewImg)
 
-            console.log(teacher_id)
-
-            TeacherService.getTeacherById(teacher_id).then(response =>{
+            TeacherService.getTeacherById(response.data.teacher_id).then(response =>{
                 setTeachername(response.data.firstName +" "+response.data.lastName)
+            })
+
+            LectureService.getLectureByCourse(CourseCode,AcademicYear).then(response =>{
+
+                response.data.map(({description:Ldescription, title: Ltitle,lectureid}) =>
+                    LectureService.getLectureResource(lectureid).then((responseL) => {
+
+                        setAccordian(response.data.map(({description:Ldescription, title: Ltitle,lectureid}) =>
+
+                            <div className="accordion-item">
+                                <h2 className="accordion-header" id={'heading'+ lectureid}>
+                                    <button className="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target={'#collapse' +lectureid}
+                                            aria-expanded="false" aria-controls={'collapse' +lectureid}>
+                                        {Ltitle}
+                                    </button>
+                                </h2>
+                                <div id={'collapse' +lectureid} className="accordion-collapse collapse"
+                                     aria-labelledby={'heading'+ lectureid} data-bs-parent="#accordionExample">
+                                    <div className="accordion-body">
+                                        {Ldescription}<br/>
+                                        <div>
+                                            Resources:
+                                            <ul>
+                                                {responseL.data.map(({resource,filename}) =>
+                                                    <li><a href={resource}>{filename}</a></li>
+                                                )
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+
+                    }).catch(error =>{
+                        console.log(error)
+                    })
+                )
             })
         })
     }, []);
-
-
-    const accordian = weeks.map((week) =>
-        <div className="accordion-item">
-            <h2 className="accordion-header" id={'heading'+ week}>
-                <button className="accordion-button collapsed" type="button"
-                        data-bs-toggle="collapse" data-bs-target={'#collapse' +week}
-                        aria-expanded="false" aria-controls={'collapse' +week}>
-                    Week #{week}
-                </button>
-            </h2>
-            <div id={'collapse' +week} className="accordion-collapse collapse"
-                 aria-labelledby={'heading'+ week} data-bs-parent="#accordionExample">
-                <div className="accordion-body">
-                    <strong>This is the {week} item's accordion body.</strong> It is
-                    hidden by default, until the collapse plugin adds the appropriate
-                    classes that we use to style each element. These classes control the
-                    overall appearance, as well as the showing and hiding via CSS
-                    transitions. You can modify any of this with custom CSS or
-                    overriding our default variables. It's also worth noting that just
-                    about any HTML can go within the <code>.accordion-body</code>,
-                    though the transition does limit overflow.
-                </div>
-            </div>
-        </div>
-    );
 
     return (
         <div className="container-course100">
@@ -81,7 +97,7 @@ function Course() {
                                 <div className="col-md-9">
                                     <div className="course-details-item">
                                         <div className="course-single-pic mb30">
-                                            <img src={cs01} alt="" />
+                                            <img src={previewImg} alt="" width="870px" height="400px"/>
                                         </div>
                                         <div className="course-single-text">
                                             <div className="course-title mt10 headline relative-position">

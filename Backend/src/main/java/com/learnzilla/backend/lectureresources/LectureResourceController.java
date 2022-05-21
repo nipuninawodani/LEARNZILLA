@@ -21,16 +21,16 @@ public class LectureResourceController {
         this.lectureResourceRepository = lectureResourceRepository;
     }
 
-    @GetMapping("/lectureResource/lecture_id={lecture_id}")
+    @GetMapping("/getLectureResource/lecture_id={lecture_id}")
     public ResponseEntity<List<LectureResource>> getLectureResourceById(@PathVariable Long lecture_id){
         List<LectureResource> lectureResource = lectureResourceRepository.findByLecture_id(lecture_id);
         return ResponseEntity.ok(lectureResource);
     }
 
-    @PostMapping("/lectureResource")
+    /*@PostMapping("/lectureResource")
     public void addLectureResource(@RequestBody LectureResource lectureResourceData) {
         lectureResourceRepository.save(lectureResourceData);
-    }
+    }*/
 
     @PostMapping("/lectureResource/edit")
     public void updateLectureResource(@RequestBody LectureResource lectureResourceData) {
@@ -45,7 +45,7 @@ public class LectureResourceController {
             lectureResource.setResource(lectureResourceData.getResource());
         }
 
-        lectureResourceRepository.save(lectureResourceData);
+        lectureResourceRepository.save(lectureResource);
     }
 
     @PostMapping("/lectureResource/delete")
@@ -53,9 +53,19 @@ public class LectureResourceController {
         lectureResourceRepository.deleteAllByLectureresourseid(lectureResourceData.getLectureresourseid());
     }
 
-    @PostMapping("/lectureResource/file")
-    public void uploadLectureResourceFile(@RequestParam("file") MultipartFile file, @RequestParam("lecture_id") String lecture_id, @RequestParam("week") String week) {
-        new FileUploader(file , "Week "+week);
+    @PostMapping("/lectureResource")
+    public void uploadLectureResourceFile(@RequestParam("file") MultipartFile file, @RequestParam("lecture_id") String lecture_id) {
+        new FileUploader(file , "Lecture "+lecture_id);
+
+        LectureResource lectureResource = new LectureResource();
+
+        lectureResource.setLecture_id(Long.valueOf(lecture_id));
+
+        lectureResource.setFilename(file.getOriginalFilename());
+
+        lectureResource.setResource("https://learnzillaftp.000webhostapp.com/learnzilla/"+"Lecture "+lecture_id+file.getOriginalFilename());
+
+        lectureResourceRepository.save(lectureResource);
     }
 
 

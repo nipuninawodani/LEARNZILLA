@@ -32,11 +32,8 @@ public class FileUploader {
 
                 boolean mkdir = con.makeDirectory(Directory);
 
-                System.out.println(mkdir);
-
                 boolean result = con.storeFile(Directory+"/"+saveFileName, file.getInputStream());
 
-                System.out.println(result);
                 con.logout();
                 con.disconnect();
             }
