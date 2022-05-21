@@ -16,7 +16,7 @@ public class Enrollment implements Serializable {
     private String course_code;
 
     @Id
-    private int student_id;
+    private Integer student_id;
 
     private String overall_grade;
 
@@ -58,7 +58,7 @@ public class Enrollment implements Serializable {
         return student_id;
     }
 
-    public void setStudent_id(int student_id) {
+    public void setStudent_id(Integer student_id) {
         this.student_id = student_id;
     }
 }
