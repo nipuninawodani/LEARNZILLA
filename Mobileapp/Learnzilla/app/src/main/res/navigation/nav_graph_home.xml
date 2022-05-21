@@ -16,9 +16,6 @@
             android:id="@+id/action_HomeFragment_to_Results"
             app:destination="@id/Results" />
         <action
-            android:id="@+id/action_HomeFragment_to_addLectcure"
-            app:destination="@id/addLecture" />
-        <action
             android:id="@+id/action_HomeFragment_to_MyCoursesStudent"
             app:destination="@id/MyCoursesStudent" />
         <action
@@ -37,17 +34,15 @@
         android:id="@+id/MyCoursesStudent"
         android:name="com.uok.learnzilla.HomeComponents.myCoursees.Student.FragmentMyCoursesStudent"
         tools:layout="@layout/fragment_mycourses_student" >
+        <action
+            android:id="@+id/action_MyCoursesStudent_to_CourseViewStudent"
+            app:destination="@id/CourseViewStudent" />
     </fragment>
     <fragment
         android:id="@+id/Results"
         android:name="com.uok.learnzilla.HomeComponents.results.ResultsListFragment"
         tools:layout="@layout/fragment_results_list" >
     </fragment>
-    <dialog
-        android:id="@+id/addLecture"
-        android:name="com.uok.learnzilla.courses.teacher.AddLectureDialogFragment"
-        tools:layout="@layout/fragment_add_lecture_dialog">
-    </dialog>
     <dialog
         android:id="@+id/EnrollDialog"
         android:name="com.uok.learnzilla.enrollment.EnrollmentDialogFragment"
@@ -182,5 +177,25 @@
             android:id="@+id/action_UpdateLectureDialog_to_MyCoursesTeacher"
             app:destination="@id/MyCoursesTeacher" />
     </dialog>
+    <fragment
+        android:id="@+id/CourseViewStudent"
+        android:name="com.uok.learnzilla.courses.student.StudentCourseViewFragment"
+        tools:layout="@layout/fragment_student_course_view" >
+        <argument
+            android:name="Course"
+            app:argType="com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses" />
+        <action
+            android:id="@+id/action_CourseViewStudent_to_lectureViewStudent"
+            app:destination="@id/lectureViewStudent" />
+    </fragment>
+    <fragment
+        android:id="@+id/lectureViewStudent"
+        android:name="com.uok.learnzilla.lecture.student.StudentLectureViewFragment"
+        tools:layout="@layout/fragment_student_lecture_view" >
+        <argument
+            android:name="lecture"
+            app:argType="com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures" />
+    </fragment>
+
 
 </navigation>
