@@ -5,6 +5,7 @@ import com.learnzilla.backend.models.Lecture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,8 +14,6 @@ import java.util.List;
 public class LectureController {
 
     private LectureRepository lectureRepository;
-
-
 
     @Autowired
     public LectureController(LectureRepository lectureRepository) {

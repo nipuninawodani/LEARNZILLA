@@ -15,14 +15,16 @@ public class Enrollment implements Serializable {
 
     private String course_code;
 
-    private String student_id;
+
+    private Integer student_id;
 
     private String overall_grade;
 
     public Enrollment(){
 
     }
-    public Enrollment(Long enrollmentid, String academic_year,String course_code,String student_id,String overall_grade){
+
+    public Enrollment(Long enrollmentid, String academic_year,String course_code,int student_id,String overall_grade){
         super();
         this.enrollmentid=enrollmentid;
         this.academic_year=academic_year;
@@ -31,7 +33,8 @@ public class Enrollment implements Serializable {
         this.overall_grade=overall_grade;
     }
 
-    public Enrollment(String academic_year,String course_code,String student_id,String overall_grade){
+
+    public Enrollment(String academic_year,String course_code,int student_id,String overall_grade){
         this.academic_year=academic_year;
         this.course_code=course_code;
         this.student_id=student_id;
@@ -62,11 +65,13 @@ public class Enrollment implements Serializable {
         this.overall_grade = overall_grade;
     }
 
-    public String getStudent_id() {
+
+    public Integer getStudent_id() {
+
         return student_id;
     }
 
-    public void setStudent_id(String student_id) {
+    public void setStudent_id(Integer student_id) {
         this.student_id = student_id;
     }
 

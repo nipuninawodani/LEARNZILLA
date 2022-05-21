@@ -21,7 +21,7 @@ public class EnrollmentController {
     }
 
     @GetMapping("/enrollment/check/course_code={course_code}&academic_year={academic_year}&student_id={student_id}")
-    public ResponseEntity<Enrollment> checkEnroll(@PathVariable String course_code , @PathVariable String academic_year,@PathVariable String student_id){
+    public ResponseEntity<Enrollment> checkEnroll(@PathVariable String course_code , @PathVariable String academic_year,@PathVariable Integer student_id){
         Enrollment enrollment = enrollmentRepository.findEnroll(course_code,academic_year,student_id);
         return ResponseEntity.ok(enrollment);
     }
@@ -34,7 +34,7 @@ public class EnrollmentController {
     }
 
     @GetMapping("/enrollment/student_id={student_id}")
-    public ResponseEntity<List<Enrollment>> getEnrollmentByStudent(@PathVariable String student_id){
+    public ResponseEntity<List<Enrollment>> getEnrollmentById(@PathVariable Integer student_id){
         List<Enrollment> enrollment = enrollmentRepository.findByStudent_id(student_id);
         return ResponseEntity.ok(enrollment);
     }
@@ -62,7 +62,7 @@ public class EnrollmentController {
             enrollment.setCourse_code(enrollmentData.getCourse_code());
         }
 
-        if (enrollmentData.getStudent_id()!=null){
+        if (enrollmentData.getStudent_id()!=0){
             enrollment.setStudent_id(enrollmentData.getStudent_id());
         }
 
