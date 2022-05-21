@@ -16,6 +16,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.AlartDialogs.SuccessDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.LectureResourcesApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectureResources;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -26,6 +28,7 @@ import java.util.List;
 
 public class TeacherLectureResourcesAdaptor extends RecyclerView.Adapter<TeacherLectureResourcesAdaptor.ViewHolder> {
     private List<apiLectureResources> mListResources;
+    private ViewGroup Frag;
     LectureResourcesApiServices ResourceServices = retrofitConfiguration.getClient().create(LectureResourcesApiServices.class);
 
 
@@ -38,6 +41,7 @@ public class TeacherLectureResourcesAdaptor extends RecyclerView.Adapter<Teacher
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_view_resources_teacher, parent, false);
+        Frag = parent;
         return new ViewHolder(view);
     }
 
@@ -53,13 +57,14 @@ public class TeacherLectureResourcesAdaptor extends RecyclerView.Adapter<Teacher
                     CallDelete.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            Toast.makeText(view.getContext(), "Resource Deleted", Toast.LENGTH_SHORT).show();
-                            notifyDataSetChanged();
+                            new SuccessDialogFragment("You successfully Enrolled")
+                                    .show(FragmentManager.findFragment(Frag).getChildFragmentManager(),null);
                         }
-
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Toast.makeText(view.getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                            new ErrorDialogFragment("Server Error : "+t.getMessage())
+                                    .show(FragmentManager.findFragment(Frag).getChildFragmentManager(),null);
+
                         }
                     });
 

@@ -20,6 +20,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.AlartDialogs.SuccessDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.EnrollmentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -47,19 +49,22 @@ public class UpdateGradeDialogFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 if(TextUtils.isEmpty(binding.GradeEdit.getText())){
-                    Toast.makeText(getContext(), "Empty Field", Toast.LENGTH_SHORT).show();
+                    new ErrorDialogFragment("Fill Empty Text boxes")
+                            .show(getChildFragmentManager(),null);
                 }else {
                     apiEnrollment NewEnrollment = UpdateEnrolmentWithGrade(enrollment);
                     Call<Void> CallUpdate = enrollmentServices.updateEnrollment(NewEnrollment);
                     CallUpdate.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            Toast.makeText(getContext(), "Grade Added", Toast.LENGTH_SHORT).show();
+                            new SuccessDialogFragment("Grade updated  successfully")
+                                    .show(getChildFragmentManager(),null);
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                            new ErrorDialogFragment("Server Error : "+t.getMessage())
+                                    .show(getChildFragmentManager(),null);
                         }
                     });
 

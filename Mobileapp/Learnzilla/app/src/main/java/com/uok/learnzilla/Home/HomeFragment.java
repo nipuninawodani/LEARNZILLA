@@ -5,6 +5,8 @@ import static android.content.Context.MODE_PRIVATE;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,8 @@ import com.uok.learnzilla.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,18 +76,26 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-        binding.Results.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(HomeFragment.this)
-                        .navigate(R.id.action_HomeFragment_to_Results);
-            }
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", MODE_PRIVATE);
+        int Type = sharedPreferences.getInt("type",0);
+        if(Type == 1){
+            binding.Results.setEnabled(false);
+            binding.Results.setVisibility(View.INVISIBLE);
+        }if(Type == 2){
+            binding.Results.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    NavHostFragment.findNavController(HomeFragment.this)
+                            .navigate(R.id.action_HomeFragment_to_Results);
+                }
+            });
+        }
 
-        });
         binding.Profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                NavHostFragment.findNavController(HomeFragment.this)
+                        .navigate(R.id.action_HomeFragment_to_ProfileFragment);
             }
 
         });

@@ -1,5 +1,6 @@
 package com.uok.learnzilla.courses.teacher;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.AlartDialogs.SuccessDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.LectureApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -26,6 +29,7 @@ import retrofit2.Response;
 
 public class CourseViewTeacherAdaptor extends RecyclerView.Adapter<CourseViewTeacherAdaptor.ViewHolder> {
     private List<apiLectures> mListLectures;
+    private ViewGroup frag;
     LectureApiServices LectureServices = retrofitConfiguration.getClient().create(LectureApiServices.class);
 
     public CourseViewTeacherAdaptor(List<apiLectures> mListLectures) {
@@ -37,6 +41,7 @@ public class CourseViewTeacherAdaptor extends RecyclerView.Adapter<CourseViewTea
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_view_lecture_teacher, parent, false);
+        frag = parent;
         return new ViewHolder(view);
     }
 
@@ -46,7 +51,7 @@ public class CourseViewTeacherAdaptor extends RecyclerView.Adapter<CourseViewTea
         Log.e("test",ItemViewModel.getCourse_code());
         holder.LectureDescription.setText(ItemViewModel.getDescription());
         holder.CourseCode.setText(ItemViewModel.getCourse_code());
-        holder.Week.setText("Week :" + ItemViewModel.getWeek());
+        holder.Week.setText(ItemViewModel.getTitle());
         holder.GoToLectureResources.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,12 +67,30 @@ public class CourseViewTeacherAdaptor extends RecyclerView.Adapter<CourseViewTea
                 CallDeleteLecture.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        Toast.makeText(view.getContext(), "Lecture deleted", Toast.LENGTH_SHORT).show();
+                        new SuccessDialogFragment("Lecture added Successfully")
+                                .show(FragmentManager.findFragment(frag).getChildFragmentManager(),null);
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                NavHostFragment.findNavController(FragmentManager.findFragment(frag))
+                                        .navigate(R.id.action_AddLectureDialog_to_MyCoursesTeacher);
+                            }
+                        }, 10000);
                     }
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(view.getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                        new ErrorDialogFragment("Server Error : "+t.getMessage())
+                                .show(FragmentManager.findFragment(frag).getChildFragmentManager(),null);
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                NavHostFragment.findNavController(FragmentManager.findFragment(frag))
+                                        .navigate(R.id.action_AddLectureDialog_to_MyCoursesTeacher);
+                            }
+                        }, 10000);
                     }
                 });
             }

@@ -21,6 +21,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.AlartDialogs.SuccessDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.EnrollmentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -67,25 +69,17 @@ public class EnrollmentDialogFragment extends DialogFragment {
                 SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", MODE_PRIVATE);
                 int Type = sharedPreferences.getInt("type",0);
                 if (Type == 1){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-                    builder.setTitle("Warning");
-                    builder.setMessage("Teacher Can not Enroll a Course")
-                            .setPositiveButton("Ok", (dialogInterface, i) -> dialogInterface.cancel());
-                    AlertDialog alert = builder.create();
-                    alert.show();
+                    new ErrorDialogFragment("Teacher Can't Enroll Courses" )
+                            .show(getChildFragmentManager(),null);
+
                 } else if(Type == 2){
                     String StudentId = sharedPreferences.getString("ID","");
                     Call<apiEnrollment> CallCheck = EnrollServices.checkEnroll(viewModel.courses.getCourse_code(),viewModel.courses.getAcademic_year(),StudentId);
                     CallCheck.enqueue(new Callback<apiEnrollment>() {
                         @Override
                         public void onResponse(Call<apiEnrollment> call, Response<apiEnrollment> response) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-                            builder.setTitle("sorry");
-                            builder.setMessage("You already Enrolled Course :"+viewModel.courses.getCourse_code())
-                                    .setPositiveButton("Ok", (dialogInterface, i) -> dialogInterface.cancel());
-                            AlertDialog alert = builder.create();
-                            alert.show();
-
+                            new ErrorDialogFragment("You Already Enrolled This Course "+viewModel.courses.getCourse_code() )
+                                    .show(getChildFragmentManager(),null);
                         }
 
                         @Override
@@ -95,22 +89,14 @@ public class EnrollmentDialogFragment extends DialogFragment {
                             CallEnrollAdd.enqueue(new Callback<Void>() {
                              @Override
                              public void onResponse(Call<Void> call, Response<Void> response) {
-                                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-                                 builder.setTitle("Congratulation....!");
-                                 builder.setMessage("You Enrolled Course :"+viewModel.courses.getCourse_code())
-                                         .setPositiveButton("Ok", (dialogInterface, i) -> dialogInterface.cancel());
-                                 AlertDialog alert = builder.create();
-                                 alert.show();
+                                 new SuccessDialogFragment("You successfully Enrolled")
+                                         .show(getChildFragmentManager(),null);
                              }
 
                              @Override
                              public void onFailure(Call<Void> call, Throwable t) {
-                                 AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-                                 builder.setTitle("Sorry..!");
-                                 builder.setMessage("You Can't Enroll at the moment")
-                                         .setPositiveButton("Ok", (dialogInterface, i) -> dialogInterface.cancel());
-                                 AlertDialog alert = builder.create();
-                                 alert.show();
+                                 new ErrorDialogFragment("You Can't Enroll at the moment")
+                                         .show(getChildFragmentManager(),null);
                              }
                          });
                         }

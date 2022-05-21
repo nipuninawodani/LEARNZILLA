@@ -17,6 +17,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.EnrollmentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment;
@@ -60,7 +61,8 @@ public class StudentAndResultsFragment extends Fragment {
             @Override
             public void onResponse(Call<List<apiEnrollment>> call, Response<List<apiEnrollment>> response) {
                 if(response.body().size() == 0) {
-                    Toast.makeText(getContext(), "no Enrollment", Toast.LENGTH_SHORT).show();
+                    new ErrorDialogFragment("No Enrolled Student found..!")
+                            .show(getChildFragmentManager(),null);
                 }else {
                     List<apiEnrollment> enrollments = response.body();
                     StudentsAndResultsAdaptor adaptor = new StudentsAndResultsAdaptor(enrollments);
@@ -71,7 +73,8 @@ public class StudentAndResultsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<apiEnrollment>> call, Throwable t) {
-
+                new ErrorDialogFragment("Server Error : "+t.getMessage())
+                        .show(getChildFragmentManager(),null);
             }
         });
     }
