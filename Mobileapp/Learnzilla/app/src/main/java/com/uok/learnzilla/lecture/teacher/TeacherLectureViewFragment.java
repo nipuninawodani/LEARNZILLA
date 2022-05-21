@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,14 +43,16 @@ public class TeacherLectureViewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         apiLectures lecture = TeacherLectureViewFragmentArgs.fromBundle(getArguments()).getLecture();
+        Log.e("Error",lecture.getLectureid().toString());
+
         binding.textviewLecturesDetails.setText("Week : "+lecture.getWeek()+"\n"+lecture.getDescription());
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
-        Call<List<apiLectureResources>> callResources = ResourcesServices.getLectureResourcesByLectureId(lecture.getLectureid().toString());
-        callResources.enqueue(new Callback<List<apiLectureResources>>() {
+        Call<List<apiLectureResources>> CallResources = ResourcesServices.getLectureResourcesByLectureId(lecture.getLectureid());
+        CallResources.enqueue(new Callback<List<apiLectureResources>>() {
             @Override
             public void onResponse(Call<List<apiLectureResources>> call, Response<List<apiLectureResources>> response) {
-                List<apiLectureResources> Resources = response.body();
-                TeacherLectureResourcesAdaptor adaptor = new TeacherLectureResourcesAdaptor(Resources);
+                List<apiLectureResources> resources = response.body();
+                TeacherLectureResourcesAdaptor adaptor = new TeacherLectureResourcesAdaptor(resources);
                 binding.recyclerview.setAdapter(adaptor);
             }
 
@@ -67,5 +70,16 @@ public class TeacherLectureViewFragment extends Fragment {
                         .navigate(Action);
             }
         });
+        binding.UpdateLecture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TeacherLectureViewFragmentDirections.ActionLectureTeacherViewToUpdateLectureDialog Action;
+                apiLectures lecture = TeacherLectureViewFragmentArgs.fromBundle(getArguments()).getLecture();
+                Action = TeacherLectureViewFragmentDirections.actionLectureTeacherViewToUpdateLectureDialog(lecture);
+                NavHostFragment.findNavController(TeacherLectureViewFragment.this)
+                        .navigate(Action);
+            }
+        });
+
     }
 }

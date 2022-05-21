@@ -46,33 +46,7 @@ public class AddLectureResourseDialogFragment extends DialogFragment {
                 dismiss();
             }
         });
-        binding.SaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(TextUtils.isEmpty(binding.ResourceEdt.getText())){
-                    Toast.makeText(getContext(), "Add Empty field", Toast.LENGTH_SHORT).show();
-                }else {
-                    apiLectureResources resources = getDataForLectureResources(lecture);
-                    Call<Void> call = ResourceServices.addLectureResources(resources);
-                    call.enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            Toast.makeText(getContext(), "Resource Added", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-                            Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            }
-        });
     }
 
-    private apiLectureResources getDataForLectureResources(apiLectures lecture) {
-        Long lectureId = lecture.getLectureid();
-        String Resource = binding.ResourceEdt.getText().toString();
-        return new apiLectureResources(lectureId,Resource);
-    }
+
 }

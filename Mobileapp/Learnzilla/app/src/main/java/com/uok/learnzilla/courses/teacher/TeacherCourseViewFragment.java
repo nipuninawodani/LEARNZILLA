@@ -93,5 +93,15 @@ public class TeacherCourseViewFragment extends Fragment {
                         .navigate(Action);
             }
         });
+
+        binding.ManageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TeacherCourseViewFragmentDirections.ActionCourseViewLecturesTeacherToManageCourseDialog Action;
+                Action = TeacherCourseViewFragmentDirections.actionCourseViewLecturesTeacherToManageCourseDialog(course);
+                NavHostFragment.findNavController(TeacherCourseViewFragment.this)
+                        .navigate(Action);
+            }
+        });
     }
 }

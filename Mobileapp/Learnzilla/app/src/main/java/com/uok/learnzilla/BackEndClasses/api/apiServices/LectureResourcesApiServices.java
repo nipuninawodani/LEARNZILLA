@@ -13,8 +13,15 @@ import retrofit2.http.Path;
 
 public interface LectureResourcesApiServices {
     @GET("/lectureResource/lecture_id={lecture_id}")
-    Call<List<apiLectureResources>> getLectureResourcesByLectureId(@Path("lecture_id") String lecture_id);
+    Call<List<apiLectureResources>> getLectureResourcesByLectureId(@Path("lecture_id") Long lecture_id);
 
     @POST("/lectureResource")
     Call<Void> addLectureResources(@Body apiLectureResources lectureResources);
+
+    @POST("/lectureResource/edit")
+    Call<Void> UpdateLectureResources(@Body apiLectureResources lectureResource);
+
+    @POST("/lectureResource/delete")
+    Call<Void> DeleteLectureResource(@Body apiLectureResources lectureResource);
+
 }

@@ -4,6 +4,7 @@ import com.learnzilla.backend.models.Lecture;
 import com.learnzilla.backend.models.LectureResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class LectureResourceController {
         lectureResourceRepository.save(lectureResourceData);
     }
 
+
     @PostMapping("/lectureResource/edit")
     public void updateLectureResource(@RequestBody LectureResource lectureResourceData) {
 
@@ -46,6 +48,7 @@ public class LectureResourceController {
     }
 
     @PostMapping("/lectureResource/delete")
+    @Transactional
     public void deleteLectureResource(@RequestBody LectureResource lectureResourceData) {
         lectureResourceRepository.deleteAllByLectureresourseid(lectureResourceData.getLectureresourseid());
     }

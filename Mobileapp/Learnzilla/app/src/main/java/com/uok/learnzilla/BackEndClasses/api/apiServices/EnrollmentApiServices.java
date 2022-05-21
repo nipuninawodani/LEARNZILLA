@@ -11,7 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface EnrollmentApiServices {
-    @GET("/enrollment/course_code={course_code}&academic_year={academic_year}")
+    @GET("/enrollment/get/course_code={course_code}&academic_year={academic_year}")
     Call<List<apiEnrollment>> getEnrollmentsByCourse (@Path("course_code") String course_code,@Path("academic_year") String academic_year);
 
     @GET("/enrollment/student_id={student_id}")
@@ -20,6 +20,19 @@ public interface EnrollmentApiServices {
     @GET("/enrollment/check/course_code={course_code}&academic_year={academic_year}&student_id={student_id}")
     Call<apiEnrollment> checkEnroll(@Path("course_code") String course_code,@Path("academic_year") String academic_year,@Path("student_id") String student_id);
 
+    @GET("/enrollment/{enrollmentid}")
+    Call<apiEnrollment> getEnrollmentByEnrollmentID(@Path("enrollmentid") Long ID);
+
     @POST("/enrollment")
     Call<Void> addEnrollment(@Body apiEnrollment enrollment);
+
+    @POST("/enrollment/edit")
+    Call<Void> updateEnrollment(@Body apiEnrollment enrollment);
+
+    @POST("/enrollment/delete")
+    Call<Void> deleteEnrollment(@Body apiEnrollment enrollment);
+
+
+
+
 }
