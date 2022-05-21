@@ -1,12 +1,15 @@
 package com.learnzilla.backend.models;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Students")
-public class Students {
+public class Students extends User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,6 +26,10 @@ public class Students {
 
     @Column(nullable = false, unique = true)
     private String password;
+
+    public Students(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+        super(username, password, authorities);
+    }
 
 
     public String getFirstName() {
@@ -49,14 +56,13 @@ public class Students {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
     public Integer getId() {
         return id;
@@ -65,4 +71,7 @@ public class Students {
     public void setId(Integer id) {
         this.id = id;
     }
+
+
+
 }

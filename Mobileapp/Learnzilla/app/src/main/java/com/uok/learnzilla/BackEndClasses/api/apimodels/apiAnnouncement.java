@@ -41,5 +41,6 @@ public class apiAnnouncement {
 
     public Date getDate() {
         return date;
+
     }
 }
