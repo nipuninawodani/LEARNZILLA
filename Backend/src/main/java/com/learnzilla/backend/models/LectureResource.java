@@ -14,19 +14,23 @@ public class LectureResource implements Serializable {
     private Long lecture_id;
 
     private String resource;
+
+    private String filename;
     public LectureResource(){
 
     }
 
-    public LectureResource(Long lectureresourseid, Long lecture_id, String resource){
+    public LectureResource(Long lectureresourseid, Long lecture_id, String resource,String filename){
         this.lectureresourseid = lectureresourseid;
         this.lecture_id=lecture_id;
         this.resource=resource;
+        this.filename=filename;
     }
 
-    public LectureResource(Long lecture_id, String resource){
+    public LectureResource(Long lecture_id, String resource,String filename){
         this.lecture_id=lecture_id;
         this.resource=resource;
+        this.filename=filename;
     }
 
     public Long getLecture_id() {
@@ -51,5 +55,13 @@ public class LectureResource implements Serializable {
 
     public void setLectureresourseid(Long lectureresourseid) {
         this.lectureresourseid = lectureresourseid;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }

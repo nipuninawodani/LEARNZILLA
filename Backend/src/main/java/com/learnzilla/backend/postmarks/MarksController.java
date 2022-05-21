@@ -17,7 +17,7 @@ public class MarksController {
         this.enrollmentRepository= enrollmentRepository;
     }
 
-    @PostMapping("/postmarks/edit")
+    @PostMapping("/learnzilla/postmarks/edit")
     public void updatePostMarks(@RequestBody Enrollment enrollmentData) {
 
         Enrollment enrollment = enrollmentRepository.findByEnrollmentid(enrollmentData.getEnrollmentid());
@@ -28,19 +28,19 @@ public class MarksController {
         enrollmentRepository.save(enrollment);
     }
 
-    @GetMapping("/getmarks/student_id={student_id}")
+    @GetMapping("/learnzilla/getmarks/student_id={student_id}")
     public ResponseEntity<List<Enrollment>> getMarksById(@PathVariable Integer student_id){
         List<Enrollment> enrollment = enrollmentRepository.findByStudent_id(student_id);
         return ResponseEntity.ok(enrollment);
     }
 
-    @GetMapping("/getmarks/course_code={course_code}&academic_year={academic_year}&student_id={student_id}")
+    @GetMapping("/learnzilla/getmarks/course_code={course_code}&academic_year={academic_year}&student_id={student_id}")
     public ResponseEntity<Enrollment> getMarksByCourse(@PathVariable String course_code , @PathVariable String academic_year, @PathVariable Integer student_id){
         Enrollment enrollment = enrollmentRepository.findEnroll(course_code , academic_year , student_id);
         return ResponseEntity.ok(enrollment);
     }
 
-    @GetMapping("/getmarks")
+    @GetMapping("/learnzilla/getmarks")
     public ResponseEntity<List<Enrollment>> getMarks(){
         List<Enrollment> enrollment = enrollmentRepository.findAll();
         return ResponseEntity.ok(enrollment);

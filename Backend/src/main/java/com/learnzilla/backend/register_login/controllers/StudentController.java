@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-
 @CrossOrigin("*")
 @RestController
 public class StudentController {
@@ -34,7 +33,7 @@ public class StudentController {
     @Autowired
     public StudentController(StudentRepository studentRepository, PasswordEncoder passwordEncoder, PasswordEncoder passwordEncoder1, JWTTokenHelper jwtTokenHelper, AuthenticationManager authenticationManager) {
         this.studentRepository = studentRepository;
-        this.passwordEncoder = passwordEncoder1;
+        this.passwordEncoder = passwordEncoder;
         this.jwtTokenHelper = jwtTokenHelper;
         this.authenticationManager = authenticationManager;
     }
@@ -46,18 +45,18 @@ public class StudentController {
         studentRepository.save(studentData);
     }
 
-    @GetMapping("/student/{email}")
+    @GetMapping("/learnzilla/student/{email}")
     public ResponseEntity<Students> getStudentByEmail(@PathVariable String email){
         Students students = studentRepository.findByEmail(email);
         return ResponseEntity.ok(students);
     }
 
 
-    @PostMapping("/student/login")
+    @PostMapping("student/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) throws InvalidKeySpecException, NoSuchAlgorithmException {
         Authentication authentication= authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        authenticationRequest.getEmail(),authenticationRequest.getPassword())
+                        authenticationRequest.getEmail(),passwordEncoder.encode(authenticationRequest.getPassword()))
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -70,7 +69,7 @@ public class StudentController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/student/id/{id}")
+    @GetMapping("/learnzilla/student/id/{id}")
     public ResponseEntity<Students> getStudent(@PathVariable Integer id) {
         Students students = studentRepository.findById(id).get();
         return ResponseEntity.ok(students);
