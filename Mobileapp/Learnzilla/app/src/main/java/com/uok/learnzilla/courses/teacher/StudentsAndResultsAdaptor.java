@@ -17,6 +17,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.StudentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiStudent;
@@ -28,6 +29,7 @@ import java.util.List;
 public class StudentsAndResultsAdaptor extends RecyclerView.Adapter<StudentsAndResultsAdaptor.ViewHolder> {
     private List<apiEnrollment> mlistEnrollment;
     private  apiStudent student;
+    private ViewGroup Frag;
     StudentApiServices StudentServices = retrofitConfiguration.getClient().create(StudentApiServices.class);
 
 
@@ -76,6 +78,8 @@ public class StudentsAndResultsAdaptor extends RecyclerView.Adapter<StudentsAndR
                 student = new apiStudent("ServerError","ServerError","ServerError","ServerError");
                 holder.StudentName.setText("server Error");
                 holder.StudentName.setText("server Error");
+                new ErrorDialogFragment("Server Error : "+t.getMessage())
+                        .show(FragmentManager.findFragment(Frag).getChildFragmentManager(),null);
             }
         });
 

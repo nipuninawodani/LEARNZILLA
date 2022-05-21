@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -56,7 +57,8 @@ public class FragmentMyCoursesTeacher extends Fragment {
 
             @Override
             public void onFailure(Call<List<apiCourses>> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                new ErrorDialogFragment("Server Error :" + t.getMessage())
+                        .show(getChildFragmentManager(),null);
             }
         });
         binding.add.setOnClickListener(new View.OnClickListener() {

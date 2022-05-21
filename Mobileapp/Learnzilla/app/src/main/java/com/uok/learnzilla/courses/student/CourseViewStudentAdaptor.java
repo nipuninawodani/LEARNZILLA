@@ -7,6 +7,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures;
@@ -26,7 +28,7 @@ public class CourseViewStudentAdaptor extends RecyclerView.Adapter<CourseViewStu
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_view_lectures_student, parent, false);
-        return new CourseViewStudentAdaptor.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -34,11 +36,14 @@ public class CourseViewStudentAdaptor extends RecyclerView.Adapter<CourseViewStu
         apiLectures ItemViewModel = mListLectures.get(position);
         holder.LectureDescription.setText(ItemViewModel.getDescription());
         holder.CourseCode.setText(ItemViewModel.getCourse_code());
-        holder.Week.setText(ItemViewModel.getWeek());
+        holder.Week.setText(ItemViewModel.getTitle());
         holder.GoToLectureResources.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                StudentCourseViewFragmentDirections.ActionCourseViewStudentToLectureViewStudent Action;
+                Action = StudentCourseViewFragmentDirections.actionCourseViewStudentToLectureViewStudent(ItemViewModel);
+                NavHostFragment.findNavController(FragmentManager.findFragment(view))
+                        .navigate(Action);
             }
         });
 
@@ -59,7 +64,7 @@ public class CourseViewStudentAdaptor extends RecyclerView.Adapter<CourseViewStu
             super(itemView);
             LectureDescription = (TextView) itemView.findViewById(R.id.textview_lecture_Description);
             CourseCode = (TextView) itemView.findViewById(R.id.textview_LecCourseCodee);
-            Week = (TextView) itemView.findViewById(R.id.textview_week);
+            Week = (TextView) itemView.findViewById(R.id.textViewWeek);
             GoToLectureResources = (ImageButton) itemView.findViewById(R.id.Goto);
 
         }

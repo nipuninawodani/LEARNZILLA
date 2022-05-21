@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.LectureResourcesApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectureResources;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures;
@@ -43,9 +44,7 @@ public class TeacherLectureViewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         apiLectures lecture = TeacherLectureViewFragmentArgs.fromBundle(getArguments()).getLecture();
-        Log.e("Error",lecture.getLectureid().toString());
-
-        binding.textviewLecturesDetails.setText("Week : "+lecture.getWeek()+"\n"+lecture.getDescription());
+        binding.textviewLecturesDetails.setText(lecture.getTitle()+"\n"+lecture.getDescription());
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         Call<List<apiLectureResources>> CallResources = ResourcesServices.getLectureResourcesByLectureId(lecture.getLectureid());
         CallResources.enqueue(new Callback<List<apiLectureResources>>() {
@@ -58,7 +57,8 @@ public class TeacherLectureViewFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<apiLectureResources>> call, Throwable t) {
-                Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                new ErrorDialogFragment("Server Error :" + t.getMessage())
+                        .show(getChildFragmentManager(),null);
             }
         });
         binding.add.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +70,7 @@ public class TeacherLectureViewFragment extends Fragment {
                         .navigate(Action);
             }
         });
+
         binding.UpdateLecture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

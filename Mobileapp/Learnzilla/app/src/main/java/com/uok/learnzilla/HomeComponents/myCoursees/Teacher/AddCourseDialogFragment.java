@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -53,7 +54,8 @@ public class AddCourseDialogFragment extends DialogFragment {
                                 ||  TextUtils.isEmpty(binding.LanguageEdit.getText())
                                 ||  TextUtils.isEmpty(binding.LeveleEdit.getText())
                 ){
-                    Toast.makeText(getContext(), "Please Fill Empty Fields", Toast.LENGTH_LONG).show();
+                    new ErrorDialogFragment("Please Fill Empty Fields")
+                            .show(getChildFragmentManager(),null);
                 }else{
                     apiCourses course = AddDataIntoCourse();
                     Call<Void> CallPostCourse = ApiCourse.addCourse(course);
@@ -67,7 +69,8 @@ public class AddCourseDialogFragment extends DialogFragment {
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            new ErrorDialogFragment("Server Error :" + t.getMessage())
+                                    .show(getChildFragmentManager(),null);
                         }
                     });
                 }

@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/white"
-    android:layout_height="match_parent"
-    tools:context=".HomeComponents.myCourses.fragment.MyCoursesListFragment">
+    android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
@@ -32,10 +31,11 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/CourseName"
+        android:id="@+id/textviewLecturesDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:gravity="center"
         android:text="Week 1 : TamilGaming"
         android:textColor="@color/primaryTextColor"
         android:textSize="20sp"

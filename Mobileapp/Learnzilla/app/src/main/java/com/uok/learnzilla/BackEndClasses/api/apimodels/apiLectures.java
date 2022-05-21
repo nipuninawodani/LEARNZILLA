@@ -11,22 +11,36 @@ public class apiLectures implements Parcelable {
     private String academic_year;
     private String course_code;
     private String description;
-    private String week;
 
-    public apiLectures(Long lectureid, String academic_year, String course_code, String description, String week) {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public apiLectures(Long lectureid, String academic_year, String course_code, String description, String title) {
         this.lectureid = lectureid;
         this.academic_year = academic_year;
         this.course_code = course_code;
         this.description = description;
-        this.week = week;
+        this.title = title;
     }
 
-    public apiLectures(String academic_year, String course_code, String description, String week) {
+    public apiLectures(String academic_year, String course_code, String description, String title) {
         this.academic_year = academic_year;
         this.course_code = course_code;
         this.description = description;
-        this.week = week;
+        this.title = title;
     }
+
 
     protected apiLectures(Parcel in) {
         if (in.readByte() == 0) {
@@ -37,7 +51,7 @@ public class apiLectures implements Parcelable {
         academic_year = in.readString();
         course_code = in.readString();
         description = in.readString();
-        week = in.readString();
+        title = in.readString();
     }
 
     public static final Creator<apiLectures> CREATOR = new Creator<apiLectures>() {
@@ -68,9 +82,6 @@ public class apiLectures implements Parcelable {
         return description;
     }
 
-    public String getWeek() {
-        return week;
-    }
 
     @Override
     public int describeContents() {
@@ -79,6 +90,15 @@ public class apiLectures implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-
+        if (lectureid == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeLong(lectureid);
+        }
+        parcel.writeString(academic_year);
+        parcel.writeString(course_code);
+        parcel.writeString(description);
+        parcel.writeString(title);
     }
 }
