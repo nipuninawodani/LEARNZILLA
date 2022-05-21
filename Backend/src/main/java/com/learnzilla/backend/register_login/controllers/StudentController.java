@@ -7,10 +7,12 @@ import com.learnzilla.backend.register_login.response.AuthenticationResponse;
 import com.learnzilla.backend.register_login.security.JWTTokenHelper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,17 +26,19 @@ import java.security.spec.InvalidKeySpecException;
 public class StudentController {
 
     private StudentRepository studentRepository;
-    private  PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private JWTTokenHelper jwtTokenHelper;
     private AuthenticationManager authenticationManager;
 
+
     @Autowired
-    public StudentController(StudentRepository studentRepository, PasswordEncoder passwordEncoder, JWTTokenHelper jwtTokenHelper, AuthenticationManager authenticationManager) {
+    public StudentController(StudentRepository studentRepository, PasswordEncoder passwordEncoder, PasswordEncoder passwordEncoder1, JWTTokenHelper jwtTokenHelper, AuthenticationManager authenticationManager) {
         this.studentRepository = studentRepository;
-        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = passwordEncoder1;
         this.jwtTokenHelper = jwtTokenHelper;
         this.authenticationManager = authenticationManager;
     }
+
 
     @PostMapping("/signup/student")
     public void signupStudent(@RequestBody Students studentData){

@@ -20,6 +20,6 @@ public class Announcement {
     @CreatedDate
     public Date date;
 
-package com.learnzilla.backend.announcements;public class Announcement {
+
 
 }
