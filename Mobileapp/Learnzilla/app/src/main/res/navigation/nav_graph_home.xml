@@ -72,6 +72,9 @@
         android:name="com.uok.learnzilla.HomeComponents.myCoursees.Teacher.AddCourseDialogFragment"
         tools:layout="@layout/fragment_add_course_dialog">
 
+        <action
+            android:id="@+id/action_AddCourseDialog_to_MyCoursesTeacher"
+            app:destination="@id/MyCoursesTeacher" />
     </dialog>
     <fragment
         android:id="@+id/CourseViewLecturesTeacher"
@@ -83,15 +86,101 @@
         <action
             android:id="@+id/action_CourseViewLecturesTeacher_to_AddLectureDialog"
             app:destination="@id/AddLectureDialog" />
+        <action
+            android:id="@+id/action_CourseViewLecturesTeacher_to_LectureTeacherView"
+            app:destination="@id/LectureTeacherView" />
+        <action
+            android:id="@+id/action_CourseViewLecturesTeacher_to_manageCourseDialog"
+            app:destination="@id/manageCourseDialog" />
     </fragment>
     <dialog
         android:id="@+id/AddLectureDialog"
         android:name="com.uok.learnzilla.courses.teacher.AddLectureDialogFragment"
         tools:layout="@layout/fragment_add_lecture_dialog">
-
         <argument
             android:name="Course"
             app:argType="com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses" />
+        <action
+            android:id="@+id/action_AddLectureDialog_to_MyCoursesTeacher"
+            app:destination="@id/MyCoursesTeacher" />
+    </dialog>
+    <fragment
+        android:id="@+id/LectureTeacherView"
+        android:name="com.uok.learnzilla.lecture.teacher.TeacherLectureViewFragment"
+        tools:layout="@layout/fragment_teacher_lecture_view" >
+        <argument
+            android:name="Lecture"
+            app:argType="com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures" />
+        <action
+            android:id="@+id/action_LectureTeacherView_to_AddLectureResourceDialog"
+            app:destination="@id/AddLectureResourceDialog" />
+        <action
+            android:id="@+id/action_LectureTeacherView_to_UpdateResourceDialog"
+            app:destination="@id/UpdateResourceDialog" />
+        <action
+            android:id="@+id/action_LectureTeacherView_to_UpdateLectureDialog"
+            app:destination="@id/UpdateLectureDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/AddLectureResourceDialog"
+        android:name="com.uok.learnzilla.lecture.teacher.AddLectureResourseDialogFragment"
+        tools:layout="@layout/fragment_add_lecture_resourse_dialog">
+        <argument
+            android:name="lecture"
+            app:argType="com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures" />
+    </dialog>
+    <dialog
+        android:id="@+id/UpdateResourceDialog"
+        android:name="com.uok.learnzilla.lecture.teacher.UpdateLectureResourceDialogFragment"
+        tools:layout="@layout/fragment_update_lecture_resource_dialog">
+    </dialog>
+    <dialog
+        android:id="@+id/manageCourseDialog"
+        android:name="com.uok.learnzilla.courses.teacher.ManageCourseDialogFragment"
+        tools:layout="@layout/fragment_manage_course_dialog">
+        <argument
+            android:name="Course"
+            app:argType="com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses" />
+        <action
+            android:id="@+id/action_manageCourseDialog_to_ResultViewTeacher"
+            app:destination="@id/ResultViewTeacher" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/ResultViewTeacher"
+        android:name="com.uok.learnzilla.courses.teacher.StudentAndResultsFragment"
+        tools:layout="@layout/fragment_student_and_results" >
+        <argument
+            android:name="Course"
+            app:argType="com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses" />
+        <action
+            android:id="@+id/action_ResultViewTeacher_to_UpdateGrade"
+            app:destination="@id/UpdateGrade" />
+    </fragment>
+    <dialog
+        android:id="@+id/UpdateGrade"
+        android:name="com.uok.learnzilla.courses.teacher.UpdateGradeDialogFragment"
+        tools:layout="@layout/fragment_update_grade_dialog">
+        <argument
+            android:name="Enrollment"
+            app:argType="com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment" />
+        <argument
+            android:name="StudentName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_UpdateGrade_to_ResultViewTeacher"
+            app:destination="@id/ResultViewTeacher" />
+    </dialog>
+    <dialog
+        android:id="@+id/UpdateLectureDialog"
+        android:name="com.uok.learnzilla.lecture.teacher.updateLectureDialogFragment"
+        tools:layout="@layout/fragment_update_lecture_dialog">
+        <argument
+            android:name="Lecture"
+            app:argType="com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures" />
+        <action
+            android:id="@+id/action_UpdateLectureDialog_to_MyCoursesTeacher"
+            app:destination="@id/MyCoursesTeacher" />
     </dialog>
 
 </navigation>

@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/CityName"
+                android:id="@+id/resName"
                 android:layout_width="204dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -43,6 +43,14 @@
             android:layout_weight="1"
             android:backgroundTint="#ffffff"
             app:srcCompat="@android:drawable/ic_menu_delete"
+            app:tint="@color/yellow"/>
+        <ImageButton
+            android:id="@+id/UpdateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#ffffff"
+            app:srcCompat="@android:drawable/ic_menu_edit"
             app:tint="@color/yellow"/>
 
     </LinearLayout>

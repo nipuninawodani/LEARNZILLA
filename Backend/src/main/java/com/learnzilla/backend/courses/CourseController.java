@@ -3,6 +3,7 @@ package com.learnzilla.backend.courses;
 import com.learnzilla.backend.models.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -75,6 +76,7 @@ public class CourseController {
     }
 
     @PostMapping("/course/delete")
+    @Transactional
     public void deleteCourse(@RequestBody Course courseData) {
         courseRepository.deleteAllByCourseid(courseData.getCourseid());
     }

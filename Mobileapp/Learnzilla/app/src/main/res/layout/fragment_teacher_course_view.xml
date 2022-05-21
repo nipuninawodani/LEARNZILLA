@@ -109,7 +109,6 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -132,5 +131,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.96" />
+
+    <ImageButton
+        android:id="@+id/ManageButton"
+        android:layout_width="47dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="36dp"
+        android:background="@color/white"
+        android:src="@android:drawable/ic_menu_manage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textview_coursenameLectures"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/primaryTextColor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
