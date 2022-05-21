@@ -68,5 +68,14 @@ public class ManageCourseDialogFragment extends DialogFragment {
                         .navigate(Action);
             }
         });
+        binding.Announcement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ManageCourseDialogFragmentDirections.ActionManageCourseDialogToAnnouncemetDialog Action;
+                Action = ManageCourseDialogFragmentDirections.actionManageCourseDialogToAnnouncemetDialog(course.getCourse_code());
+                NavHostFragment.findNavController(ManageCourseDialogFragment.this)
+                        .navigate(Action);
+            }
+        });
     }
 }
