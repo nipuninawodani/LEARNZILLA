@@ -8,7 +8,16 @@ import Update_dialog from "./Components/Results/Update_dialog_component/Update_d
 import Edit_dialog from "./Components/Results/Edit_dialog_component/Edit_dialog";
 import Delete_dialog from "./Components/Results/Delete_dialog_component/Delete_dialog";
 import Announcement from "./Components/Announcement/Announcemnet";
+import Course_view from "./Components/Course_view/Course_view";
+import Announcement_creation from "./Components/Announcement_creation/Announcement_creation"
 import Enroll from "./Components/Enroll/Enroll";
+import AddCourse from "./Components/Course_Teacher/AddCourse";
+import EditCourse from "./Components/Course_Teacher/EditCourse";
+import Lecture_add from "./Components/Lecture/Lecture_Add";
+import Lecture_Add from "./Components/Lecture/Lecture_Add";
+
+
+
 
 
 function App() {
@@ -28,6 +37,11 @@ function App() {
               <Route path="/Edit_dialog"  element={<Edit_dialog/>}/>
               <Route path="/Delete_dialog"  element={<Delete_dialog/>}/>
               <Route exact path="/Announcement" element={<Announcement/>} />
+              <Route exact path="/Course_view" element={<Course_view/>} />
+              <Route path="/Announcement_creation" element={<Announcement_creation/>} />
+              <Route exact path="/Add_Course" element={<AddCourse/>} />
+              <Route exact path="/Edit_Course" element={<EditCourse/>} />
+              <Route exact path="/Add_Lecture" element={<Lecture_add/>} />
 
             </Routes> 
   

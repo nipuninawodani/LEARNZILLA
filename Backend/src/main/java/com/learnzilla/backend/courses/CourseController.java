@@ -1,9 +1,12 @@
 package com.learnzilla.backend.courses;
 
+import com.learnzilla.backend.fileUploader.FileUploader;
 import com.learnzilla.backend.models.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -39,8 +42,9 @@ public class CourseController {
     }
 
     @PostMapping("/course")
-    public void addCourse(@RequestBody Course courseData) {
+    public String addCourse(@RequestBody Course courseData) {
         courseRepository.save(courseData);
+        return String.valueOf(courseData.getCourseid());
     }
 
 
@@ -71,12 +75,25 @@ public class CourseController {
         if (courseData.getDescription()!=null){
             course.setDescription(courseData.getDescription());
         }
+
         courseRepository.save(course);
     }
 
     @PostMapping("/course/delete")
+    @Transactional
     public void deleteCourse(@RequestBody Course courseData) {
         courseRepository.deleteAllByCourseid(courseData.getCourseid());
+    }
+
+    @PostMapping("/course/file")
+    public void uploadCourseImage(@RequestParam("file") MultipartFile file, @RequestParam("course_id") String course_id) {
+        new FileUploader(file , "Course "+course_id);
+
+        Course course = courseRepository.findByCourseid(Long.valueOf(course_id));
+
+        course.setPreviewImg("https://learnzillaftp.000webhostapp.com/learnzilla/" + "Course "+course_id+"/"+file.getOriginalFilename());
+
+        courseRepository.save(course);
     }
 
 }

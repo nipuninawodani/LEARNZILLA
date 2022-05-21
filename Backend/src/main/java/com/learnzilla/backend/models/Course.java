@@ -23,12 +23,14 @@ public class Course implements Serializable {
     private String description;
     private String language;
 
+    private String previewImg;
+
 
     public Course() {
 
     }
 
-    public Course(Long courseid, String course_code, String academic_year, String level, String semester, String teacher_id, String title, String description, String language) {
+    public Course(Long courseid, String course_code, String academic_year, String level, String semester, String teacher_id, String title, String description, String language,String previewImg) {
         this.courseid = courseid;
         this.academic_year=academic_year;
         this.course_code=course_code;
@@ -40,7 +42,7 @@ public class Course implements Serializable {
         this.language=language;
     }
 
-    public Course(String course_code, String academic_year, String level, String semester, String teacher_id, String title, String description, String language) {
+    public Course(String course_code, String academic_year, String level, String semester, String teacher_id, String title, String description, String language,String previewImg) {
         this.academic_year=academic_year;
         this.course_code=course_code;
         this.description=description;
@@ -121,6 +123,14 @@ public class Course implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getPreviewImg() {
+        return previewImg;
+    }
+
+    public void setPreviewImg(String previewImg) {
+        this.previewImg = previewImg;
     }
 }
 
