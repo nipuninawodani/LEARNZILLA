@@ -1,6 +1,7 @@
 package com.uok.learnzilla.BackEndClasses.api.apiServices;
 
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectureResources;
+import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface LectureResourcesApiServices {
     Call<List<apiLectureResources>> getLectureResourcesByLectureId(@Path("lecture_id") String lecture_id);
 
     @POST("/lectureResource")
-    Call<apiLectureResources> addLectureResources(@Body apiLectureResources lectureResources);
+    Call<Void> addLectureResources(@Body apiLectureResources lectureResources);
 }

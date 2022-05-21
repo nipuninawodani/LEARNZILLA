@@ -6,8 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uok.learnzilla.BackEndClasses.api.apiServices.LectureApiServices;
@@ -16,6 +19,10 @@ import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
 import com.uok.learnzilla.R;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CourseViewTeacherAdaptor extends RecyclerView.Adapter<CourseViewTeacherAdaptor.ViewHolder> {
     private List<apiLectures> mListLectures;
@@ -43,13 +50,26 @@ public class CourseViewTeacherAdaptor extends RecyclerView.Adapter<CourseViewTea
         holder.GoToLectureResources.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO
+                TeacherCourseViewFragmentDirections.ActionCourseViewLecturesTeacherToLectureTeacherView Action;
+                Action = TeacherCourseViewFragmentDirections.actionCourseViewLecturesTeacherToLectureTeacherView(ItemViewModel);
+                NavHostFragment.findNavController(FragmentManager.findFragment(view)).navigate(Action);
             }
         });
         holder.Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Call<Void> CallDeleteLecture = LectureServices.deleteLecture(ItemViewModel);
+                CallDeleteLecture.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Toast.makeText(view.getContext(), "Lecture deleted", Toast.LENGTH_SHORT).show();
+                    }
 
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(view.getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }

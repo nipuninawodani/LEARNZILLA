@@ -20,4 +20,9 @@ public interface LectureApiServices {
     @POST("/lecture")
     Call<Void>  addLecture(@Body apiLectures lectures);
 
+    @POST("/lecture/delete")
+    Call<Void> deleteLecture(@Body apiLectures lectures);
+
+    @POST("/lecture/edit")
+    Call<Void> updateLecture(@Body apiLectures lectures);
 }
