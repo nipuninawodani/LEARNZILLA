@@ -8,7 +8,7 @@ const navLinks = [
     url: "#",
   },
   {
-    display: "Profile",
+    display: "About",
     url: "#",
   },
 
@@ -17,10 +17,13 @@ const navLinks = [
     url: "#",
   },
   {
-    display: "Grades",
+    display: "Pages",
     url: "#",
   },
- 
+  {
+    display: "Blog",
+    url: "#",
+  },
 ];
 
 const Header = () => {
@@ -49,7 +52,11 @@ const Header = () => {
               </ul>
             </div>
 
-           
+            <div className="nav__right">
+              <p className="mb-0 d-flex align-items-center gap-2">
+                <i class="ri-phone-line"></i> +88 0123456789
+              </p>
+            </div>
           </div>
 
           <div className="mobile__menu">
