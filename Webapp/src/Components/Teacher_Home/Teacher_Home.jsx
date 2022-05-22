@@ -35,7 +35,7 @@ function Teacher_Home() {
                                 <div class="card-body text-center">
                                     <img src={courses} class="card-img-top" alt="..." />
                                     <p ></p>
-                                    <a href="#" class="btn btn-outline-danger btn-sm">Courses</a>
+                                    <a href="/Course_view" class="btn btn-outline-danger btn-sm">Courses</a>
                                 </div>
 
                             </div>
@@ -46,7 +46,7 @@ function Teacher_Home() {
                                 <div class="card-body text-center">
                                     <img src={announcements} class="card-img-top" alt="..." />
                                     <p ></p>
-                                    <a href="#" class="btn btn-outline-danger btn-sm">Announcements</a>
+                                    <a href="/Announcement_creation" class="btn btn-outline-danger btn-sm">Create Announcements</a>
                                 </div>
 
                             </div>
@@ -57,7 +57,7 @@ function Teacher_Home() {
                                 <div class="card-body text-center">
                                     <img src={grades} class="card-img-top" alt="..." />
                                     <p ></p>
-                                    <a href="#" class="btn btn-outline-danger btn-sm">Grades</a>
+                                    <a href="/Results" class="btn btn-outline-danger btn-sm">Grades</a>
                                 </div>
 
                             </div>
@@ -69,7 +69,7 @@ function Teacher_Home() {
                     <hr class="my-4" />
                     <p  className="text-center">Hope to see you soon again!</p>
                     <p class="lead text-center">
-                        <a class="btn btn-outline-dark btn-sm" href="#" role="button">Log Out</a>
+                        <a class="btn btn-outline-dark btn-sm" href="/Login" role="button">Log Out</a>
                     </p>
                 </div>
             </div>
