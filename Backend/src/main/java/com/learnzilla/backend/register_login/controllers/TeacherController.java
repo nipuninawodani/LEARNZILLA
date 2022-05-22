@@ -5,6 +5,7 @@ import com.learnzilla.backend.register_login.repositories.TeacherRepository;
 import com.learnzilla.backend.register_login.request.AuthenticationRequest;
 import com.learnzilla.backend.register_login.response.AuthenticationResponse;
 import com.learnzilla.backend.register_login.security.JWTTokenHelper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,12 +29,11 @@ public class TeacherController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    public TeacherController(TeacherRepository teacherRepository) {
+    public TeacherController(TeacherRepository teacherRepository, PasswordEncoder passwordEncoder, JWTTokenHelper jwtTokenHelper, AuthenticationManager authenticationManager) {
         this.teacherRepository = teacherRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenHelper = jwtTokenHelper;
         this.authenticationManager = authenticationManager;
-
     }
 
     @PostMapping("/signup/teacher")
@@ -48,7 +48,7 @@ public class TeacherController {
         return ResponseEntity.ok(teachers);
     }
 
-    @PostMapping("teacher/login")
+    @PostMapping("login/teacher")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) throws InvalidKeySpecException, NoSuchAlgorithmException {
         Authentication authentication= authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

@@ -1,10 +1,14 @@
 package com.learnzilla.backend.models;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Teachers")
-public class Teachers {
+public class Teachers extends User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,6 +25,10 @@ public class Teachers {
 
     @Column(nullable = false, unique = true)
     private String password;
+
+    public Teachers(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+        super(username, password, authorities);
+    }
 
     public String getFirstName() {
         return firstName;
