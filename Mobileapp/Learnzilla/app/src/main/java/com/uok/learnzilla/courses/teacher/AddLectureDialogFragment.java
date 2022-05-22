@@ -5,14 +5,17 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.AlartDialogs.SuccessDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.LectureApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures;
@@ -52,21 +55,32 @@ public class AddLectureDialogFragment extends DialogFragment {
             public void onClick(View view) {
                 if(
                             TextUtils.isEmpty(binding.TitleEdit.getText())
-                        ||  TextUtils.isEmpty(binding.WeekEdt.getText())
+                        ||  TextUtils.isEmpty(binding.DisEdit.getText())
                 ){
-                    Toast.makeText(getContext(), "Add Empty Fields", Toast.LENGTH_SHORT).show();
+                    new ErrorDialogFragment("Fill Empty TextBoxes" )
+                            .show(getChildFragmentManager(),null);
                 }else {
                     apiLectures lecture = getDataForLecture(course);
                     Call<Void> CallAddLecture = LectureServices.addLecture(lecture);
                     CallAddLecture.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            Toast.makeText(getContext(), "Lecture Added", Toast.LENGTH_SHORT).show();
+                            new SuccessDialogFragment("Lecture added Successfully")
+                                    .show(getChildFragmentManager(),null);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    NavHostFragment.findNavController(AddLectureDialogFragment.this)
+                                            .navigate(R.id.action_AddLectureDialog_to_MyCoursesTeacher);
+                                }
+                            }, 10000);
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                            new ErrorDialogFragment("Server Error :" + t.getMessage())
+                                    .show(getChildFragmentManager(),null);
                         }
                     });
 
@@ -77,8 +91,8 @@ public class AddLectureDialogFragment extends DialogFragment {
     }
 
     private apiLectures getDataForLecture(apiCourses course) {
-        String week = binding.WeekEdt.getText().toString();
+        String week = binding.DisEdit.getText().toString();
         String Title = binding.TitleEdit.getText().toString();
-        return new apiLectures(course.getAcademic_year(),course.getCourse_code(),Title,week);
+        return new apiLectures(course.getAcademic_year(),course.getCourse_code(),week,Title);
     }
 }

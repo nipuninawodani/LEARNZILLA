@@ -1,14 +1,15 @@
 package com.learnzilla.backend.lectures;
 
-import com.learnzilla.backend.models.Enrollment;
 import com.learnzilla.backend.models.Lecture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 public class LectureController {
 
@@ -19,24 +20,26 @@ public class LectureController {
         this.lectureRepository = lectureRepository;
     }
 
-    @GetMapping("/lecture/{lectureid}")
+    @GetMapping("/learnzilla/lecture/{lectureid}")
     public ResponseEntity<Lecture> getLectureById(@PathVariable Long lectureid){
         Lecture lecture = lectureRepository.findByLectureid(lectureid);
         return ResponseEntity.ok(lecture);
     }
 
-    @GetMapping("/lecture/get/course_code={course_code}&academic_year={academic_year}")
+    @GetMapping("/learnzilla/lecture/get/course_code={course_code}&academic_year={academic_year}")
     public ResponseEntity<List<Lecture>> getLectureByCourse(@PathVariable String course_code , @PathVariable String academic_year){
         List<Lecture> lecture = lectureRepository.findBycourse_codeAndacademic_year(course_code , academic_year);
         return ResponseEntity.ok(lecture);
     }
 
-    @PostMapping("/lecture")
-    public void addLecture(@RequestBody Lecture lectureData) {
+
+    @PostMapping("/learnzilla/lecture")
+    public String addLecture(@RequestBody Lecture lectureData) {
         lectureRepository.save(lectureData);
+        return String.valueOf(lectureData.getLectureid());
     }
 
-    @PostMapping("/lecture/edit")
+    @PostMapping("/learnzilla/lecture/edit")
     public void updateLecture(@RequestBody Lecture lectureData) {
         Lecture lecture = lectureRepository.findByLectureid(lectureData.getLectureid());
 
@@ -52,14 +55,15 @@ public class LectureController {
             lecture.setDescription(lectureData.getDescription());
         }
 
-        if (lectureData.getWeek()!=null){
-            lecture.setWeek(lectureData.getWeek());
+        if (lectureData.getTitle()!=null){
+            lecture.setTitle(lectureData.getTitle());
         }
 
         lectureRepository.save(lecture);
     }
 
-    @PostMapping("/lecture/delete")
+    @PostMapping("/learnzilla/lecture/delete")
+    @Transactional
     public void deleteLecture(@RequestBody Lecture lectureData) {
         lectureRepository.deleteAllByLectureid(lectureData.getLectureid());
     }

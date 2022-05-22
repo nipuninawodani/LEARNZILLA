@@ -9,8 +9,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.TeacherApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
@@ -65,7 +68,8 @@ public class MyCoursesStudentAdaptor extends RecyclerView.Adapter<MyCoursesStude
                     }
                     @Override
                     public void onFailure(Call<apiTeacher> call, Throwable t) {
-                        Toast.makeText(context, "Server Timeout", Toast.LENGTH_SHORT).show();
+                        new ErrorDialogFragment("Server Error : "+t.getMessage())
+                                .show(FragmentManager.findFragment(Frag).getChildFragmentManager(),null);;
                     }
                 });
                 holder.AcademicYear.setText(ItemViewModel.getAcademic_year());
@@ -77,17 +81,20 @@ public class MyCoursesStudentAdaptor extends RecyclerView.Adapter<MyCoursesStude
                 holder.Go.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, "Nodata", Toast.LENGTH_SHORT).show();
+                        FragmentMyCoursesStudentDirections.ActionMyCoursesStudentToCourseViewStudent Action;
+                        Action = FragmentMyCoursesStudentDirections.actionMyCoursesStudentToCourseViewStudent(ItemViewModel);
+                        NavHostFragment.findNavController(FragmentManager.findFragment(view))
+                                .navigate(Action);
                     }
                 });
             }
 
             @Override
             public void onFailure(Call<apiCourses> call, Throwable t) {
-                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                new ErrorDialogFragment("Server Error : "+t.getMessage())
+                        .show(FragmentManager.findFragment(Frag).getChildFragmentManager(),null);
             }
         });
-
 
     }
 

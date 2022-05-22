@@ -12,26 +12,26 @@ public class Lecture  {
     private String academic_year;
     private String course_code;
     private String description;
-    private String week;
+    private String title;
 
 
     public Lecture(){
 
     }
 
-    public Lecture(Long lectureid, String academic_year, String course_code, String description, String week){
+    public Lecture(Long lectureid, String academic_year, String course_code, String description, String title){
         this.academic_year=academic_year;
         this.course_code=course_code;
         this.description=description;
-        this.week=week;
+        this.title = title;
         this.lectureid = lectureid;
     }
 
-    public Lecture(String academic_year,String course_code,String description,String week){
+    public Lecture(String academic_year,String course_code,String description,String title){
         this.academic_year=academic_year;
         this.course_code=course_code;
         this.description=description;
-        this.week=week;
+        this.title = title;
     }
 
     public String getCourse_code() {
@@ -66,11 +66,11 @@ public class Lecture  {
         this.lectureid = lecture_id;
     }
 
-    public String getWeek() {
-        return week;
+    public String getTitle() {
+        return title;
     }
 
-    public void setWeek(String week) {
-        this.week = week;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
