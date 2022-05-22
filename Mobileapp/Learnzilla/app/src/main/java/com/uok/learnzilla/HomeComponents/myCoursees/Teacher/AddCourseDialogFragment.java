@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -58,7 +59,8 @@ public class AddCourseDialogFragment extends DialogFragment {
                             .show(getChildFragmentManager(),null);
                 }else{
                     apiCourses course = AddDataIntoCourse();
-                    Call<Void> CallPostCourse = ApiCourse.addCourse(course);
+                    SessionManager Manage = new SessionManager(getContext());
+                    Call<Void> CallPostCourse = ApiCourse.addCourse(course,Manage.fetchAuthToken());
                     CallPostCourse.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {

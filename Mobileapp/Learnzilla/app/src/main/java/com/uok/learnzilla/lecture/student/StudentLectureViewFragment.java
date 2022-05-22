@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.LectureResourcesApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectureResources;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures;
@@ -45,7 +46,8 @@ public class StudentLectureViewFragment extends Fragment {
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         apiLectures lecture =StudentLectureViewFragmentArgs.fromBundle(getArguments()).getLecture();
         binding.textviewLecturesDetails.setText(lecture.getTitle()+"\n"+lecture.getDescription());
-        Call<List<apiLectureResources>> CallResources = ResourcesServices.getLectureResourcesByLectureId(lecture.getLectureid());
+        SessionManager Manage = new SessionManager(getContext());
+        Call<List<apiLectureResources>> CallResources = ResourcesServices.getLectureResourcesByLectureId(lecture.getLectureid(),Manage.fetchAuthToken());
         CallResources.enqueue(new Callback<List<apiLectureResources>>() {
             @Override
             public void onResponse(Call<List<apiLectureResources>> call, Response<List<apiLectureResources>> response) {

@@ -12,16 +12,16 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface LectureResourcesApiServices {
-    @GET("/learnzilla/lectureResource/lecture_id={lecture_id}")
-    Call<List<apiLectureResources>> getLectureResourcesByLectureId(@Path("lecture_id") Long lecture_id);
+    @GET("/learnzilla/lectureResource/lecture_id={lecture_id}?access_token={access_token}")
+    Call<List<apiLectureResources>> getLectureResourcesByLectureId(@Path("lecture_id") Long lecture_id,@Path("access_token") String Token);
 
-    @POST("/learnzilla/lectureResource")
-    Call<Void> addLectureResources(@Body apiLectureResources lectureResources);
+    @POST("/learnzilla/lectureResource?access_token={access_token}")
+    Call<Void> addLectureResources(@Body apiLectureResources lectureResources,@Path("access_token") String Token);
 
-    @POST("/learnzilla/lectureResource/edit")
-    Call<Void> UpdateLectureResources(@Body apiLectureResources lectureResource);
+    @POST("/learnzilla/lectureResource/edit?access_token={access_token}")
+    Call<Void> UpdateLectureResources(@Body apiLectureResources lectureResource,@Path("access_token") String Token);
 
-    @POST("/learnzilla/lectureResource/delete")
-    Call<Void> DeleteLectureResource(@Body apiLectureResources lectureResource);
+    @POST("/learnzilla/lectureResource/delete?access_token={access_token}")
+    Call<Void> DeleteLectureResource(@Body apiLectureResources lectureResource,@Path("access_token") String Token);
 
 }

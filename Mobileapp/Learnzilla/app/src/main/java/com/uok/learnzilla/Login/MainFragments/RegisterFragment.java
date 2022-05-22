@@ -170,18 +170,18 @@ public class RegisterFragment extends Fragment {
     //add Register Student Program
     private void RegisterStudent() {
         apiStudent student = getSignInDataStudent();
-        Call<String>  RegisterCall = ApiStudent.signUpStudent(student);
-        RegisterCall.enqueue(new Callback<String>() {
+        Call<apiString>  RegisterCall = ApiStudent.signUpStudent(student);
+        RegisterCall.enqueue(new Callback<apiString>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if(response.body().equals("Email Already Exists")){
+            public void onResponse(Call<apiString> call, Response<apiString> response) {
+                apiString msg = response.body();
+                if(msg.getMsg().equals("Email Already Exists")){
                     String Error = new String("Email Already Taken..!");
                     RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
                     action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
                     NavHostFragment.findNavController(RegisterFragment.this)
                             .navigate(action);
-
-                }else if(response.body().equals("Signup Completed Successfully")){
+                }else if(msg.getMsg().equals("Signup Completed Successfully")){
                     RegisterFragmentDirections.ActionRegisterFragmentToRegisterSuccess action;
                     action = RegisterFragmentDirections.actionRegisterFragmentToRegisterSuccess(2);
                     NavHostFragment.findNavController(RegisterFragment.this)
@@ -190,8 +190,8 @@ public class RegisterFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                String Error = new String("Register Failed...! "+t.getMessage());
+            public void onFailure(Call<apiString> call, Throwable t) {
+                String Error = new String("Register Failed...! " + t.getMessage());
                 RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
                 action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
                 NavHostFragment.findNavController(RegisterFragment.this)

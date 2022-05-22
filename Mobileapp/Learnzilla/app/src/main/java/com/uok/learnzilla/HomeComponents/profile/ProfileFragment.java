@@ -21,6 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.EnrollmentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.StudentApiServices;
@@ -65,7 +66,8 @@ public class ProfileFragment extends Fragment {
     }
 
     private void getNumberOfCourses() {
-        Call<List<apiCourses>> call = CourseService.getAllCourses();
+        SessionManager Manage = new SessionManager(getContext());
+        Call<List<apiCourses>> call = CourseService.getAllCourses(Manage.fetchAuthToken());
         call.enqueue(new Callback<List<apiCourses>>() {
             @Override
             public void onResponse(@NonNull Call<List<apiCourses>> call, @NonNull Response<List<apiCourses>> response) {
@@ -89,10 +91,11 @@ public class ProfileFragment extends Fragment {
 
 
     private void addStudentDetails() {
+        SessionManager Manage = new SessionManager(getContext());
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", MODE_PRIVATE);
         String StudentId = sharedPreferences.getString("ID","");
         binding.type.setText("Student");
-        Call<apiStudent> CallStudent = StudentServices.getStudentByID(StudentId);
+        Call<apiStudent> CallStudent = StudentServices.getStudentByID(StudentId,Manage.fetchAuthToken());
         CallStudent.enqueue(new Callback<apiStudent>() {
             @Override
             public void onResponse(Call<apiStudent> call, Response<apiStudent> response) {
@@ -109,7 +112,7 @@ public class ProfileFragment extends Fragment {
                 GoToHomeFragment();
             }
         });
-        Call<List<apiEnrollment>> CallEnrolledCourses = EnrollmentServices.getEnrollmentsByStudent(StudentId);
+        Call<List<apiEnrollment>> CallEnrolledCourses = EnrollmentServices.getEnrollmentsByStudent(StudentId,Manage.fetchAuthToken());
         CallEnrolledCourses.enqueue(new Callback<List<apiEnrollment>>() {
             @Override
             public void onResponse(Call<List<apiEnrollment>> call, Response<List<apiEnrollment>> response) {
@@ -135,7 +138,8 @@ public class ProfileFragment extends Fragment {
         String TeacherId = sharedPreferences.getString("ID","");
         binding.title3.setText("No Courses you Created");
         binding.type.setText("Teacher");
-        Call<apiTeacher> CallTeacher = TeacherServices.getTeacherById(TeacherId);
+        SessionManager Manage = new SessionManager(getContext());
+        Call<apiTeacher> CallTeacher = TeacherServices.getTeacherById(TeacherId,Manage.fetchAuthToken());
         CallTeacher.enqueue(new Callback<apiTeacher>() {
             @Override
             public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {
@@ -152,7 +156,7 @@ public class ProfileFragment extends Fragment {
                 GoToHomeFragment();
             }
         });
-        Call<List<apiCourses>> CallCourse = CourseService.getCourseByTeacherId(TeacherId);
+        Call<List<apiCourses>> CallCourse = CourseService.getCourseByTeacherId(TeacherId,Manage.fetchAuthToken());
         CallCourse.enqueue(new Callback<List<apiCourses>>() {
             @Override
             public void onResponse(Call<List<apiCourses>> call, Response<List<apiCourses>> response) {

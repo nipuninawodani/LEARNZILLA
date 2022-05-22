@@ -18,6 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -43,7 +44,8 @@ public class ManageCourseDialogFragment extends DialogFragment {
         binding.DeleteCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Void> Call = CourseServices.DeleteCourse(course);
+                SessionManager Manage = new SessionManager(getContext());
+                Call<Void> Call = CourseServices.DeleteCourse(course,Manage.fetchAuthToken());
                 Call.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(retrofit2.Call<Void> call, Response<Void> response) {

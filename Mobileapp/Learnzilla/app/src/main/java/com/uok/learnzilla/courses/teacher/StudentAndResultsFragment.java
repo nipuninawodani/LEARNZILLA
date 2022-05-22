@@ -18,6 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.EnrollmentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment;
@@ -56,7 +57,8 @@ public class StudentAndResultsFragment extends Fragment {
     private void addtoRecyclerView() {
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         apiCourses course = StudentAndResultsFragmentArgs.fromBundle(getArguments()).getCourse();
-        Call<List<apiEnrollment>> CallStudents = EnrollmentServices.getEnrollmentsByCourse(course.getCourse_code(),course.getAcademic_year());
+        SessionManager Manage = new SessionManager(getContext());
+        Call<List<apiEnrollment>> CallStudents = EnrollmentServices.getEnrollmentsByCourse(course.getCourse_code(),course.getAcademic_year(),Manage.fetchAuthToken());
         CallStudents.enqueue(new Callback<List<apiEnrollment>>() {
             @Override
             public void onResponse(Call<List<apiEnrollment>> call, Response<List<apiEnrollment>> response) {

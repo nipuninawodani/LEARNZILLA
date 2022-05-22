@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -46,7 +47,8 @@ public class FragmentMyCoursesTeacher extends Fragment {
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", MODE_PRIVATE);
         String TeacherID = sharedPreferences.getString("ID","");
-        Call<List<apiCourses>> CallCourse = CourseServices.getCourseByTeacherId(TeacherID);
+        SessionManager Manage = new SessionManager(getContext());
+        Call<List<apiCourses>> CallCourse = CourseServices.getCourseByTeacherId(TeacherID,Manage.fetchAuthToken());
         CallCourse.enqueue(new Callback<List<apiCourses>>() {
             @Override
             public void onResponse(Call<List<apiCourses>> call, Response<List<apiCourses>> response) {

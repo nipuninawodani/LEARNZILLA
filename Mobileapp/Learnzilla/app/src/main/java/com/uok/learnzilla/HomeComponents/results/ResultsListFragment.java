@@ -21,6 +21,7 @@ import retrofit2.Response;
 
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.EnrollmentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -49,7 +50,8 @@ public class ResultsListFragment extends Fragment {
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", MODE_PRIVATE);
         String StudentId = sharedPreferences.getString("ID","");
-        Call<List<apiEnrollment>> CallEnroll = EnrollServices.getEnrollmentsByStudent(StudentId);
+        SessionManager Manage = new SessionManager(getContext());
+        Call<List<apiEnrollment>> CallEnroll = EnrollServices.getEnrollmentsByStudent(StudentId,Manage.fetchAuthToken());
         CallEnroll.enqueue(new Callback<List<apiEnrollment>>() {
             @Override
             public void onResponse(Call<List<apiEnrollment>> call, Response<List<apiEnrollment>> response) {

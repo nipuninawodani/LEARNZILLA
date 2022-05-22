@@ -1,5 +1,7 @@
 package com.uok.learnzilla.HomeComponents.myCoursees.Teacher;
 
+import static java.security.AccessController.getContext;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.TeacherApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiTeacher;
@@ -53,7 +56,8 @@ public class MyCoursesTeacherAdapter extends RecyclerView.Adapter<MyCoursesTeach
             new ErrorDialogFragment("No Courses Created")
                     .show(FragmentManager.findFragment(Frag).getChildFragmentManager(),null);
         }else {
-            Call<apiTeacher> CallTeacher = TeacherServices.getTeacherById(ItemViewModel.getTeacher_id());
+            SessionManager Manage = new SessionManager(Frag.getContext());
+            Call<apiTeacher> CallTeacher = TeacherServices.getTeacherById(ItemViewModel.getTeacher_id(),Manage.fetchAuthToken());
             CallTeacher.enqueue(new Callback<apiTeacher>() {
                 @Override
                 public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {

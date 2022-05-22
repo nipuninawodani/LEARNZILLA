@@ -16,10 +16,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.StudentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.TeacherApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiStudent;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiTeacher;
+import com.uok.learnzilla.BackEndClasses.api.apimodels.apiToken;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
 import com.uok.learnzilla.BackEndClasses.validaters.EmailPatternValidator;
 
@@ -89,71 +91,72 @@ public class loginFragment extends Fragment {
     //login
     private void LoginMethod() {
        //tryToLoginTeacher
-        Call<apiTeacher> EmailCall = TeacherServices.getTeacherByEmail(binding.editTextEmail.getText().toString());
-        EmailCall.enqueue(new Callback<apiTeacher>() {
+        apiTeacher teacher = new apiTeacher(binding.editTextEmail.getText().toString(),binding.editTextPassword.getText().toString());
+        Call<apiToken> CallLogin = TeacherServices.LoginTeacher(teacher);
+        CallLogin.enqueue(new Callback<apiToken>() {
             @Override
-            public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {
-                apiTeacher teacher = response.body();
-              boolean pass =  authanticateUser(teacher.getPassword(),binding.editTextPassword.getText().toString());
-              Log.i("Test",String.format("%b",pass));
-                if(pass == true){
-                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("Login", true);
-                    editor.putInt("type",1);
-                    editor.putString("ID",teacher.getId());
-                    editor.apply();
-                    loginFragmentDirections.ActionLoginFragmentToLoginSuccess Action;
-                    Action = loginFragmentDirections.actionLoginFragmentToLoginSuccess(1);
-                    NavHostFragment.findNavController(loginFragment.this)
-                            .navigate(Action);
-                }else {
-                    String Error = new String("Password not match");
-                    loginFragmentDirections.ActionLoginFragmentToLoginFailed Action;
-                    Action=loginFragmentDirections.actionLoginFragmentToLoginFailed(Error);
-                    NavHostFragment.findNavController(loginFragment.this)
-                            .navigate(Action);
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<apiTeacher> call, Throwable t) {
-                //tryStudentLogin
-                Call<apiStudent> EmailCallStudent = StudentServices.getStudentByEmail(binding.editTextEmail.getText().toString());
-                EmailCallStudent.enqueue(new Callback<apiStudent>() {
+            public void onResponse(Call<apiToken> call, Response<apiToken> response) {
+                apiToken token = response.body();
+                SessionManager Manage = new SessionManager(getContext());
+                Manage.saveToken(token.getToken());
+                Call<apiStudent> CallStudent = StudentServices.getStudentByEmail(binding.editTextEmail.getText().toString(),Manage.fetchAuthToken());
+                CallStudent.enqueue(new Callback<apiStudent>() {
                     @Override
                     public void onResponse(Call<apiStudent> call, Response<apiStudent> response) {
-                        apiStudent student = response.body();
-                        boolean pass =  authanticateUser(student.getPassword(),binding.editTextPassword.getText().toString());
-                        if(pass == true){
+                        if(response.body() == null){
+                            //teacher
+                            Call<apiTeacher> CallTeacher = TeacherServices.getTeacherByEmail(binding.editTextEmail.getText().toString(),Manage.fetchAuthToken());
+                            CallTeacher.enqueue(new Callback<apiTeacher>() {
+                                @Override
+                                public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {
+                                    apiTeacher teacher = response.body();
+                                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putBoolean("Login", true);
+                                    editor.putInt("type",1);
+                                    editor.putString("ID",teacher.getId());
+                                    editor.apply();
+                                }
+
+                                @Override
+                                public void onFailure(Call<apiTeacher> call, Throwable t) {
+
+                                }
+                            });
+                        }else{
+                            apiStudent student = response.body();
                             SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putBoolean("Login", true);
                             editor.putInt("type",2);
                             editor.putString("ID",student.getId());
                             editor.apply();
-                            loginFragmentDirections.ActionLoginFragmentToLoginSuccess Action;
-                            Action = loginFragmentDirections.actionLoginFragmentToLoginSuccess(1);
-                            NavHostFragment.findNavController(loginFragment.this)
-                                    .navigate(Action);
-                        }else {
-                            String Error = new String("Password not match");
-                            loginFragmentDirections.ActionLoginFragmentToLoginFailed Action;
-                            Action=loginFragmentDirections.actionLoginFragmentToLoginFailed(Error);
-                            NavHostFragment.findNavController(loginFragment.this)
-                                    .navigate(Action);
                         }
                     }
+
                     @Override
                     public void onFailure(Call<apiStudent> call, Throwable t) {
-                        String Error = new String("Email not found");
+                        String Error = t.getMessage();
                         loginFragmentDirections.ActionLoginFragmentToLoginFailed Action;
                         Action=loginFragmentDirections.actionLoginFragmentToLoginFailed(Error);
                         NavHostFragment.findNavController(loginFragment.this)
                                 .navigate(Action);
                     }
                 });
+
+                loginFragmentDirections.ActionLoginFragmentToLoginSuccess Action;
+                Action = loginFragmentDirections.actionLoginFragmentToLoginSuccess(1);
+                NavHostFragment.findNavController(loginFragment.this)
+                        .navigate(Action);
+            }
+
+            @Override
+            public void onFailure(Call<apiToken> call, Throwable t) {
+                String Error = t.getMessage();
+                loginFragmentDirections.ActionLoginFragmentToLoginFailed Action;
+                Action=loginFragmentDirections.actionLoginFragmentToLoginFailed(Error);
+                NavHostFragment.findNavController(loginFragment.this)
+                        .navigate(Action);
             }
         });
     }

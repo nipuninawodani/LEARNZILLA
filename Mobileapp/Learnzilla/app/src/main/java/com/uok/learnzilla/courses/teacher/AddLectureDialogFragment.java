@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.AlartDialogs.SuccessDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.LectureApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures;
@@ -61,7 +62,8 @@ public class AddLectureDialogFragment extends DialogFragment {
                             .show(getChildFragmentManager(),null);
                 }else {
                     apiLectures lecture = getDataForLecture(course);
-                    Call<Void> CallAddLecture = LectureServices.addLecture(lecture);
+                    SessionManager Manage = new SessionManager(getContext());
+                    Call<Void> CallAddLecture = LectureServices.addLecture(lecture,Manage.fetchAuthToken());
                     CallAddLecture.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {

@@ -22,6 +22,7 @@ import retrofit2.Response;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.AlartDialogs.SuccessDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.EnrollmentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -53,7 +54,8 @@ public class UpdateGradeDialogFragment extends DialogFragment {
                             .show(getChildFragmentManager(),null);
                 }else {
                     apiEnrollment NewEnrollment = UpdateEnrolmentWithGrade(enrollment);
-                    Call<Void> CallUpdate = enrollmentServices.updateEnrollment(NewEnrollment);
+                    SessionManager Manage = new SessionManager(getContext());
+                    Call<Void> CallUpdate = enrollmentServices.updateEnrollment(NewEnrollment,Manage.fetchAuthToken());
                     CallUpdate.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
