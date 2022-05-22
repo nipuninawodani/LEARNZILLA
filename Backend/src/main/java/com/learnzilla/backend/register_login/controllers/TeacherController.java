@@ -1,6 +1,7 @@
 package com.learnzilla.backend.register_login.controllers;
 
 import com.learnzilla.backend.models.Teachers;
+import com.learnzilla.backend.register_login.repositories.StudentRepository;
 import com.learnzilla.backend.register_login.repositories.TeacherRepository;
 import com.learnzilla.backend.register_login.request.AuthenticationRequest;
 import com.learnzilla.backend.register_login.response.AuthenticationResponse;
@@ -25,22 +26,30 @@ import java.security.spec.InvalidKeySpecException;
 public class TeacherController {
 
     private TeacherRepository teacherRepository;
+    private StudentRepository studentRepository;
     private PasswordEncoder passwordEncoder;
     private JWTTokenHelper jwtTokenHelper;
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    public TeacherController(TeacherRepository teacherRepository, PasswordEncoder passwordEncoder, JWTTokenHelper jwtTokenHelper, AuthenticationManager authenticationManager) {
+    public TeacherController(TeacherRepository teacherRepository, StudentRepository studentRepository, PasswordEncoder passwordEncoder, JWTTokenHelper jwtTokenHelper, AuthenticationManager authenticationManager) {
         this.teacherRepository = teacherRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenHelper = jwtTokenHelper;
         this.authenticationManager = authenticationManager;
+        this.studentRepository=studentRepository;
     }
 
     @PostMapping("/signup/teacher")
-    public void signupTeacher(@RequestBody Teachers teacherData) {
-        teacherData.setPassword(passwordEncoder.encode(teacherData.getPassword()));
-        teacherRepository.save(teacherData);
+    public String signupTeacher(@RequestBody Teachers teacherData) {
+        if((studentRepository.findByEmail(teacherData.getEmail())!=null) || teacherRepository.findByEmail(teacherData.getEmail())!=null) {
+            return "Email Already Exists";
+        }
+        else {
+            teacherData.setPassword(passwordEncoder.encode(teacherData.getPassword()));
+            teacherRepository.save(teacherData);
+            return "Signup Completed Successfully";
+        }
     }
 
     @GetMapping("/learnzilla/teacher/{email}")
