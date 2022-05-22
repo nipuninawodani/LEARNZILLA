@@ -27,18 +27,18 @@
         android:layout_width="112dp"
         android:layout_height="36dp"
         android:layout_marginTop="20dp"
-        android:hint="Intro"
+        android:hint="Lecture 01"
         android:inputType="textPersonName"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toEndOf="@+id/TitleView"
+        app:layout_constraintStart_toEndOf="@+id/StudentNAme"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
-        android:id="@+id/TitleView"
+        android:id="@+id/StudentNAme"
         android:layout_width="83dp"
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
@@ -50,30 +50,30 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
-        android:id="@+id/WeekView"
+        android:id="@+id/DisView"
         android:layout_width="83dp"
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:gravity="center_vertical"
-        android:text="Week :"
+        android:text="Description:"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TitleView" />
+        app:layout_constraintTop_toBottomOf="@+id/StudentNAme" />
 
     <EditText
-        android:id="@+id/WeekEdt"
+        android:id="@+id/DisEdit"
         android:layout_width="112dp"
         android:layout_height="36dp"
         android:layout_marginTop="20dp"
         android:hint="2"
-        android:inputType="number"
+        android:inputType="textPersonName"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toEndOf="@+id/WeekView"
+        app:layout_constraintStart_toEndOf="@+id/DisView"
         app:layout_constraintTop_toBottomOf="@+id/TitleEdit" />
 
     <Button

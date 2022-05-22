@@ -1,6 +1,7 @@
 package com.uok.learnzilla.BackEndClasses.api.apiServices;
 
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectureResources;
+import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures;
 
 import java.util.List;
 
@@ -11,9 +12,16 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface LectureResourcesApiServices {
-    @GET("/lectureResource/lecture_id={lecture_id}")
-    Call<List<apiLectureResources>> getLectureResourcesByLectureId(@Path("lecture_id") String lecture_id);
+    @GET("/learnzilla/lectureResource/lecture_id={lecture_id}")
+    Call<List<apiLectureResources>> getLectureResourcesByLectureId(@Path("lecture_id") Long lecture_id);
 
-    @POST("/lectureResource")
-    Call<apiLectureResources> addLectureResources(@Body apiLectureResources lectureResources);
+    @POST("/learnzilla/lectureResource")
+    Call<Void> addLectureResources(@Body apiLectureResources lectureResources);
+
+    @POST("/learnzilla/lectureResource/edit")
+    Call<Void> UpdateLectureResources(@Body apiLectureResources lectureResource);
+
+    @POST("/learnzilla/lectureResource/delete")
+    Call<Void> DeleteLectureResource(@Body apiLectureResources lectureResource);
+
 }

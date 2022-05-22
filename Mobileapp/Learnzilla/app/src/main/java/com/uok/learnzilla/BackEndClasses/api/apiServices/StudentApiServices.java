@@ -10,13 +10,17 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface StudentApiServices {
-    @GET("/student/id/{id}")
+
+    @GET("/learnzilla/student/id/{id}")
     Call<apiStudent> getStudentByID(@Path("id") String StudentId);
 
-    @GET("/student/{email}")
+    @GET("/learnzilla/student/{email}")
     Call<apiStudent> getStudentByEmail(@Path("email") String email);
 
     @POST("/signup/student")
+    Call<String> signUpStudent(@Body apiStudent student);
 
-    Call<Void> signupStudent(@Body apiStudent student);
+    @POST("/login/student")
+    Call<?> LoginStudent(@Body apiStudent student);
+
 }
