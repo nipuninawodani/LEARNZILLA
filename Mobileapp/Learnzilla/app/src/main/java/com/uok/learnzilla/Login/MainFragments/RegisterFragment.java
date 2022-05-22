@@ -161,19 +161,18 @@ public class RegisterFragment extends Fragment {
                     @Override
                     public void onFailure(Call<apiStudent> call, Throwable t) {
                         apiTeacher teacher = getSignInDataTeacher();
-                        Call<Void> RegisterCall = ApiTeacher.signUpTeacher(teacher);
-                        RegisterCall.enqueue(new Callback<Void>() {
+                        Call<String> RegisterCall = ApiTeacher.signUpTeacher(teacher);
+                        RegisterCall.enqueue(new Callback<String>() {
                             @Override
-                            public void onResponse(Call<Void> call, Response<Void> response) {
+                            public void onResponse(Call<String> call, Response<String> response) {
                                 RegisterFragmentDirections.ActionRegisterFragmentToRegisterSuccess action;
                                 action = RegisterFragmentDirections.actionRegisterFragmentToRegisterSuccess(2);
                                 NavHostFragment.findNavController(RegisterFragment.this)
                                         .navigate(action);
-
                             }
 
                             @Override
-                            public void onFailure(Call<Void> call, Throwable t) {
+                            public void onFailure(Call<String> call, Throwable t) {
                                 String Error = new String("Register Failed...! "+t.getMessage());
                                 RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
                                 action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
