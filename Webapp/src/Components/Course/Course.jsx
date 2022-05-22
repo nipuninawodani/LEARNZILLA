@@ -9,6 +9,7 @@ import CourseService from "../../services/CourseService";
 import TeacherService from "../../services/TeacherService";
 import LectureService from "../../services/LectureService";
 import RegisterService from "../../services/RegisterService";
+import EnrollmentService from "../../services/EnrollmentService";
 
 function Course() {
 
@@ -41,6 +42,8 @@ function Course() {
             TeacherService.getTeacherById(response.data.teacher_id).then(response =>{
                 setTeachername(response.data.firstName +" "+response.data.lastName)
             })
+
+            EnrollmentService.getGrade(CourseCode,AcademicYear,localStorage.getItem("UserID"))
 
             LectureService.getLectureByCourse(CourseCode,AcademicYear).then(response =>{
 

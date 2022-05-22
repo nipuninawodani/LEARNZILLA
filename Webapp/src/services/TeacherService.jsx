@@ -9,7 +9,7 @@ class TeacherService{
     }
 
     getTeacherById(id){
-        return axios.get(TEACHER_BASE_REST_API_URL+"teacher/id/"+id)
+        return axios.get(TEACHER_BASE_REST_API_URL+"learnzilla/teacher/id/"+id)
     }
 
 }

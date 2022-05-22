@@ -36,7 +36,7 @@ public class EnrollmentController {
     }
 
 
-    @GetMapping("/enrollment/gets/course_code={course_code}")
+    @GetMapping("/learnzilla/enrollment/gets/course_code={course_code}")
     public ResponseEntity<List<Enrollment>> getEnrollmentByCourse(@PathVariable String course_code){
         List<Enrollment> enrollment = enrollmentRepository.findBycourse_code(course_code);
         return ResponseEntity.ok(enrollment);
