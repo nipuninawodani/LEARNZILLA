@@ -13,8 +13,12 @@ import Announcement_creation from "./Components/Announcement_creation/Announceme
 import Enroll from "./Components/Enroll/Enroll";
 import AddCourse from "./Components/Course_Teacher/AddCourse";
 import EditCourse from "./Components/Course_Teacher/EditCourse";
+import Student_Home from "./Components/Student_Home/Student_Home"
+import Teacher_Home from "./Components/Teacher_Home/Teacher_Home"
+import User_Profile from "./Components/User_Profile/User_Profile"
 import Lecture_add from "./Components/Lecture/Lecture_Add";
 import Lecture_Add from "./Components/Lecture/Lecture_Add";
+
 
 
 
@@ -41,7 +45,11 @@ function App() {
               <Route path="/Announcement_creation" element={<Announcement_creation/>} />
               <Route exact path="/Add_Course" element={<AddCourse/>} />
               <Route exact path="/Edit_Course" element={<EditCourse/>} />
+              <Route path="/Student_Home" element={<Student_Home/>} />
+              <Route path="/Teacher_Home" element={<Teacher_Home/>} />
+              <Route path="/User_Profile" element={<User_Profile/>} />
               <Route exact path="/Add_Lecture" element={<Lecture_add/>} />
+
 
             </Routes> 
   

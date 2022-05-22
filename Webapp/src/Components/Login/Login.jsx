@@ -6,7 +6,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faLock, faLongArrowRight} from "@fortawesome/free-solid-svg-icons";
 import img01 from './images/img-01.png'
 
-
 function Login() {
 
     return (

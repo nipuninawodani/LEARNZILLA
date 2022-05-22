@@ -14,6 +14,7 @@ import androidx.navigation.NavHostController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.TeacherApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiTeacher;
@@ -63,7 +64,8 @@ public class AllCourseListAdaptor extends RecyclerView.Adapter<AllCourseListAdap
 
             @Override
             public void onFailure(Call<apiTeacher> call, Throwable t) {
-                Toast.makeText(context, "Server Timeout", Toast.LENGTH_SHORT).show();
+                new ErrorDialogFragment("Server Error : "+t.getMessage())
+                        .show(FragmentManager.findFragment(Frag).getChildFragmentManager(),null);
             }
         });
         holder.AcademicYear.setText(ItemViewModel.getAcademic_year());

@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.TeacherApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiTeacher;
@@ -49,7 +50,8 @@ public class MyCoursesTeacherAdapter extends RecyclerView.Adapter<MyCoursesTeach
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         apiCourses ItemViewModel = mListAllCourse.get(position);
         if(ItemViewModel == null){
-            Toast.makeText(context, "No data", Toast.LENGTH_SHORT).show();
+            new ErrorDialogFragment("No Courses Created")
+                    .show(FragmentManager.findFragment(Frag).getChildFragmentManager(),null);
         }else {
             Call<apiTeacher> CallTeacher = TeacherServices.getTeacherById(ItemViewModel.getTeacher_id());
             CallTeacher.enqueue(new Callback<apiTeacher>() {
@@ -61,7 +63,8 @@ public class MyCoursesTeacherAdapter extends RecyclerView.Adapter<MyCoursesTeach
 
                 @Override
                 public void onFailure(Call<apiTeacher> call, Throwable t) {
-                    Toast.makeText(context, "Server Timeout", Toast.LENGTH_SHORT).show();
+                    new ErrorDialogFragment("Server Error : "+t.getMessage())
+                            .show(FragmentManager.findFragment(Frag).getChildFragmentManager(),null);
                 }
             });
             holder.AcademicYear.setText(ItemViewModel.getAcademic_year());
