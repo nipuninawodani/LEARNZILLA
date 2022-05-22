@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.learnzilla.backend.register_login.services.UserPrinciple;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -58,7 +59,8 @@ public class JWTTokenHelper {
     }
 
     public String generateToken(Authentication authentication) throws InvalidKeySpecException, NoSuchAlgorithmException {
-        UserPrinciple userPrinciple =(UserPrinciple)authentication.getPrincipal();
+        System.out.println(authentication.getPrincipal());
+        UserPrinciple userPrinciple = new UserPrinciple((User) authentication.getPrincipal());
         return Jwts.builder()
                 .setIssuer( appName )
                 .setSubject(userPrinciple.getUsername())

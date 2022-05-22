@@ -1,15 +1,21 @@
 package com.learnzilla.backend.register_login.services;
 
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+@Getter @Setter @NoArgsConstructor
 public class UserPrinciple implements UserDetails {
 
-    private String username;
-    private String email;
-    private String password;
+    private User user;
+
+    public UserPrinciple(User user){
+        this.user = user;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -17,12 +23,12 @@ public class UserPrinciple implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.password;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.username;
+        return user.getUsername();
     }
 
     @Override
