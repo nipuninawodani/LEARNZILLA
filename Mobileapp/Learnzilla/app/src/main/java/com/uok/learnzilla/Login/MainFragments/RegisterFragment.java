@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.uok.learnzilla.BackEndClasses.api.apiServices.StudentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.TeacherApiServices;
+import com.uok.learnzilla.BackEndClasses.api.apimodels.apiString;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiStudent;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiTeacher;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -134,18 +135,19 @@ public class RegisterFragment extends Fragment {
     //add Register Teacher Program
     private void RegisterTeacher() {
         apiTeacher teacher = getSignInDataTeacher();
-        Call<String> RegisterCall = ApiTeacher.signUpTeacher(teacher);
-        RegisterCall.enqueue(new Callback<String>() {
+        Call<apiString> RegisterCall = ApiTeacher.signUpTeacher(teacher);
+        RegisterCall.enqueue(new Callback<apiString>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if(response.body().equals("Email Already Exists")){
+            public void onResponse(Call<apiString> call, Response<apiString> response) {
+                apiString msg = response.body();
+                if(msg.getMsg().equals("Email Already Exists")){
                     String Error = new String("Email Already Taken..!");
                     RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
                     action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
                     NavHostFragment.findNavController(RegisterFragment.this)
                             .navigate(action);
 
-                }else if(response.body().equals("Signup Completed Successfully")){
+                }else if(msg.getMsg().equals("Signup Completed Successfully")){
                     RegisterFragmentDirections.ActionRegisterFragmentToRegisterSuccess action;
                     action = RegisterFragmentDirections.actionRegisterFragmentToRegisterSuccess(2);
                     NavHostFragment.findNavController(RegisterFragment.this)
@@ -154,7 +156,7 @@ public class RegisterFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<apiString> call, Throwable t) {
                 String Error = new String("Register Failed...! " + t.getMessage());
                 RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
                 action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
@@ -162,7 +164,6 @@ public class RegisterFragment extends Fragment {
                         .navigate(action);
             }
         });
-
     }
 
 

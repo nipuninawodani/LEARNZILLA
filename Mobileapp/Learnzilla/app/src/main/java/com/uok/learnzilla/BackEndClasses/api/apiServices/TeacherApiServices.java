@@ -1,5 +1,6 @@
 package com.uok.learnzilla.BackEndClasses.api.apiServices;
 
+import com.uok.learnzilla.BackEndClasses.api.apimodels.apiString;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiStudent;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiTeacher;
 
@@ -17,7 +18,7 @@ public interface TeacherApiServices {
     Call<apiTeacher> getTeacherByEmail(@Path("email") String email);
 
     @POST("/signup/teacher")
-    Call<String> signUpTeacher(@Body apiTeacher teacher);
+    Call<apiString> signUpTeacher(@Body apiTeacher teacher);
 
     @POST("/login/teacher")
     Call<?> LoginTeacher(@Body apiTeacher teacher);
