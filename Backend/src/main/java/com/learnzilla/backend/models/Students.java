@@ -9,7 +9,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "Students")
-public class Students extends User {
+public class Students {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,10 +27,24 @@ public class Students extends User {
     @Column(nullable = false, unique = true)
     private String password;
 
-    public Students(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        super(username, password, authorities);
+    public Students(){
+
     }
 
+    public Students(Integer id,String firstName,String lastName,String email,String password){
+        this.email=email;
+        this.firstName=firstName;
+        this.password=password;
+        this.lastName=lastName;
+        this.id = id;
+    }
+
+    public Students(String firstName,String lastName,String email,String password){
+        this.email=email;
+        this.firstName=firstName;
+        this.password=password;
+        this.lastName=lastName;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -71,7 +85,6 @@ public class Students extends User {
     public void setId(Integer id) {
         this.id = id;
     }
-
 
 
 }
