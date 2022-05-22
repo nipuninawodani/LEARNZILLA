@@ -41,14 +41,17 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().exceptionHandling()
-                .authenticationEntryPoint(authenticationEntryPoint).and()
-                .authorizeRequests((request) -> request.antMatchers("/login/student","login/teacher","/signup/student","/signup/teacher").permitAll()
-                        .antMatchers(HttpMethod.OPTIONS, "/learnzilla/**").permitAll().anyRequest().authenticated())
-                .addFilterBefore(new JWTAuthenticationFilter(userService, jwtTokenHelper),
+        http.csrf().and().cors().disable().
+                authorizeRequests()
+                .antMatchers("/login/student","/login/teacher","/signup/student","/signup/teacher").permitAll()
+                .anyRequest().authenticated().and()
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+
+        http.addFilterBefore(new JWTAuthenticationFilter(userService, jwtTokenHelper),
                         UsernamePasswordAuthenticationFilter.class);
 
-        http.csrf().disable().cors().and().headers().frameOptions().disable();
     }
 
     @Bean

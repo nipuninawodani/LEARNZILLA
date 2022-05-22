@@ -4,7 +4,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
+
+import com.learnzilla.backend.register_login.services.UserPrinciple;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -54,11 +57,11 @@ public class JWTTokenHelper {
         return username;
     }
 
-    public String generateToken(String username) throws InvalidKeySpecException, NoSuchAlgorithmException {
-
+    public String generateToken(Authentication authentication) throws InvalidKeySpecException, NoSuchAlgorithmException {
+        UserPrinciple userPrinciple =(UserPrinciple)authentication.getPrincipal();
         return Jwts.builder()
                 .setIssuer( appName )
-                .setSubject(username)
+                .setSubject(userPrinciple.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(generateExpirationDate())
                 .signWith( SIGNATURE_ALGORITHM, secretKey )

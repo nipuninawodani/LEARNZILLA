@@ -8,7 +8,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "Teachers")
-public class Teachers extends User {
+public class Teachers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,9 +26,6 @@ public class Teachers extends User {
     @Column(nullable = false, unique = true)
     private String password;
 
-    public Teachers(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        super(username, password, authorities);
-    }
 
     public String getFirstName() {
         return firstName;

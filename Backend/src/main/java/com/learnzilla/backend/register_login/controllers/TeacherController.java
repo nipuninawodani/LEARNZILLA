@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +49,7 @@ public class TeacherController {
         return ResponseEntity.ok(teachers);
     }
 
-    @PostMapping("login/teacher")
+    @PostMapping("/login/teacher")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) throws InvalidKeySpecException, NoSuchAlgorithmException {
         Authentication authentication= authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -56,8 +57,9 @@ public class TeacherController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        Teachers teacher = (Teachers)authentication.getPrincipal();
-        String jwtToken=jwtTokenHelper.generateToken(teacher.getEmail());
+        String jwtToken=jwtTokenHelper.generateToken(authentication);
+
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 
         AuthenticationResponse response=new AuthenticationResponse();
         response.setToken(jwtToken);

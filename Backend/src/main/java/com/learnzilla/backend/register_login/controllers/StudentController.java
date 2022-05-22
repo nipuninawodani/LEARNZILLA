@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class StudentController {
 
 
     @Autowired
-    public StudentController(StudentRepository studentRepository, PasswordEncoder passwordEncoder, PasswordEncoder passwordEncoder1, JWTTokenHelper jwtTokenHelper, AuthenticationManager authenticationManager) {
+    public StudentController(StudentRepository studentRepository, PasswordEncoder passwordEncoder, JWTTokenHelper jwtTokenHelper, AuthenticationManager authenticationManager) {
         this.studentRepository = studentRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenHelper = jwtTokenHelper;
@@ -58,9 +59,9 @@ public class StudentController {
                         authenticationRequest.getEmail(),authenticationRequest.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwtToken=jwtTokenHelper.generateToken(authentication);
 
-        Students student = (Students)authentication.getPrincipal();
-        String jwtToken=jwtTokenHelper.generateToken(student.getEmail());
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 
         AuthenticationResponse response=new AuthenticationResponse();
         response.setToken(jwtToken);
