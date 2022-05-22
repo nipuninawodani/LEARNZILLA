@@ -28,21 +28,38 @@ public class EnrollmentController {
     }
 
 
+    @GetMapping("/enrollment/gets/course_code={course_code}&academic_year={academic_year}")
+
     @GetMapping("/learnzilla/enrollment/get/course_code={course_code}&academic_year={academic_year}")
+
     public ResponseEntity<List<Enrollment>> getEnrollmentByCourse(@PathVariable String course_code , @PathVariable String academic_year){
         List<Enrollment> enrollment = enrollmentRepository.findBycourse_codeAndacademic_year(course_code , academic_year);
         return ResponseEntity.ok(enrollment);
     }
 
 
+    @GetMapping("/enrollment/gets/course_code={course_code}")
+    public ResponseEntity<List<Enrollment>> getEnrollmentByCourse(@PathVariable String course_code){
+        List<Enrollment> enrollment = enrollmentRepository.findBycourse_code(course_code);
+        return ResponseEntity.ok(enrollment);
+    }
+
+    @GetMapping("/enrollment/get/student_id={student_id}")
+
+
     @GetMapping("/learnzilla/enrollment/student_id={student_id}")
+
     public ResponseEntity<List<Enrollment>> getEnrollmentById(@PathVariable Integer student_id){
         List<Enrollment> enrollment = enrollmentRepository.findByStudent_id(student_id);
         return ResponseEntity.ok(enrollment);
     }
 
 
+    @GetMapping("/enrollment/get/{enrollmentid}")
+
+
     @GetMapping("/learnzilla/enrollment/{enrollmentid}")
+
     public ResponseEntity<Enrollment> getEnrollmentByStudent(@PathVariable Long enrollmentid){
         Enrollment enrollment = enrollmentRepository.findByEnrollmentid(enrollmentid);
         return ResponseEntity.ok(enrollment);

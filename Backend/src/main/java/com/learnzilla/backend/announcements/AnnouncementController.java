@@ -1,6 +1,10 @@
 package com.learnzilla.backend.announcements;
 
 import com.learnzilla.backend.email.EmailSenderService;
+import com.learnzilla.backend.enrollments.EnrollmentRepository;
+import com.learnzilla.backend.models.Enrollment;
+import com.learnzilla.backend.models.Students;
+import com.learnzilla.backend.register_login.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +16,16 @@ import java.util.List;
 public class AnnouncementController {
 
     private AnnouncementRepository announcementRepository;
+    private EnrollmentRepository enrollmentRepository;
+    private StudentRepository studentRepository;
     @Autowired
     private EmailSenderService mailSender;
 
     @Autowired
-    public AnnouncementController(AnnouncementRepository announcementRepository) {
+    public AnnouncementController(AnnouncementRepository announcementRepository, EnrollmentRepository enrollmentRepository, StudentRepository studentRepository) {
         this.announcementRepository = announcementRepository;
+        this.enrollmentRepository = enrollmentRepository;
+        this.studentRepository = studentRepository;
     }
 
     @GetMapping("/learnzilla/announcement/{id}")
@@ -39,9 +47,14 @@ public class AnnouncementController {
     @PostMapping("/learnzilla/announcement")
     public void setAnnouncement(@RequestBody Announcement announcement){
       announcementRepository.save(announcement);
-       mailSender.sendEmail("learnzilla.lms@gmail.com",announcement.title,announcement.message);
-    }
+        List<Enrollment> enrollments = enrollmentRepository.findBycourse_code(announcement.course_code);
+        enrollments.forEach((n)->{
+            Students student = studentRepository.findById(n.getStudent_id()).get();
+                    String Email = student.getEmail();
+            mailSender.sendEmail(Email,announcement.title,announcement.message);
+                });
 
+    }
 }
 
 
