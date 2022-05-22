@@ -26,6 +26,7 @@ import Header from './Components/Header/Header';
 
 
 
+
 function App() {
   return (
     <div className="App">
@@ -53,6 +54,7 @@ function App() {
               <Route path="/Add_Teacher" element={<Teacher_Add/>} />
               <Route path="/Edit_Teacher" element={<Teacher_Edit/>} />
               <Route path="/Header" element={<Header/>} />
+
 
               <Route exact path="/Add_Lecture" element={<Lecture_add/>} />
 
