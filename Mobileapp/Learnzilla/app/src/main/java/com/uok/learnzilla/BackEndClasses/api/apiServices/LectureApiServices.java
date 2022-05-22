@@ -11,13 +11,18 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface LectureApiServices {
-    @GET("/lecture/{lecture_id}")
+    @GET("/learnzilla/lecture/{lecture_id}")
     Call<apiLectures> getLectureById(@Path("lecture_id") String lecture_id);
 
-    @GET("/lecture/get/course_code={course_code}&academic_year={academic_year}")
+    @GET("/learnzilla/lecture/get/course_code={course_code}&academic_year={academic_year}")
     Call<List<apiLectures>> getLecturesByCourse(@Path("course_code")String course_code, @Path("academic_year") String academic_year);
 
-    @POST("/lecture")
+    @POST("/learnzilla/lecture")
     Call<Void>  addLecture(@Body apiLectures lectures);
 
+    @POST("/learnzilla/lecture/delete")
+    Call<Void> deleteLecture(@Body apiLectures lectures);
+
+    @POST("/learnzilla/lecture/edit")
+    Call<Void> updateLecture(@Body apiLectures lectures);
 }

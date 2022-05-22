@@ -4,6 +4,7 @@ import com.learnzilla.backend.models.Students;
 import com.learnzilla.backend.models.Teachers;
 import com.learnzilla.backend.register_login.repositories.StudentRepository;
 import com.learnzilla.backend.register_login.repositories.TeacherRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,6 +23,7 @@ public class UserService implements UserDetailsService {
     private final StudentRepository studentRepository;
     private final TeacherRepository teacherRepository;
 
+    @Autowired
     public UserService(StudentRepository studentRepository, TeacherRepository teacherRepository) {
         this.studentRepository = studentRepository;
         this.teacherRepository = teacherRepository;
@@ -39,7 +41,7 @@ public class UserService implements UserDetailsService {
 
             Teachers teacher = teacherRepository.findByEmail(username);
             if (teacher == null) {
-                throw new UsernameNotFoundException("Please sign up before login");
+                throw new UsernameNotFoundException("User not found");
             }
             else{
                 user = new User(teacher.getEmail(), teacher.getPassword(), authorities);

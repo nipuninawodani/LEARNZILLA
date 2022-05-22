@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.LectureApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.TeacherApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
@@ -62,12 +63,11 @@ public class TeacherCourseViewFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<apiTeacher> call, Throwable t) {
-                Toast.makeText(getContext(), "Server Error", Toast.LENGTH_SHORT).show();
+                new ErrorDialogFragment("Server Error : " + t.getMessage())
+                        .show(getChildFragmentManager(),null);
             }
         });
         Call<List<apiLectures>> CallLecture = LectureServices.getLecturesByCourse(course.getCourse_code(),course.getAcademic_year());
-        Log.e("test",course.getCourse_code());
-        Log.e("test",course.getAcademic_year());
         CallLecture.enqueue(new Callback<List<apiLectures>>() {
             @Override
             public void onResponse(Call<List<apiLectures>> call, Response<List<apiLectures>> response) {
@@ -78,8 +78,8 @@ public class TeacherCourseViewFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<apiLectures>> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("Error",t.getMessage());
+                new ErrorDialogFragment("Server Error : " + t.getMessage())
+                        .show(getChildFragmentManager(),null);
             }
         });
 
@@ -89,6 +89,16 @@ public class TeacherCourseViewFragment extends Fragment {
             public void onClick(View view) {
                 TeacherCourseViewFragmentDirections.ActionCourseViewLecturesTeacherToAddLectureDialog Action;
                 Action = TeacherCourseViewFragmentDirections.actionCourseViewLecturesTeacherToAddLectureDialog(course);
+                NavHostFragment.findNavController(TeacherCourseViewFragment.this)
+                        .navigate(Action);
+            }
+        });
+
+        binding.ManageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TeacherCourseViewFragmentDirections.ActionCourseViewLecturesTeacherToManageCourseDialog Action;
+                Action = TeacherCourseViewFragmentDirections.actionCourseViewLecturesTeacherToManageCourseDialog(course);
                 NavHostFragment.findNavController(TeacherCourseViewFragment.this)
                         .navigate(Action);
             }

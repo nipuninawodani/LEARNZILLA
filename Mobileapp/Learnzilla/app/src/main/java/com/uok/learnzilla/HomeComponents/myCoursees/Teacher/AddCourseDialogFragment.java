@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -52,7 +54,8 @@ public class AddCourseDialogFragment extends DialogFragment {
                                 ||  TextUtils.isEmpty(binding.LanguageEdit.getText())
                                 ||  TextUtils.isEmpty(binding.LeveleEdit.getText())
                 ){
-                    Toast.makeText(getContext(), "Please Fill Empty Fields", Toast.LENGTH_LONG).show();
+                    new ErrorDialogFragment("Please Fill Empty Fields")
+                            .show(getChildFragmentManager(),null);
                 }else{
                     apiCourses course = AddDataIntoCourse();
                     Call<Void> CallPostCourse = ApiCourse.addCourse(course);
@@ -60,11 +63,14 @@ public class AddCourseDialogFragment extends DialogFragment {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             Toast.makeText(getContext(), "Course Added", Toast.LENGTH_SHORT).show();
+                            NavHostFragment.findNavController(AddCourseDialogFragment.this)
+                                    .navigate(R.id.action_AddCourseDialog_to_MyCoursesTeacher);
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            new ErrorDialogFragment("Server Error :" + t.getMessage())
+                                    .show(getChildFragmentManager(),null);
                         }
                     });
                 }

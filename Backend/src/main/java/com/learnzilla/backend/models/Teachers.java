@@ -1,6 +1,10 @@
 package com.learnzilla.backend.models;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Teachers")
@@ -21,6 +25,7 @@ public class Teachers {
 
     @Column(nullable = false, unique = true)
     private String password;
+
 
     public String getFirstName() {
         return firstName;
