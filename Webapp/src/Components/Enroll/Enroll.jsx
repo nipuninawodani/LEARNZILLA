@@ -46,7 +46,7 @@ function Enroll() {
 
         const enroll = {CourseCode,AcademicYear,StudentId}
         EnrollmentService.createEnrollment(enroll).then((response) => {
-            navigate("/course")
+            navigate("/Student_Home")
         }).catch(error =>{
             console.log(error)
         })

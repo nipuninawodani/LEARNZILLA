@@ -7,11 +7,13 @@ import {faEnvelope, faLock, faLongArrowRight} from "@fortawesome/free-solid-svg-
 import img01 from './images/img-01.png'
 import RegisterService from "../../services/RegisterService";
 import LoginService from "../../services/LoginService";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,10 +26,10 @@ function Login() {
             LoginService.GetUser(login)
 
             if (localStorage.getItem("Type") == "Student"){
-
+                navigate("/Student_Home")
             }
             else{
-
+                navigate("/Student_Home")
             }
 
         }).catch(error =>{
