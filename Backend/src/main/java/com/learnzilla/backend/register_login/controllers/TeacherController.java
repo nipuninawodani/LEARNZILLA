@@ -18,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
 
+@CrossOrigin("*")
 @RestController
 public class TeacherController {
 

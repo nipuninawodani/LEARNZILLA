@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {Link, useSearchParams} from "react-router-dom";
-import cs01 from './img/cs-1.jpg'
 import './css/Enroll.css'
 import {faCaretRight, faEnvelope, faHeart} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -31,8 +30,6 @@ function Enroll() {
            setDescription(response.data.description)
         })
     }, []);
-
-    console.log(level)
 
 
 

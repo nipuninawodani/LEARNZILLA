@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 public class EnrollmentController {
 
@@ -33,11 +34,13 @@ public class EnrollmentController {
         return ResponseEntity.ok(enrollment);
     }
 
+
     @GetMapping("/learnzilla/enrollment/student_id={student_id}")
     public ResponseEntity<List<Enrollment>> getEnrollmentById(@PathVariable Integer student_id){
         List<Enrollment> enrollment = enrollmentRepository.findByStudent_id(student_id);
         return ResponseEntity.ok(enrollment);
     }
+
 
     @GetMapping("/learnzilla/enrollment/{enrollmentid}")
     public ResponseEntity<Enrollment> getEnrollmentByStudent(@PathVariable Long enrollmentid){
