@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -24,6 +25,7 @@ import com.uok.learnzilla.R;
 import com.uok.learnzilla.courses.teacher.CourseViewTeacherAdaptor;
 import com.uok.learnzilla.courses.teacher.StudentAndResultsFragmentArgs;
 import com.uok.learnzilla.databinding.FragmentStudentCourseViewBinding;
+import com.uok.learnzilla.lecture.student.StudentLectureViewFragmentDirections;
 
 import java.util.List;
 
@@ -79,6 +81,16 @@ public class StudentCourseViewFragment extends Fragment {
             public void onFailure(Call<List<apiLectures>> call, Throwable t) {
                 new ErrorDialogFragment("Server Error : "+t.getMessage() )
                         .show(getChildFragmentManager(),null);
+            }
+        });
+
+        binding.Announcements.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StudentCourseViewFragmentDirections.ActionCourseViewStudentToAnnouncemetDialog Action;
+                Action = StudentCourseViewFragmentDirections.actionCourseViewStudentToAnnouncemetDialog(course.getCourse_code());
+                NavHostFragment.findNavController(StudentCourseViewFragment.this)
+                        .navigate(Action);
             }
         });
 

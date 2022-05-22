@@ -193,6 +193,9 @@
         <action
             android:id="@+id/action_CourseViewStudent_to_lectureViewStudent"
             app:destination="@id/lectureViewStudent" />
+        <action
+            android:id="@+id/action_CourseViewStudent_to_AnnouncemetDialog"
+            app:destination="@id/AnnouncemetDialog" />
     </fragment>
     <fragment
         android:id="@+id/lectureViewStudent"
