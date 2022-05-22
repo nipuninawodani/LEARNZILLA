@@ -23,7 +23,7 @@ function Login() {
             localStorage.setItem("Token" , response.data.token)
             LoginService.GetUser(login)
 
-            if (localStorage.getItem("Type") == Student){
+            if (localStorage.getItem("Type") == "Student"){
 
             }
             else{
