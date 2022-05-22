@@ -97,6 +97,7 @@ public class loginFragment extends Fragment {
             @Override
             public void onResponse(Call<apiToken> call, Response<apiToken> response) {
                 apiToken token = response.body();
+                Log.e("token",token.getToken());
                 SessionManager Manage = new SessionManager(getContext());
                 Manage.saveToken(token.getToken());
                 Call<apiStudent> CallStudent = StudentServices.getStudentByEmail(binding.editTextEmail.getText().toString(),Manage.fetchAuthToken());
@@ -109,13 +110,17 @@ public class loginFragment extends Fragment {
                             CallTeacher.enqueue(new Callback<apiTeacher>() {
                                 @Override
                                 public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {
-                                    apiTeacher teacher = response.body();
-                                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putBoolean("Login", true);
-                                    editor.putInt("type",1);
-                                    editor.putString("ID",teacher.getId());
-                                    editor.apply();
+                                    if(response.body() == null){
+
+                                    }else {
+                                        apiTeacher teacher1 = response.body();
+                                        SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putBoolean("Login", true);
+                                        editor.putInt("type",1);
+                                        editor.putString("ID",teacher1.getId());
+                                        editor.apply();
+                                    }
                                 }
 
                                 @Override

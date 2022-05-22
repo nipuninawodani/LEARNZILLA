@@ -1,13 +1,13 @@
 package com.uok.learnzilla.BackEndClasses.api.apimodels;
 
 public class apiToken {
-    private String Token;
+    private String token;
 
     public apiToken(String token) {
-        Token = token;
+        this.token = token;
     }
 
     public String getToken() {
-        return Token;
+        return token;
     }
 }

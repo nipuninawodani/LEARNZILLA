@@ -58,9 +58,14 @@ public class FragmentMyCoursesStudent extends Fragment {
         CallEnrolledCourses.enqueue(new Callback<List<apiEnrollment>>() {
             @Override
             public void onResponse(Call<List<apiEnrollment>> call, Response<List<apiEnrollment>> response) {
-                List<apiEnrollment> enrollments = response.body();
-                MyCoursesStudentAdaptor adaptor = new MyCoursesStudentAdaptor(enrollments);
-                binding.recyclerview.setAdapter(adaptor);
+                if(response.body().size() == 0){
+
+                }else {
+                    List<apiEnrollment> enrollments = response.body();
+                    MyCoursesStudentAdaptor adaptor = new MyCoursesStudentAdaptor(enrollments);
+                    binding.recyclerview.setAdapter(adaptor);
+                }
+
             }
 
             @Override

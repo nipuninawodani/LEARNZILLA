@@ -58,9 +58,14 @@ public class allCourseListFragment extends Fragment {
         call.enqueue(new Callback<List<apiCourses>>() {
             @Override
             public void onResponse(@NonNull Call<List<apiCourses>> call, @NonNull Response<List<apiCourses>> response) {
-                List<apiCourses> body = response.body();
-                AllCourseListAdaptor allCourseListAdaptor = new AllCourseListAdaptor(body);
-                binding.recyclerview.setAdapter(allCourseListAdaptor);
+                if(response.body() == null){
+
+                }else{
+                    List<apiCourses> body = response.body();
+                    AllCourseListAdaptor allCourseListAdaptor = new AllCourseListAdaptor(body);
+                    binding.recyclerview.setAdapter(allCourseListAdaptor);
+                }
+
             }
             @Override
             public void onFailure(@NonNull Call<List<apiCourses>> call, @NonNull Throwable t) {
