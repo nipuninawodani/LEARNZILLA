@@ -21,6 +21,7 @@ import retrofit2.Response;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.AlartDialogs.SuccessDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.LectureApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -54,7 +55,8 @@ public class updateLectureDialogFragment extends DialogFragment {
                             .show(getChildFragmentManager(),null);
                 }else{
                     apiLectures LectureNew = PutDataToUpdateLecture(lecture);
-                    Call<Void> CallUpdateLecture = LectureServices.updateLecture(LectureNew);
+                    SessionManager Manage = new SessionManager(getContext());
+                    Call<Void> CallUpdateLecture = LectureServices.updateLecture(LectureNew,Manage.fetchAuthToken());
                     CallUpdateLecture.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {

@@ -44,12 +44,12 @@ public class StudentController {
     @PostMapping("/signup/student")
     public String signupStudent(@RequestBody Students studentData){
         if((studentRepository.findByEmail(studentData.getEmail())!=null) || teacherRepository.findByEmail(studentData.getEmail())!=null) {
-            return "Email Already Exists";
+            return "{Msg : \"Email Already Exists\"}";
         }
         else {
             studentData.setPassword(passwordEncoder.encode(studentData.getPassword()));
             studentRepository.save(studentData);
-            return "Signup Completed Successfully";
+            return "{Msg : \"Signup Completed Successfully\"}";
         }
     }
 

@@ -18,6 +18,7 @@ import retrofit2.Response;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.AlartDialogs.SuccessDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.LectureResourcesApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectureResources;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -53,7 +54,8 @@ public class TeacherLectureResourcesAdaptor extends RecyclerView.Adapter<Teacher
             holder.Delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Call<Void> CallDelete = ResourceServices.DeleteLectureResource(ItemViewModel);
+                    SessionManager Manage = new SessionManager(Frag.getContext());
+                    Call<Void> CallDelete = ResourceServices.DeleteLectureResource(ItemViewModel,Manage.fetchAuthToken());
                     CallDelete.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {

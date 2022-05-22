@@ -15,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.TeacherApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiTeacher;
@@ -54,7 +55,8 @@ public class AllCourseListAdaptor extends RecyclerView.Adapter<AllCourseListAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         apiCourses ItemViewModel = mlistAllCourse.get(position);
-        Call<apiTeacher> CallTeacher = TeacherServices.getTeacherById(ItemViewModel.getTeacher_id());
+        SessionManager Manage = new SessionManager(Frag.getContext());
+        Call<apiTeacher> CallTeacher = TeacherServices.getTeacherById(ItemViewModel.getTeacher_id(),Manage.fetchAuthToken());
         CallTeacher.enqueue(new Callback<apiTeacher>() {
             @Override
             public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {

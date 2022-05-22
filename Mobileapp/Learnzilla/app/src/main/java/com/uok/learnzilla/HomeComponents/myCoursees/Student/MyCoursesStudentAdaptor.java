@@ -1,5 +1,7 @@
 package com.uok.learnzilla.HomeComponents.myCoursees.Student;
 
+import static java.security.AccessController.getContext;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.TeacherApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
@@ -54,12 +57,14 @@ public class MyCoursesStudentAdaptor extends RecyclerView.Adapter<MyCoursesStude
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
        apiEnrollment enrollment = mListAllEnrolledCourses.get(position);
-        Call<apiCourses> CallEnrolledCourse = CourseServices.getCourseByCourseCode(enrollment.getCourse_code(),enrollment.getAcademic_year());
+        SessionManager Manage = new SessionManager(Frag.getContext());
+        Call<apiCourses> CallEnrolledCourse = CourseServices.getCourseByCourseCode(enrollment.getCourse_code(),enrollment.getAcademic_year(),Manage.fetchAuthToken());
         CallEnrolledCourse.enqueue(new Callback<apiCourses>() {
             @Override
             public void onResponse(Call<apiCourses> call, Response<apiCourses> response) {
               ItemViewModel = response.body();
-                Call<apiTeacher> CallTeacher = TeacherServices.getTeacherById(ItemViewModel.getTeacher_id());
+                SessionManager Manage = new SessionManager(Frag.getContext());
+                Call<apiTeacher> CallTeacher = TeacherServices.getTeacherById(ItemViewModel.getTeacher_id(),Manage.fetchAuthToken());
                 CallTeacher.enqueue(new Callback<apiTeacher>() {
                     @Override
                     public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {

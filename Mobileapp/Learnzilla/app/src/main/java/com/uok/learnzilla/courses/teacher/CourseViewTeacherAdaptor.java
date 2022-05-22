@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.AlartDialogs.SuccessDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.LectureApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -63,7 +64,8 @@ public class CourseViewTeacherAdaptor extends RecyclerView.Adapter<CourseViewTea
         holder.Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Call<Void> CallDeleteLecture = LectureServices.deleteLecture(ItemViewModel);
+                SessionManager Manage = new SessionManager(frag.getContext());
+                Call<Void> CallDeleteLecture = LectureServices.deleteLecture(ItemViewModel,Manage.fetchAuthToken());
                 CallDeleteLecture.enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {

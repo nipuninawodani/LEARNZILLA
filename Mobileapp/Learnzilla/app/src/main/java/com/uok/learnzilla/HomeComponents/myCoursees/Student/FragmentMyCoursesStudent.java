@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.EnrollmentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment;
@@ -52,7 +53,8 @@ public class FragmentMyCoursesStudent extends Fragment {
     private void bindDataToRecyclerView() {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("login", MODE_PRIVATE);
         String StudentId = sharedPreferences.getString("ID","");
-        Call<List<apiEnrollment>> CallEnrolledCourses = EnrollmentServices.getEnrollmentsByStudent(StudentId);
+        SessionManager Manage = new SessionManager(getContext());
+        Call<List<apiEnrollment>> CallEnrolledCourses = EnrollmentServices.getEnrollmentsByStudent(StudentId,Manage.fetchAuthToken());
         CallEnrolledCourses.enqueue(new Callback<List<apiEnrollment>>() {
             @Override
             public void onResponse(Call<List<apiEnrollment>> call, Response<List<apiEnrollment>> response) {

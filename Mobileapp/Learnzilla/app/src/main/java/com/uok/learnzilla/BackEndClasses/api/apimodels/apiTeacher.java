@@ -7,6 +7,11 @@ public class apiTeacher {
     private String email;
     private String password;
 
+    public apiTeacher(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     public String getFirstName() {
         return firstName;
     }

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.LectureApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.TeacherApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
@@ -55,7 +56,8 @@ public class StudentCourseViewFragment extends Fragment {
         binding.Level.setText("Level :"+course.getLevel());
         binding.Sem.setText("Semester :"+course.getSemester());
         binding.AcademicYearText.setText(course.getAcademic_year());
-        Call<apiTeacher> CallTeacher = TeacherServices.getTeacherById(course.getTeacher_id());
+        SessionManager Manage = new SessionManager(getContext());
+        Call<apiTeacher> CallTeacher = TeacherServices.getTeacherById(course.getTeacher_id(),Manage.fetchAuthToken());
         CallTeacher.enqueue(new Callback<apiTeacher>() {
             @Override
             public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {
@@ -68,7 +70,8 @@ public class StudentCourseViewFragment extends Fragment {
                         .show(getChildFragmentManager(),null);
             }
         });
-        Call<List<apiLectures>> CallLecture = LectureServices.getLecturesByCourse(course.getCourse_code(),course.getAcademic_year());
+
+        Call<List<apiLectures>> CallLecture = LectureServices.getLecturesByCourse(course.getCourse_code(),course.getAcademic_year(),Manage.fetchAuthToken());
         CallLecture.enqueue(new Callback<List<apiLectures>>() {
             @Override
             public void onResponse(Call<List<apiLectures>> call, Response<List<apiLectures>> response) {

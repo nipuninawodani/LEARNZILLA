@@ -23,6 +23,7 @@ import retrofit2.Response;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.AlartDialogs.SuccessDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.AnnouncementApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiAnnouncement;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -74,7 +75,8 @@ public class AnnouncementFragmentDialog extends DialogFragment {
         System.out.println("Current time => " + c);
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
         String formattedDate = df.format(c);
-        Call<List<apiAnnouncement>>  CallAnnouncement = AnnouncementServices.getAnnouncementByCourseCode(CourseCode);
+        SessionManager Manage = new SessionManager(getContext());
+        Call<List<apiAnnouncement>>  CallAnnouncement = AnnouncementServices.getAnnouncementByCourseCode(CourseCode,Manage.fetchAuthToken());
         CallAnnouncement.enqueue(new Callback<List<apiAnnouncement>>() {
             @Override
             public void onResponse(Call<List<apiAnnouncement>> call, Response<List<apiAnnouncement>> response) {
@@ -103,7 +105,7 @@ public class AnnouncementFragmentDialog extends DialogFragment {
                             .show(getChildFragmentManager(),null);
                 }else {
                     apiAnnouncement announcement = AddDataToAnnouncement();
-                    Call<Void> CallAddAnnouncement = AnnouncementServices.addAnnouncement(announcement);
+                    Call<Void> CallAddAnnouncement = AnnouncementServices.addAnnouncement(announcement,Manage.fetchAuthToken());
                     CallAddAnnouncement.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {

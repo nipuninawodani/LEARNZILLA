@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment;
@@ -51,7 +52,8 @@ public class ResultsListAdaptor extends RecyclerView.Adapter<ResultsListAdaptor.
           holder.Grade.setText(ItemViewModel.getOverall_grade());
       }
       holder.Year.setText(ItemViewModel.getAcademic_year());
-      Call<apiCourses> CallData =  courseApiServices.getCourseByCourseCode(ItemViewModel.getCourse_code(),ItemViewModel.getAcademic_year());
+        SessionManager Manage = new SessionManager(Frag.getContext());
+      Call<apiCourses> CallData =  courseApiServices.getCourseByCourseCode(ItemViewModel.getCourse_code(),ItemViewModel.getAcademic_year(),Manage.fetchAuthToken());
       CallData.enqueue(new Callback<apiCourses>() {
           @Override
           public void onResponse(Call<apiCourses> call, Response<apiCourses> response) {

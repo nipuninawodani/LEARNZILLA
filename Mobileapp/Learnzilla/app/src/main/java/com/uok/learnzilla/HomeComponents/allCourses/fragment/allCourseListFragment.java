@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiCourses;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -52,8 +53,8 @@ public class allCourseListFragment extends Fragment {
     }
 
     private void addToRecyclerView() {
-
-        Call<List<apiCourses>> call = apiService.getAllCourses();
+        SessionManager Manage = new SessionManager(getContext());
+        Call<List<apiCourses>> call = apiService.getAllCourses(Manage.fetchAuthToken());
         call.enqueue(new Callback<List<apiCourses>>() {
             @Override
             public void onResponse(@NonNull Call<List<apiCourses>> call, @NonNull Response<List<apiCourses>> response) {

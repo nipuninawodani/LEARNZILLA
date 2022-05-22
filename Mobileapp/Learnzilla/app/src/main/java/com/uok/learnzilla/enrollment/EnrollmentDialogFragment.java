@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.AlartDialogs.SuccessDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.EnrollmentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment;
 import com.uok.learnzilla.BackEndClasses.api.config.retrofitConfiguration;
@@ -74,7 +75,8 @@ public class EnrollmentDialogFragment extends DialogFragment {
 
                 } else if(Type == 2){
                     String StudentId = sharedPreferences.getString("ID","");
-                    Call<apiEnrollment> CallCheck = EnrollServices.checkEnroll(viewModel.courses.getCourse_code(),viewModel.courses.getAcademic_year(),StudentId);
+                    SessionManager Manage = new SessionManager(getContext());
+                    Call<apiEnrollment> CallCheck = EnrollServices.checkEnroll(viewModel.courses.getCourse_code(),viewModel.courses.getAcademic_year(),StudentId,Manage.fetchAuthToken());
                     CallCheck.enqueue(new Callback<apiEnrollment>() {
                         @Override
                         public void onResponse(Call<apiEnrollment> call, Response<apiEnrollment> response) {
@@ -85,7 +87,7 @@ public class EnrollmentDialogFragment extends DialogFragment {
                         @Override
                         public void onFailure(Call<apiEnrollment> call, Throwable t) {
                             apiEnrollment enrollment = getEnrollmentData(viewModel,StudentId);
-                            Call<Void> CallEnrollAdd = EnrollServices.addEnrollment(enrollment);
+                            Call<Void> CallEnrollAdd = EnrollServices.addEnrollment(enrollment,Manage.fetchAuthToken());
                             CallEnrollAdd.enqueue(new Callback<Void>() {
                              @Override
                              public void onResponse(Call<Void> call, Response<Void> response) {

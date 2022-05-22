@@ -18,6 +18,7 @@ import retrofit2.Response;
 
 
 import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
+import com.uok.learnzilla.BackEndClasses.api.Session.SessionManager;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.StudentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiStudent;
@@ -55,7 +56,8 @@ public class StudentsAndResultsAdaptor extends RecyclerView.Adapter<StudentsAndR
         }else {
             holder.Grade.setText(ItemViewModel.getOverall_grade());
         }
-        Call<apiStudent> CallStudent = StudentServices.getStudentByID(ItemViewModel.getStudent_id());
+        SessionManager Manage = new SessionManager(Frag.getContext());
+        Call<apiStudent> CallStudent = StudentServices.getStudentByID(ItemViewModel.getStudent_id(),Manage.fetchAuthToken());
         CallStudent.enqueue(new Callback<apiStudent>() {
             @Override
             public void onResponse(Call<apiStudent> call, Response<apiStudent> response) {
