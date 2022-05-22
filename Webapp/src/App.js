@@ -19,10 +19,8 @@ import User_Profile from "./Components/User_Profile/User_Profile"
 import Lecture_add from "./Components/Lecture/Lecture_Add";
 import Lecture_Add from "./Components/Lecture/Lecture_Add";
 import Teacher_Add from "./Components/AddTeacher/AddTeacher";
-import Teacher_Edit from "./Components/AddTeacher/EditTeacher"
-import Header from './Components/Header/Header';
-
-
+import Teacher_Edit from "./Components/AddTeacher/EditTeacher";
+import Header from "./Components/Header/Header";
 
 
 
@@ -31,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        
+      <Header/>
         <Router>   
             <Routes>
 
@@ -54,7 +52,6 @@ function App() {
               <Route path="/Add_Teacher" element={<Teacher_Add/>} />
               <Route path="/Edit_Teacher" element={<Teacher_Edit/>} />
               <Route path="/Header" element={<Header/>} />
-
 
               <Route exact path="/Add_Lecture" element={<Lecture_add/>} />
 

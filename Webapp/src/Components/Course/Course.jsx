@@ -9,7 +9,7 @@ import CourseService from "../../services/CourseService";
 import TeacherService from "../../services/TeacherService";
 import LectureService from "../../services/LectureService";
 import RegisterService from "../../services/RegisterService";
-import Header from "../Header/Header";
+
 
 
 
@@ -91,7 +91,7 @@ function Course() {
     }, []);
 
     return (
-       <div><Header/>
+       
         
         <div className="container-course100">
         
@@ -162,7 +162,7 @@ function Course() {
                 <div className="col-md-1"></div>
             </div>
         </div>
-        </div>
+        
     )
 }
 
