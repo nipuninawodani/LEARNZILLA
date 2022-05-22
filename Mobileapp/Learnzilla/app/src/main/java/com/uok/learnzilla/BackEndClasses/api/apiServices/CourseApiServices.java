@@ -24,4 +24,11 @@ public interface CourseApiServices {
     @POST("/course")
     Call<Void> addCourse(@Body apiCourses courses);
 
+    @POST("/course/edit")
+    Call<Void> UpdateCourse(@Body apiCourses course);
+
+    @POST("/course/delete")
+    Call<Void> DeleteCourse(@Body apiCourses course);
+
+
 }

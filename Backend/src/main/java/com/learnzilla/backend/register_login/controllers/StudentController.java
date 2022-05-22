@@ -52,6 +52,7 @@ public class StudentController {
         return ResponseEntity.ok(students);
     }
 
+
     @PostMapping("/student/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) throws InvalidKeySpecException, NoSuchAlgorithmException {
         Authentication authentication= authenticationManager.authenticate(
