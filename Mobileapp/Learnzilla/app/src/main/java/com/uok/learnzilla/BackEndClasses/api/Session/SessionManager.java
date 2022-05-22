@@ -8,10 +8,11 @@ import android.content.SharedPreferences;
 
 public  class SessionManager {
     private Context context;
-    private SharedPreferences shardPre =context.getSharedPreferences("Session", MODE_PRIVATE);
+    private SharedPreferences shardPre ;
 
     public SessionManager(Context context) {
         this.context = context;
+        shardPre=context.getSharedPreferences("Session", MODE_PRIVATE);
     }
 
    public void saveToken(String Token){

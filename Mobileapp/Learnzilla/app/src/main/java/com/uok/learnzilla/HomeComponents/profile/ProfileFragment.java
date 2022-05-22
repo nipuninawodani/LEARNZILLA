@@ -83,7 +83,7 @@ public class ProfileFragment extends Fragment {
             public void onFailure(@NonNull Call<List<apiCourses>> call, @NonNull Throwable t) {
                 new ErrorDialogFragment("Server Error : "+t.getMessage() )
                         .show(getChildFragmentManager(),null);
-                GoToHomeFragment();
+
             }
         });
 
@@ -109,7 +109,6 @@ public class ProfileFragment extends Fragment {
             public void onFailure(Call<apiStudent> call, Throwable t) {
                 new ErrorDialogFragment("Server Error : "+t.getMessage() )
                         .show(getChildFragmentManager(),null);
-                GoToHomeFragment();
             }
         });
         Call<List<apiEnrollment>> CallEnrolledCourses = EnrollmentServices.getEnrollmentsByStudent(StudentId,Manage.fetchAuthToken());
@@ -128,7 +127,6 @@ public class ProfileFragment extends Fragment {
             public void onFailure(Call<List<apiEnrollment>> call, Throwable t) {
                 new ErrorDialogFragment("Server Error : "+t.getMessage() )
                         .show(getChildFragmentManager(),null);
-                GoToHomeFragment();
             }
         });
     }
@@ -153,7 +151,7 @@ public class ProfileFragment extends Fragment {
             public void onFailure(Call<apiTeacher> call, Throwable t) {
                new ErrorDialogFragment("Server Error : "+t.getMessage() )
                        .show(getChildFragmentManager(),null);
-                GoToHomeFragment();
+
             }
         });
         Call<List<apiCourses>> CallCourse = CourseService.getCourseByTeacherId(TeacherId,Manage.fetchAuthToken());
@@ -172,13 +170,9 @@ public class ProfileFragment extends Fragment {
             public void onFailure(Call<List<apiCourses>> call, Throwable t) {
                 new ErrorDialogFragment("Server Error : "+t.getMessage() )
                         .show(getChildFragmentManager(),null);
-                GoToHomeFragment();
             }
         });
     }
 
-    private void GoToHomeFragment() {
-        NavHostFragment.findNavController(FragmentManager.findFragment(getView()))
-                .navigate(R.id.action_ProfileFragment_to_HomeFragment);
-    }
+
 }

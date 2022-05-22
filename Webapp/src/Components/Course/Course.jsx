@@ -11,7 +11,12 @@ import LectureService from "../../services/LectureService";
 import RegisterService from "../../services/RegisterService";
 import EnrollmentService from "../../services/EnrollmentService";
 
+
+
+
 function Course() {
+
+    
 
     const [searchParams] = useSearchParams();
 
@@ -92,7 +97,10 @@ function Course() {
     }, []);
 
     return (
+       
+        
         <div className="container-course100">
+        
             <div className="row">
                 <div className="col-md-1"></div>
 
@@ -160,6 +168,7 @@ function Course() {
                 <div className="col-md-1"></div>
             </div>
         </div>
+        
     )
 }
 
