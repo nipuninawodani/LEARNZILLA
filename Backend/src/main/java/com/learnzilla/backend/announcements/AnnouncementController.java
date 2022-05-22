@@ -20,18 +20,18 @@ public class AnnouncementController {
         this.announcementRepository = announcementRepository;
     }
 
-    @GetMapping("/announcement/{id}")
+    @GetMapping("/learnzilla/announcement/{id}")
     public Announcement getAnnouncement(@PathVariable Integer id){
 
         return announcementRepository.findById(id).get();
     }
 
-    @GetMapping("/announcement")
+    @GetMapping("/learnzilla/announcement")
     public List<Announcement> getAnnouncements(){
         return announcementRepository.findAll();
     }
 
-    @PostMapping("/announcement")
+    @PostMapping("/learnzilla/announcement")
     public void setAnnouncement(@RequestBody Announcement announcement){
       announcementRepository.save(announcement);
        mailSender.sendEmail("learnzilla.lms@gmail.com",announcement.title,announcement.message);

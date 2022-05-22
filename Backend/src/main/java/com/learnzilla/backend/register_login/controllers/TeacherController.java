@@ -41,13 +41,13 @@ public class TeacherController {
         teacherRepository.save(teacherData);
     }
 
-    @GetMapping("/teacher/{email}")
+    @GetMapping("/learnzilla/teacher/{email}")
     public ResponseEntity<Teachers> getTeacherByEmail(@PathVariable String email) {
         Teachers teachers = teacherRepository.findByEmail(email);
         return ResponseEntity.ok(teachers);
     }
 
-    @PostMapping("/teacher/login")
+    @PostMapping("teacher/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) throws InvalidKeySpecException, NoSuchAlgorithmException {
         Authentication authentication= authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -64,7 +64,7 @@ public class TeacherController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/teacher/id/{id}")
+    @GetMapping("/learnzilla/teacher/id/{id}")
     public ResponseEntity<Teachers> getTeacher(@PathVariable Integer id) {
         Teachers teachers = teacherRepository.findById(id).get();
         return ResponseEntity.ok(teachers);

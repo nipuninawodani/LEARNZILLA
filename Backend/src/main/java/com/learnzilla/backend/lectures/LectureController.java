@@ -20,24 +20,24 @@ public class LectureController {
         this.lectureRepository = lectureRepository;
     }
 
-    @GetMapping("/lecture/{lectureid}")
+    @GetMapping("/learnzilla/lecture/{lectureid}")
     public ResponseEntity<Lecture> getLectureById(@PathVariable Long lectureid){
         Lecture lecture = lectureRepository.findByLectureid(lectureid);
         return ResponseEntity.ok(lecture);
     }
 
-    @GetMapping("/lecture/get/course_code={course_code}&academic_year={academic_year}")
+    @GetMapping("/learnzilla/lecture/get/course_code={course_code}&academic_year={academic_year}")
     public ResponseEntity<List<Lecture>> getLectureByCourse(@PathVariable String course_code , @PathVariable String academic_year){
         List<Lecture> lecture = lectureRepository.findBycourse_codeAndacademic_year(course_code , academic_year);
         return ResponseEntity.ok(lecture);
     }
 
-    @PostMapping("/lecture")
+    @PostMapping("/learnzilla/lecture")
     public void addLecture(@RequestBody Lecture lectureData) {
         lectureRepository.save(lectureData);
     }
 
-    @PostMapping("/lecture/edit")
+    @PostMapping("/learnzilla/lecture/edit")
     public void updateLecture(@RequestBody Lecture lectureData) {
         Lecture lecture = lectureRepository.findByLectureid(lectureData.getLectureid());
 
@@ -60,7 +60,7 @@ public class LectureController {
         lectureRepository.save(lecture);
     }
 
-    @PostMapping("/lecture/delete")
+    @PostMapping("/learnzilla/lecture/delete")
     @Transactional
     public void deleteLecture(@RequestBody Lecture lectureData) {
         lectureRepository.deleteAllByLectureid(lectureData.getLectureid());

@@ -19,19 +19,19 @@ public class LectureResourceController {
         this.lectureResourceRepository = lectureResourceRepository;
     }
 
-    @GetMapping("/lectureResource/lecture_id={lecture_id}")
+    @GetMapping("/learnzilla/lectureResource/lecture_id={lecture_id}")
     public ResponseEntity<List<LectureResource>> getLectureResourceById(@PathVariable Long lecture_id){
         List<LectureResource> lectureResource = lectureResourceRepository.findByLecture_id(lecture_id);
         return ResponseEntity.ok(lectureResource);
     }
 
-    @PostMapping("/lectureResource")
+    @PostMapping("/learnzilla/lectureResource")
     public void addLectureResource(@RequestBody LectureResource lectureResourceData) {
         lectureResourceRepository.save(lectureResourceData);
     }
 
 
-    @PostMapping("/lectureResource/edit")
+    @PostMapping("/learnzilla/lectureResource/edit")
     public void updateLectureResource(@RequestBody LectureResource lectureResourceData) {
 
         LectureResource lectureResource = lectureResourceRepository.findByLectureresourseid(lectureResourceData.getLectureresourseid());
@@ -47,7 +47,7 @@ public class LectureResourceController {
         lectureResourceRepository.save(lectureResourceData);
     }
 
-    @PostMapping("/lectureResource/delete")
+    @PostMapping("/learnzilla/lectureResource/delete")
     @Transactional
     public void deleteLectureResource(@RequestBody LectureResource lectureResourceData) {
         lectureResourceRepository.deleteAllByLectureresourseid(lectureResourceData.getLectureresourseid());

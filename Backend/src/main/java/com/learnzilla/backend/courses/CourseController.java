@@ -21,19 +21,19 @@ public class CourseController {
         this.courseRepository = courseRepository;
     }
 
-    @GetMapping("/course/get/{course_code}&{academic_year}")
+    @GetMapping("/learnzilla/course/get/{course_code}&{academic_year}")
     public ResponseEntity<Course> getCourseByCourseCode(@PathVariable String course_code , @PathVariable String academic_year){
         Course course = courseRepository.findBycourse_codeAndacademic_year(course_code , academic_year);
         return ResponseEntity.ok(course);
     }
 
-    @GetMapping("/course/{teacher_id}")
+    @GetMapping("/learnzilla/course/{teacher_id}")
     public ResponseEntity<List<Course>> getCoursesByTeacher(@PathVariable String teacher_id){
         List<Course> course = courseRepository.findByTeacher_id(teacher_id);
         return ResponseEntity.ok(course);
     }
 
-    @GetMapping("/course")
+    @GetMapping("/learnzilla/course")
     public ResponseEntity<List<Course>> getAllCourses(){
         List<Course> course = courseRepository.findAll();
         return ResponseEntity.ok(course);
