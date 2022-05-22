@@ -46,6 +46,9 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/login/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/signup/**").permitAll()
                 .anyRequest().authenticated();
+
+        http.addFilterBefore(new JWTAuthenticationFilter(userService, jwtTokenHelper),
+                UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
