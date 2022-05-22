@@ -27,6 +27,24 @@ public class Students {
     @Column(nullable = false, unique = true)
     private String password;
 
+    public Students(){
+
+    }
+
+    public Students(Integer id,String firstName,String lastName,String email,String password){
+        this.email=email;
+        this.firstName=firstName;
+        this.password=password;
+        this.lastName=lastName;
+        this.id = id;
+    }
+
+    public Students(String firstName,String lastName,String email,String password){
+        this.email=email;
+        this.firstName=firstName;
+        this.password=password;
+        this.lastName=lastName;
+    }
 
     public String getFirstName() {
         return firstName;

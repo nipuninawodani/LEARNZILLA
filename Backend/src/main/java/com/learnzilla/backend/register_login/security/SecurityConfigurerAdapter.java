@@ -41,17 +41,11 @@ public class SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().and().cors().disable().
-                authorizeRequests()
-                .antMatchers("/login/student","/login/teacher","/signup/student","/signup/teacher").permitAll()
-                .anyRequest().authenticated().and()
-                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-
-        http.addFilterBefore(new JWTAuthenticationFilter(userService, jwtTokenHelper),
-                        UsernamePasswordAuthenticationFilter.class);
-
+        http.csrf().disable().authorizeRequests()
+    //            .antMatchers("/").permitAll()
+                .antMatchers(HttpMethod.POST, "/login/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/signup/**").permitAll()
+                .anyRequest().authenticated();
     }
 
     @Bean
