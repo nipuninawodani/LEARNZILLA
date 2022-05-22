@@ -1,6 +1,7 @@
 package com.learnzilla.backend.models;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "Students")
-public class Students implements UserDetails {
+public class Students extends User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +26,10 @@ public class Students implements UserDetails {
 
     @Column(nullable = false, unique = true)
     private String password;
+
+    public Students(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+        super(username, password, authorities);
+    }
 
 
     public String getFirstName() {
@@ -67,34 +72,6 @@ public class Students implements UserDetails {
         this.id = id;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
 
-    @Override
-    public String getUsername() {
-        return this.email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
 
 }
