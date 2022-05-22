@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.uok.learnzilla.AlartDialogs.ErrorDialogFragment;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.CourseApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apiServices.EnrollmentApiServices;
 import com.uok.learnzilla.BackEndClasses.api.apimodels.apiEnrollment;
@@ -46,7 +47,6 @@ public class FragmentMyCoursesStudent extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         bindDataToRecyclerView();
-
     }
 
     private void bindDataToRecyclerView() {
@@ -63,8 +63,8 @@ public class FragmentMyCoursesStudent extends Fragment {
 
             @Override
             public void onFailure(Call<List<apiEnrollment>> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
-                //no data found
+                new ErrorDialogFragment("Server Error : "+t.getMessage())
+                        .show(getChildFragmentManager(),null);
             }
         });
     }

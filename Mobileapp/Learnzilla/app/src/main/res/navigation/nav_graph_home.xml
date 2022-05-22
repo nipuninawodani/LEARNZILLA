@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_MyCoursesTeacher"
             app:destination="@id/MyCoursesTeacher" />
+        <action
+            android:id="@+id/action_HomeFragment_to_ProfileFragment"
+            app:destination="@id/ProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/AllCourses"
@@ -195,7 +198,25 @@
         <argument
             android:name="lecture"
             app:argType="com.uok.learnzilla.BackEndClasses.api.apimodels.apiLectures" />
+        <action
+            android:id="@+id/action_lectureViewStudent_to_webView"
+            app:destination="@id/webView" />
     </fragment>
-
+    <fragment
+        android:id="@+id/webView"
+        android:name="com.uok.learnzilla.Resource.webviewResources"
+        tools:layout="@layout/fragment_webview_resources" >
+        <argument
+            android:name="Url"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/ProfileFragment"
+        android:name="com.uok.learnzilla.HomeComponents.profile.ProfileFragment"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_ProfileFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
 
 </navigation>
