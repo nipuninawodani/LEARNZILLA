@@ -30,7 +30,7 @@ public class LectureResourceController {
     }
 
 
-    @PostMapping("/learnzilla/lectureResource")
+    @PostMapping("/learnzilla/lectureResource/add")
     public void addLectureResource(@RequestBody LectureResource lectureResourceData) {
         lectureResourceRepository.save(lectureResourceData);
     }
