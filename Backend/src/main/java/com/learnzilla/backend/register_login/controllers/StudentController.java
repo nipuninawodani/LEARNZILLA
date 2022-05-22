@@ -70,7 +70,7 @@ public class StudentController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwtToken=jwtTokenHelper.generateToken(authentication);
 
-        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+        //UserDetails userDetails = authentication.getPrincipal();
 
         AuthenticationResponse response=new AuthenticationResponse();
         response.setToken(jwtToken);

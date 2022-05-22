@@ -146,7 +146,6 @@ public class RegisterFragment extends Fragment {
                     action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
                     NavHostFragment.findNavController(RegisterFragment.this)
                             .navigate(action);
-
                 }else if(msg.getMsg().equals("Signup Completed Successfully")){
                     RegisterFragmentDirections.ActionRegisterFragmentToRegisterSuccess action;
                     action = RegisterFragmentDirections.actionRegisterFragmentToRegisterSuccess(2);
