@@ -133,57 +133,33 @@ public class RegisterFragment extends Fragment {
 
     //add Register Teacher Program
     private void RegisterTeacher() {
-        Call<apiTeacher> callEmail = ApiTeacher.getTeacherByEmail(binding.editTextEmail.getText().toString());
-        callEmail.enqueue(new Callback<apiTeacher>() {
+        apiTeacher teacher = getSignInDataTeacher();
+        Call<String> RegisterCall = ApiTeacher.signUpTeacher(teacher);
+        RegisterCall.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {
-                String Error = new String("Email Already Taken..!");
-                RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
-                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.body().equals("Email Already Exists")){
+                    String Error = new String("Email Already Taken..!");
+                    RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
+                    action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
+                    NavHostFragment.findNavController(RegisterFragment.this)
+                            .navigate(action);
 
-                NavHostFragment.findNavController(RegisterFragment.this)
-                        .navigate(action);
+                }else if(response.body().equals("Signup Completed Successfully")){
+                    RegisterFragmentDirections.ActionRegisterFragmentToRegisterSuccess action;
+                    action = RegisterFragmentDirections.actionRegisterFragmentToRegisterSuccess(2);
+                    NavHostFragment.findNavController(RegisterFragment.this)
+                            .navigate(action);
+                }
             }
 
             @Override
-            public void onFailure(Call<apiTeacher> call, Throwable t) {
-                Call<apiStudent> callEmailStudent = ApiStudent.getStudentByEmail(binding.editTextEmail.getText().toString());
-                callEmailStudent.enqueue(new Callback<apiStudent>() {
-                    @Override
-                    public void onResponse(Call<apiStudent> call, Response<apiStudent> response) {
-                        String Error = new String("Email Already Taken..!");
-                        RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
-                        action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
-                        NavHostFragment.findNavController(RegisterFragment.this)
-                                .navigate(action);
-                    }
-
-                    @Override
-                    public void onFailure(Call<apiStudent> call, Throwable t) {
-                        apiTeacher teacher = getSignInDataTeacher();
-                        Call<Void> RegisterCall = ApiTeacher.signUpTeacher(teacher);
-                        RegisterCall.enqueue(new Callback<Void>() {
-                            @Override
-                            public void onResponse(Call<Void> call, Response<Void> response) {
-                                RegisterFragmentDirections.ActionRegisterFragmentToRegisterSuccess action;
-                                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterSuccess(2);
-                                NavHostFragment.findNavController(RegisterFragment.this)
-                                        .navigate(action);
-
-                            }
-
-                            @Override
-                            public void onFailure(Call<Void> call, Throwable t) {
-                                String Error = new String("Register Failed...! "+t.getMessage());
-                                RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
-                                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
-                                NavHostFragment.findNavController(RegisterFragment.this)
-                                        .navigate(action);
-                            }
-                        });
-                    }
-                });
-
+            public void onFailure(Call<String> call, Throwable t) {
+                String Error = new String("Register Failed...! " + t.getMessage());
+                RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
+                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
+                NavHostFragment.findNavController(RegisterFragment.this)
+                        .navigate(action);
             }
         });
 
@@ -193,55 +169,33 @@ public class RegisterFragment extends Fragment {
 
     //add Register Student Program
     private void RegisterStudent() {
-        Call<apiStudent> EmailCall = ApiStudent.getStudentByEmail(binding.editTextEmail.getText().toString());
-        EmailCall.enqueue(new Callback<apiStudent>() {
+        apiStudent student = getSignInDataStudent();
+        Call<String>  RegisterCall = ApiStudent.signUpStudent(student);
+        RegisterCall.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<apiStudent> call, Response<apiStudent> response) {
-                String Error = new String("Email Already Taken..!");
-                RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
-                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.body().equals("Email Already Exists")){
+                    String Error = new String("Email Already Taken..!");
+                    RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
+                    action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
+                    NavHostFragment.findNavController(RegisterFragment.this)
+                            .navigate(action);
 
-                NavHostFragment.findNavController(RegisterFragment.this)
-                        .navigate(action);
+                }else if(response.body().equals("Signup Completed Successfully")){
+                    RegisterFragmentDirections.ActionRegisterFragmentToRegisterSuccess action;
+                    action = RegisterFragmentDirections.actionRegisterFragmentToRegisterSuccess(2);
+                    NavHostFragment.findNavController(RegisterFragment.this)
+                            .navigate(action);
+                }
             }
 
             @Override
-            public void onFailure(Call<apiStudent> call, Throwable t) {
-                Call<apiTeacher> callEmailTeacher = ApiTeacher.getTeacherByEmail(binding.editTextEmail.getText().toString());
-                callEmailTeacher.enqueue(new Callback<apiTeacher>() {
-                    @Override
-                    public void onResponse(Call<apiTeacher> call, Response<apiTeacher> response) {
-                        String Error = new String("Email Already Taken..!");
-                        RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
-                        action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
-
-                        NavHostFragment.findNavController(RegisterFragment.this)
-                                .navigate(action);
-                    }
-
-                    @Override
-                    public void onFailure(Call<apiTeacher> call, Throwable t) {
-                        apiStudent student = getSignInDataStudent();
-                        Call<Void> RegisterCall = ApiStudent.signupStudent(student);
-                        RegisterCall.enqueue(new Callback<Void>() {
-                            @Override
-                            public void onResponse(Call<Void> call, Response<Void> response) {
-                                RegisterFragmentDirections.ActionRegisterFragmentToRegisterSuccess action;
-                                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterSuccess(2);
-                                NavHostFragment.findNavController(RegisterFragment.this)
-                                        .navigate(action);
-                            }
-                            @Override
-                            public void onFailure(Call<Void> call, Throwable t) {
-                                String Error = new String("Register Failed...! "+t.getMessage());
-                                RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
-                                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
-                                NavHostFragment.findNavController(RegisterFragment.this)
-                                        .navigate(action);
-                            }
-                        });
-                    }
-                });
+            public void onFailure(Call<String> call, Throwable t) {
+                String Error = new String("Register Failed...! "+t.getMessage());
+                RegisterFragmentDirections.ActionRegisterFragmentToRegisterFailed action;
+                action = RegisterFragmentDirections.actionRegisterFragmentToRegisterFailed(Error);
+                NavHostFragment.findNavController(RegisterFragment.this)
+                        .navigate(action);
             }
         });
     }
@@ -250,7 +204,7 @@ public class RegisterFragment extends Fragment {
         String FirstName = binding.editTextFirstName.getText().toString();
         String LastName = binding.editTextLastName.getText().toString();
         String Email = binding.editTextEmail.getText().toString();
-        String Password = DigestUtils.md5Hex(binding.editTextPassword.getText().toString());
+        String Password = binding.editTextPassword.getText().toString();
         return  new apiTeacher(FirstName,LastName,Email,Password);
     }
 
@@ -258,7 +212,7 @@ public class RegisterFragment extends Fragment {
         String FirstName = binding.editTextFirstName.getText().toString();
         String LastName = binding.editTextLastName.getText().toString();
         String Email = binding.editTextEmail.getText().toString();
-        String Password = DigestUtils.md5Hex(binding.editTextPassword.getText().toString());
+        String Password =binding.editTextPassword.getText().toString();
         return  new apiStudent(FirstName,LastName,Email,Password);
     }
 }
