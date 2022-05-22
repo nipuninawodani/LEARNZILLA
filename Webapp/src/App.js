@@ -52,7 +52,7 @@ function App() {
               <Route path="/User_Profile" element={<User_Profile/>} />
               <Route path="/Add_Teacher" element={<Teacher_Add/>} />
               <Route path="/Edit_Teacher" element={<Teacher_Edit/>} />
-              <Route pathe="/Header" element={<Header/>} />
+              <Route path="/Header" element={<Header/>} />
 
               <Route exact path="/Add_Lecture" element={<Lecture_add/>} />
 
