@@ -15,18 +15,24 @@ class RegisterService{
     }
 
     GetUser(login){
-        let request = axios.get("http://localhost:8080/learnzilla/student/"+login.email , config)!=null
+        let request = axios.get("http://localhost:8080/learnzilla/student/"+login.email , config)
 
         if (request != null){
-            localStorage.setItem("UserID",request.data.id)
-            localStorage.setItem("Type","Student")
+            request.then(response =>{
+                console.log(response.data)
+                localStorage.setItem("UserID",response.data.id)
+                localStorage.setItem("Type","Student")
+                console.log(localStorage.getItem("UserID"))
+            })
         }
 
         else{
             let request2 = axios.get("http://localhost:8080/learnzilla/teacher/"+login.email , config)!=null
 
-            localStorage.setItem("UserID",request.data.id)
-            localStorage.setItem("Type","Teacher")
+            request2.then(response =>{
+                localStorage.setItem("UserID",response.data.id)
+                localStorage.setItem("Type","Teacher")
+            })
 
         }
     }

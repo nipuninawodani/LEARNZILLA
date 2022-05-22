@@ -27,8 +27,11 @@ function Course() {
     const [previewImg, setPreviewImg] = useState('');
     const [lectures, setLectures] = useState([]);
     const [accordian, setAccordian] = useState([]);
+    const [grade, setGrade] = useState('');
 
     const [teachername, setTeachername] = useState('');
+
+    console.log()
 
     useEffect(() => {
         CourseService.getCourseByCourseCodeAndAcademicYear(CourseCode,AcademicYear).then(response =>{
@@ -43,7 +46,9 @@ function Course() {
                 setTeachername(response.data.firstName +" "+response.data.lastName)
             })
 
-            EnrollmentService.getGrade(CourseCode,AcademicYear,localStorage.getItem("UserID"))
+            EnrollmentService.getGrade(CourseCode,AcademicYear,localStorage.getItem("UserID")).then(response =>{
+                setTeachername(response.data.firstName +" "+response.data.lastName)
+            })
 
             LectureService.getLectureByCourse(CourseCode,AcademicYear).then(response =>{
 
@@ -143,7 +148,7 @@ function Course() {
                                                 <li>Language <span>{language}</span></li>
                                                 <li>Teacher <span>Mr. {teachername}</span></li>
                                                 <li>Status <span>On Going</span></li>
-                                                <li>Grade <span>N/A</span></li>
+                                                <li>Grade <span>{grade}</span></li>
                                             </ul>
                                         </div>
                                     </div>

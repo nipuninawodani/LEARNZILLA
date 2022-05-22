@@ -21,7 +21,7 @@ class EnrollmentService {
     }
 
     getGrade(course_code,academic_year,student_id){
-        return axios.get("/enrollment/check/course_code="+course_code+"&academic_year="+academic_year+"&student_id="+student_id,config)
+        return axios.get("http://localhost:8080/learnzilla/enrollment/check/course_code="+course_code+"&academic_year="+academic_year+"&student_id="+student_id,config)
     }
 }
 
