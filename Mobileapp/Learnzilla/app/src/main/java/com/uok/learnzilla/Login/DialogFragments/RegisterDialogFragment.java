@@ -64,7 +64,7 @@ public class RegisterDialogFragment extends DialogFragment {
 
         binding.teacher.setOnClickListener(view12 -> {
             builder.setTitle("Warning");
-            builder.setMessage("To Register as a teacher you need to Wait for Admin Approval, Do you need To continue?")
+            builder.setMessage("Do you need to Create Account for Teacher ?")
                     .setCancelable(false)
                     .setPositiveButton("yes", (dialogInterface, i) -> NavHostFragment.findNavController(RegisterDialogFragment.this)
                             .navigate(action.setRegister(2)))
