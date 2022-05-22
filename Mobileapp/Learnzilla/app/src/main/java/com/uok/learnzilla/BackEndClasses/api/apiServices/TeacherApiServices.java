@@ -17,6 +17,8 @@ public interface TeacherApiServices {
     Call<apiTeacher> getTeacherByEmail(@Path("email") String email);
 
     @POST("/signup/teacher")
-    Call<Void> signUpTeacher(@Body apiTeacher teacher);
+    Call<String> signUpTeacher(@Body apiTeacher teacher);
 
+    @POST("/login/teacher")
+    Call<?> LoginTeacher(@Body apiTeacher teacher);
 }
