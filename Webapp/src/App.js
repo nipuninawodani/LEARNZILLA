@@ -18,6 +18,9 @@ import Teacher_Home from "./Components/Teacher_Home/Teacher_Home"
 import User_Profile from "./Components/User_Profile/User_Profile"
 import Lecture_add from "./Components/Lecture/Lecture_Add";
 import Lecture_Add from "./Components/Lecture/Lecture_Add";
+import Teacher_Add from "./Components/AddTeacher/AddTeacher";
+import Teacher_Edit from "./Components/AddTeacher/EditTeacher"
+import Header from './Components/Header/Header';
 
 
 
@@ -48,6 +51,11 @@ function App() {
               <Route path="/Student_Home" element={<Student_Home/>} />
               <Route path="/Teacher_Home" element={<Teacher_Home/>} />
               <Route path="/User_Profile" element={<User_Profile/>} />
+              <Route path="/Add_Teacher" element={<Teacher_Add/>} />
+              <Route path="/Edit_Teacher" element={<Teacher_Edit/>} />
+              <Route path="/Header" element={<Header/>} />
+
+
               <Route exact path="/Add_Lecture" element={<Lecture_add/>} />
 
 
