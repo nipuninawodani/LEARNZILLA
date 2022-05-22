@@ -60,6 +60,7 @@ public class StudentController {
     }
 
 
+    @CrossOrigin("*")
     @PostMapping("/login/student")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) throws InvalidKeySpecException, NoSuchAlgorithmException {
 

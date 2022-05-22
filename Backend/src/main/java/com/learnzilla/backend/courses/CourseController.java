@@ -4,7 +4,6 @@ import com.learnzilla.backend.fileUploader.FileUploader;
 import com.learnzilla.backend.models.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,14 +40,26 @@ public class CourseController {
         return ResponseEntity.ok(course);
     }
 
-    @PostMapping("/course")
+    @GetMapping("/learnzilla/course/name={name}")
+    public ResponseEntity<List<Course>> getCoursesByTitle(@PathVariable String name){
+        List<Course> course = courseRepository.findByTitleLike("%"+name+"%");
+        return ResponseEntity.ok(course);
+    }
+
+    @GetMapping("/learnzilla/course/id={id}")
+    public ResponseEntity<Course> getCoursesById(@PathVariable String id){
+        Course course = courseRepository.findByCourseid(Long.valueOf(id));
+        return ResponseEntity.ok(course);
+    }
+
+    @PostMapping("/learnzilla/course")
     public String addCourse(@RequestBody Course courseData) {
         courseRepository.save(courseData);
         return String.valueOf(courseData.getCourseid());
     }
 
 
-    @PostMapping("/course/edit")
+    @PostMapping("/learnzilla/course/edit")
     public void updateCourse(@RequestBody Course courseData) {
         Course course = courseRepository.findByCourseid(courseData.getCourseid());
 
@@ -79,13 +90,12 @@ public class CourseController {
         courseRepository.save(course);
     }
 
-    @PostMapping("/course/delete")
-    @Transactional
+    @PostMapping("/learnzilla/course/delete")
     public void deleteCourse(@RequestBody Course courseData) {
         courseRepository.deleteAllByCourseid(courseData.getCourseid());
     }
 
-    @PostMapping("/course/file")
+    @PostMapping("/learnzilla/course/file")
     public void uploadCourseImage(@RequestParam("file") MultipartFile file, @RequestParam("course_id") String course_id) {
         new FileUploader(file , "Course "+course_id);
 

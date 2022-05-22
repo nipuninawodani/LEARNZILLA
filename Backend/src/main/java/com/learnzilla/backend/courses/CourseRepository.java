@@ -20,4 +20,7 @@ public interface CourseRepository extends JpaRepository<Course, String> {
     Course findByCourseid(Long courseid);
 
     void deleteAllByCourseid(Long courseid);
+
+    @Query("SELECT c FROM Course c WHERE c.title LIKE %?1%")
+    List<Course> findByTitleLike(String title);
 }
